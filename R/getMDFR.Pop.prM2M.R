@@ -12,7 +12,7 @@
 #'
 #'@export
 #'
-getMDFR.Pop.prM2M<-function(tcsams,verbose=FALSE){
+getMDFR.Pop.PrM2M<-function(tcsams,verbose=FALSE){
     if (verbose) cat("--Getting molt-to-maturity ogives.\n");
 
     mdfr<-NULL;

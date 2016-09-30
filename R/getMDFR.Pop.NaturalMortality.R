@@ -13,9 +13,9 @@
 #'
 #'@export
 #'
-getMDFR.Pop.NatMort<-function(tcsams=NULL,
-                              type=c('M_cxm','M_yxm','M_yxmsz'),
-                              verbose=FALSE){
+getMDFR.Pop.NaturalMortality<-function(tcsams=NULL,
+                                      type=c('M_cxm','M_yxm','M_yxmsz'),
+                                      verbose=FALSE){
     if (verbose) cat("--Getting natural mortality info\n");
 
     mdfr<-NULL;
