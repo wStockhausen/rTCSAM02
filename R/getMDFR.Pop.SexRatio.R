@@ -7,7 +7,7 @@
 #'@param rsims - single rsimTCSAM results object, or named list of such
 #'@param verbose - flag (T/F) to print debug info
 #'
-#'@return dataframe with columns 'modeltype', 'model', 'pc', 'val'.
+#'@return dataframe in canonical format.
 #'
 #'@details Extracts recruitment sex ratio.
 #'
