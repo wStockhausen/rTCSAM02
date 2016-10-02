@@ -7,7 +7,7 @@
 #'
 #'@return TCSAM02 report object (a list). The returned object will be a list of class 'tcsam02.rep'.
 #'
-#'@details If \code{repFile} is NULL, the user will be prompted to identify a 
+#'@details If \code{repFile} is NULL, the user will be prompted to identify a
 #'TCSAM02 model report file from which to source the results object.
 #'The returned object will be a list of class 'tcsam02.rep'.
 #'
@@ -38,16 +38,16 @@ getRep<-function(repFile=NULL){
     if (file.exists(repFile)){
         cat("Reading model report from file:\n",repFile,"\n")
         source(repFile,local=TRUE);
-        if(!any(names(rep)=='mc')){
+        if(!any(names(res)=='mc')){
                 cat("The file '",repFile,"'\n",
                     "\tdoes not appear to be a TCSAM02 model report file.\n",
-                    "\tTCSAM02 results files are R lists, with 'mc' as the first element.\n",
+                    "\tTCSAM02 rep files are a set of nested R lists with name 'res', with 'mc' as the first element.\n",
                     "\tReturning NULL.\n",sep="");
                 return(NULL);
         }
-        class(rep)<-c('tcsam02.rep',class(rep));#set class attribute to 'tcsam2015.rep' for identification
+        class(res)<-c('tcsam02.res',class(res));#set class attribute to 'tcsam2015.res' for identification
     } else {
         cat('\tFile "',repFile,'" does not exist.\n\tReturning NULL\n',sep='');
     }
-    return(invisible(rep));
+    return(invisible(res));
 }
