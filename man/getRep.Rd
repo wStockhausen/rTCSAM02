@@ -4,10 +4,12 @@
 \alias{getRep}
 \title{Get a TCSAM02 report object (by reading a TCSAM02 model report [.rep] file)}
 \usage{
-getRep(repFile = NULL)
+getRep(repFile = NULL, verbose = FALSE)
 }
 \arguments{
 \item{repFile}{- report file from a TCSAM02 model run to source. can be NULL.}
+
+\item{verbose}{- flag (T/F) to prnt diagnostic info}
 }
 \value{
 TCSAM02 report object (a list). The returned object will be a list of class 'tcsam02.rep'.

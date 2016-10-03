@@ -5,7 +5,7 @@
 \title{Create a tcsam02.resLst object from a model run}
 \usage{
 getResLst(inp.dir = NULL, rep = "tcsam02.rep", model = "tcsam02",
-  prsType = c("all", "active"))
+  prsType = c("all", "active"), verbose = FALSE)
 }
 \arguments{
 \item{inp.dir}{- a folder with model output}
@@ -15,6 +15,8 @@ getResLst(inp.dir = NULL, rep = "tcsam02.rep", model = "tcsam02",
 \item{model}{- name of model executable}
 
 \item{prsType}{-  type ('all' or 'active') of parameters to read}
+
+\item{verbose}{- flag (T/F) to prnt diagnostic info}
 }
 \value{
 a tcsam02.resLst object.

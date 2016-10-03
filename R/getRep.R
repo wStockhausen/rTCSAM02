@@ -4,6 +4,7 @@
 #'@description Function to get a TCSAM02 report object
 #'
 #'@param repFile - report file from a TCSAM02 model run to source. can be NULL.
+#'@param verbose - flag (T/F) to prnt diagnostic info
 #'
 #'@return TCSAM02 report object (a list). The returned object will be a list of class 'tcsam02.rep'.
 #'
@@ -13,7 +14,7 @@
 #'
 #'@export
 #'
-getRep<-function(repFile=NULL){
+getRep<-function(repFile=NULL,verbose=FALSE){
     rep<-NULL;
     if(is.null(repFile)){
         Filters<-wtsUtilities::addFilter("rep","report files (*.rep)","*.rep",Filters=NULL);
@@ -36,7 +37,7 @@ getRep<-function(repFile=NULL){
         }
     }
     if (file.exists(repFile)){
-        cat("Reading model report from file:\n",repFile,"\n")
+        if (verbose) cat("Reading model report from file:\n",repFile,"\n")
         source(repFile,local=TRUE);
         if(!any(names(res)=='mc')){
                 cat("The file '",repFile,"'\n",
@@ -45,9 +46,10 @@ getRep<-function(repFile=NULL){
                     "\tReturning NULL.\n",sep="");
                 return(NULL);
         }
-        class(res)<-c('tcsam02.res',class(res));#set class attribute to 'tcsam2015.res' for identification
+        class(res)<-c('tcsam02.rep',class(res));#set class attribute to 'tcsam02.rep' for identification
     } else {
         cat('\tFile "',repFile,'" does not exist.\n\tReturning NULL\n',sep='');
     }
+    if (verbose) cat("rTCSAM02:getRep(): Done!\n")
     return(invisible(res));
 }

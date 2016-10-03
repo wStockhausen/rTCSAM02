@@ -26,15 +26,30 @@ getPrs<-function(type='all',inp.dir='.'){
     }
     ##get initial parameter values
     iCSV<-file.path(inp.dir,paste0("TCSAM02.params.",type,".init.csv"));
-    iPRS<-readParamsCSV(iCSV);
+    if (file.exists(iCSV)){
+        if (verbose) cat("rTCSAM02::getPrs(): Reading \n\t'",iCSV,"'.\n",sep='')
+        iPRS<-readParamsCSV(iCSV);
+    } else {
+        cat("rTCSAM02::getPrs(): \n\t'",iCSV,"'\ndoes not exist.\n",sep='')
+        cat("Returning NULL\n");
+        return(NULL);
+    }
     ##get final parameter values
     fCSV<-file.path(inp.dir,paste0("TCSAM02.params.",type,".final.csv"));
-    fPRS<-readParamsCSV(fCSV);
-    
+    if (file.exists(fCSV)){
+        if (verbose) cat("rTCSAM02::getPrs(): Reading \n\t'",fCSV,"'.\n",sep='')
+        fPRS<-readParamsCSV(fCSV);
+    } else {
+        cat("rTCSAM02::getPrs(): \n\t'",fCSV,"'\ndoes not exist.\n",sep='')
+        cat("Returning NULL\n");
+        return(NULL);
+    }
+
     ##combine initial and final values
     prsObj<-cbind(fPRS,init=iPRS$value);
     prsObj<-prsObj[,c(1:6,10,7:9)];
     class(prsObj)<-c('tcsam02.prs',class(prsObj));#set class attribute to 'tcsam02.prs' for identification
-    
-    return(prsObj);
+
+      if (verbose) cat("rTCSAM02::getPrs(): Done!\n")
+      return(prsObj);
 }

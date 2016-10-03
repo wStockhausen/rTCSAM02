@@ -12,13 +12,17 @@
 #'
 #'@export
 #'
-getMDFR.Pop.MeanGrowthIncrements<-function(tcsams,verbose=FALSE){
+getMDFR.Pop.MeanGrowth<-function(tcsams,verbose=FALSE){
     if (verbose) cat("--Getting mean growth increments\n");
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/T_list/mnZAM_cz',tcsams,verbose);
     mdfr$y<-'';
     mdfr$x<-'';
+
+    if (inherits(tcsams,'tcsam02.rep')){tcsams<-list(tcsam=tcsams);}
+    if (inherits(tcsams,'tcsam02.resLst')){tcsams<-list(tcsam=tcsams);}
+
     ums<-as.character(unique(mdfr$case))
     for (um in ums){
         tcsam<-tcsams[[um]];

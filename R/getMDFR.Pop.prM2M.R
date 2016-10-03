@@ -13,14 +13,18 @@
 #'@export
 #'
 getMDFR.Pop.PrM2M<-function(tcsams,verbose=FALSE){
-    if (verbose) cat("--Getting molt-to-maturity ogives.\n");
+    if (verbose) cat("--rTCSAM02::Getting molt-to-maturity ogives.\n");
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/prM2M_cz',tcsams,verbose);
     if (is.null(mdfr)) mdfr<-getMDFR('mp/prMolt2Mat_cz',tcsams,verbose);
     mdfr$y<-'';
     mdfr$x<-'';
-    ums<-as.character(unique(mdfr$case))
+
+    if (inherits(tcsams,'tcsam02.rep')){tcsams<-list(tcsam=tcsams);}
+    if (inherits(tcsams,'tcsam02.resLst')){tcsams<-list(tcsam=tcsams);}
+
+    ums<-as.character(unique(mdfr$case));
     for (um in ums){
         tcsam<-tcsams[[um]];
         if (inherits(tcsam,'tcsam02.resLst')) tcsam<-tcsam$rep;
@@ -28,8 +32,8 @@ getMDFR.Pop.PrM2M<-function(tcsams,verbose=FALSE){
         nPCs<-length(pgi$pcs)-1;#last element is a NULL
         for (pc in 1:nPCs){
             idx<-(mdfr$pc==pc)&(mdfr$case==um);
-            mdfr$y[idx]<-pgi$pcs[[pc]]$YEAR_BLOCK;
             mdfr$x[idx]<-tolower(pgi$pcs[[pc]]$SEX);
+            mdfr$y[idx]<-pgi$pcs[[pc]]$YEAR_BLOCK;
             mdfr$y[idx]<-reformatTimeBlocks(mdfr$y[idx],tcsam$mc$dims);
         }
     }
