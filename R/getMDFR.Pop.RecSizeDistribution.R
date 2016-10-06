@@ -13,11 +13,16 @@
 #'@export
 #'
 getMDFR.Pop.RecSizeDistribution<-function(tcsams,verbose=FALSE){
-    if (verbose) cat("--Getting recruitment size distribution.\n");
+    if (verbose) cat("--rTCSAM02::getMDFR.Pop.RecSizeDistribution: Getting recruitment size distribution.\n");
 
+    mdfr<-NULL;
     mdfr<-getMDFR('mp/R_list/R_cz',tcsams,verbose);
     mdfr$y<-'';
-    ums<-as.character(unique(mdfr$case))
+    ums<-as.character(unique(mdfr$case));
+
+    if (inherits(tcsams,'tcsam02.rep')){tcsams<-list(tcsam=tcsams);}
+    if (inherits(tcsams,'tcsam02.resLst')){tcsams<-list(tcsam=tcsams);}
+
     for (um in ums){
         tcsam<-tcsams[[um]];
         if (inherits(tcsam,'tcsam02.resLst')) tcsam<-tcsam$rep;
@@ -36,6 +41,6 @@ getMDFR.Pop.RecSizeDistribution<-function(tcsams,verbose=FALSE){
     mdfr$m<-"immature";
     mdfr$s<-"new shell";
 
-    if (verbose) cat("--Done. \n");
+    if (verbose) cat("--rTCSAM02::getMDFR.Pop.RecSizeDistribution: Done. \n");
     return(mdfr);
 }

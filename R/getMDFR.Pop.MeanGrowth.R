@@ -13,7 +13,7 @@
 #'@export
 #'
 getMDFR.Pop.MeanGrowth<-function(tcsams,verbose=FALSE){
-    if (verbose) cat("--Getting mean growth increments\n");
+    if (verbose) cat("--rTCSAM02::Getting mean growth increments\n");
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/T_list/mnZAM_cz',tcsams,verbose);
@@ -31,8 +31,8 @@ getMDFR.Pop.MeanGrowth<-function(tcsams,verbose=FALSE){
         nPCs<-length(pgi$pcs)-1;#last element is a NULL
         for (pc in 1:nPCs){
             idx<-(mdfr$pc==pc)&(mdfr$case==um);
-            mdfr$y[idx]<-pgi$pcs[[pc]]$YEAR_BLOCK;
             mdfr$x[idx]<-tolower(pgi$pcs[[pc]]$SEX);
+            mdfr$y[idx]<-pgi$pcs[[pc]]$YEAR_BLOCK;
             mdfr$y[idx]<-reformatTimeBlocks(mdfr$y[idx],tcsam$mc$dims);
         }
     }
@@ -43,6 +43,6 @@ getMDFR.Pop.MeanGrowth<-function(tcsams,verbose=FALSE){
     mdfr$m<-"immature";
     mdfr$s<-"all";
 
-    if (verbose) cat("--Done. \n");
+    if (verbose) cat("--rTCSAM02::Done. \n");
     return(mdfr);
 }

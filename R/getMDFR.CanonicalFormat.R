@@ -17,6 +17,16 @@ getMDFR.CanonicalFormat<-function(mdfr){
     if (!('case' %in% nms))     mdfr[['case']]    <-"";
     if (!('type' %in% nms))     mdfr[['type']]    <-"";
     if (!('fleet' %in% nms))    mdfr[['fleet']]   <-"";
+    if (('f' %in% nms)) {
+        #convert fisheries to fleets
+        mdfr$fleet<-mdfr$f;
+        mdfr$type <-"fisheries";
+    }
+    if (('v' %in% nms)){
+        #convert surveys to fleets
+        mdfr[['fleet']]<-mdfr$v;
+        mdfr$type <-"surveys";
+    }
     if (!('category' %in% nms)) mdfr[['category']]<-"";
     if (!('pc' %in% nms))       mdfr[['pc']]      <-"";
     if (!('y' %in% nms)) mdfr[['y']]<-"all";
@@ -25,11 +35,18 @@ getMDFR.CanonicalFormat<-function(mdfr){
     if (!('s' %in% nms)) mdfr[['s']]<-"all";
     if (!('z' %in% nms)) mdfr[['z']]<-"all";
     if (!('val' %in% nms)) mdfr[['val']]<-NA;
+    if ('.' %in% nms) mdfr$val<-mdfr[['.']];
     if (!('zp' %in% nms)) {
         if (!('lci' %in% nms)) mdfr[['lci']]<-NA;
         if (!('uci' %in% nms)) mdfr[['uci']]<-NA;
     }
-    
+
+    #check for fisheries and surveys info
+    if (all(mdfr$type=='')) {
+        mdfr$type<-'population';
+        mdfr$fleet<-'';
+    }
+
     #re-order to canconical format
     if ('zp' %in% nms){
         mdfr<-mdfr[,c('case','type','fleet','category','pc','y','x','m','s','z','zp','val')]

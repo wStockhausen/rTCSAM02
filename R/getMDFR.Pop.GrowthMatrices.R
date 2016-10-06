@@ -12,11 +12,17 @@
 #'
 #'@export
 #'
-getMDFR.Pop.GrowthTransitionMatrices<-function(tcsams,verbose=FALSE){
-    if (verbose) cat("--Getting growth transition matrices.\n");
+getMDFR.Pop.GrowthMatrices<-function(tcsams,verbose=FALSE){
+    if (verbose) cat("--rTCSAM02::Getting growth transition matrices.\n");
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/T_list/T_czz',tcsams,verbose);
+    mdfr$y<-'';
+    mdfr$x<-'';
+
+    if (inherits(tcsams,'tcsam02.rep')){tcsams<-list(tcsam=tcsams);}
+    if (inherits(tcsams,'tcsam02.resLst')){tcsams<-list(tcsam=tcsams);}
+
     ums<-as.character(unique(mdfr$case))
     for (um in ums){
         tcsam<-tcsams[[um]];
@@ -25,8 +31,8 @@ getMDFR.Pop.GrowthTransitionMatrices<-function(tcsams,verbose=FALSE){
         nPCs<-length(pgi$pcs)-1;#last element is a NULL
         for (pc in 1:nPCs){
             idx<-(mdfr$pc==pc)&(mdfr$case==um);
-            mdfr$y[idx]<-pgi$pcs[[pc]]$YEAR_BLOCK;
             mdfr$x[idx]<-tolower(pgi$pcs[[pc]]$SEX);
+            mdfr$y[idx]<-pgi$pcs[[pc]]$YEAR_BLOCK;
             mdfr$y[idx]<-reformatTimeBlocks(mdfr$y[idx],tcsam$mc$dims);
         }
     }
@@ -43,6 +49,6 @@ getMDFR.Pop.GrowthTransitionMatrices<-function(tcsams,verbose=FALSE){
     mdfr$m<-"immature";
     mdfr$s<-"all";
 
-    if (verbose) cat("--Done. \n");
+    if (verbose) cat("--rTCSAM02::Done. \n");
     return(mdfr);
 }

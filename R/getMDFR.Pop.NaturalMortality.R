@@ -16,7 +16,7 @@
 getMDFR.Pop.NaturalMortality<-function(tcsams=NULL,
                                       type=c('M_cxm','M_yxm','M_yxmsz'),
                                       verbose=FALSE){
-    if (verbose) cat("--Getting natural mortality info\n");
+    if (verbose) cat("--rTCSAM02::getMDFR.Pop.NaturalMortality: Getting natural mortality info\n");
 
     mdfr<-NULL;
     if (type[1]=='M_cxm'){
@@ -49,6 +49,6 @@ getMDFR.Pop.NaturalMortality<-function(tcsams=NULL,
     mdfr<-getMDFR.CanonicalFormat(mdfr);
     mdfr$type<-"population";
 
-    if (verbose) cat("--Done. \n");
+    if (verbose) cat("--rTCSAM02::getMDFR.Pop.NaturalMortality: Done. \n");
     return(mdfr);
 }
