@@ -4,14 +4,14 @@
 \alias{getMDFR.Fisheries.SelFcns}
 \title{Get fishery selectivity functions from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Fisheries.SelFcns(tcsams, verbose = FALSE, cast = "x")
+getMDFR.Fisheries.SelFcns(tcsams, verbose = FALSE, cast = "y+x")
 }
 \arguments{
 \item{tcsams}{- single TCSAM02 object, TCSAM02.resLst object, or named list of the latter}
 
 \item{verbose}{- flag (T/F) to print debug info}
 
-\item{cast}{- casting formula for excluding x,m,s factor levels from an average-at-size across unspecified factors}
+\item{cast}{- casting formula for excluding y,x,m,s factor levels from an average-at-size across unspecified factors}
 }
 \value{
 dataframe in canonical format

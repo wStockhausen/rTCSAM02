@@ -4,7 +4,7 @@
 \alias{getPrs}
 \title{Get a TCSAM2015 prs object by reading initial and final parameters csv files}
 \usage{
-getPrs(type = "all", inp.dir = ".")
+getPrs(type = "all", inp.dir = ".", verbose = FALSE)
 }
 \arguments{
 \item{type}{- 'all' or 'active'}

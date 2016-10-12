@@ -15,9 +15,10 @@
 #'
 #'@export
 #'
-getPrs<-function(type='all',inp.dir='.'){
+getPrs<-function(type='all',inp.dir='.',verbose=FALSE){
+    if (verbose) cat("rTCSAM02::getPrs(): Starting...\n")
     if (!any(type==c('all','active'))) {
-        cat("type = '",type,"' undefined for function rTCSAM2015::getPrs(...).\n",sep='');
+        cat("type = '",type,"' undefined for function rTCSAM02::getPrs(...).\n",sep='');
         cat("Returning NULL.\n\n");
         return(NULL);
     }
@@ -50,6 +51,6 @@ getPrs<-function(type='all',inp.dir='.'){
     prsObj<-prsObj[,c(1:6,10,7:9)];
     class(prsObj)<-c('tcsam02.prs',class(prsObj));#set class attribute to 'tcsam02.prs' for identification
 
-      if (verbose) cat("rTCSAM02::getPrs(): Done!\n")
-      return(prsObj);
+    if (verbose) cat("rTCSAM02::getPrs(): Done!\n")
+    return(prsObj);
 }

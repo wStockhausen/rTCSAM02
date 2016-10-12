@@ -46,8 +46,8 @@ getMDFR.Pop.NaturalMortality<-function(tcsams=NULL,
         mdfr<-mdfr[,c("case","y","x","m","s","z","val")];
     }
 
-    mdfr<-getMDFR.CanonicalFormat(mdfr);
-    mdfr$type<-"population";
+    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    mdfr$process<-"population";
 
     if (verbose) cat("--rTCSAM02::getMDFR.Pop.NaturalMortality: Done. \n");
     return(mdfr);

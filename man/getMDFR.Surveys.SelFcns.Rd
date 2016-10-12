@@ -11,7 +11,7 @@ getMDFR.Surveys.SelFcns(tcsams, verbose = FALSE, cast = "x")
 
 \item{verbose}{- flag (T/F) to print debug info}
 
-\item{cast}{- casting formula for excluding x,m,s factor levels from an average-at-size across unspecified factors}
+\item{cast}{- casting formula for excluding y,x,m,s factor levels from an average-at-size across unspecified factors}
 }
 \value{
 dataframe in canonical format

@@ -16,6 +16,7 @@
 #'
 getMDFR.Pop.Quantities<-function(tcsams=NULL,
                                  type=c("R_y","MB_yx",
+                                        "B_yxmsz","B_yxmz","B_yxz",
                                         "B_yxms","B_yxm","B_yx",
                                         "N_yxmsz","N_yxmz","N_yxz",
                                         "N_yxms","N_yxm","N_yx",
@@ -25,12 +26,13 @@ getMDFR.Pop.Quantities<-function(tcsams=NULL,
     if (verbose) cat("rTCSAM02::getMDFR.Pop.Quantities: Getting population trends\n");
 
     types<-c("R_y","MB_yx",
+             "B_yxmsz","B_yxmz","B_yxz",
              "B_yxms","B_yxm","B_yx",
              "N_yxmsz","N_yxmz","N_yxz",
              "N_yxms","N_yxm","N_yx",
              "iN_xmsz","fN_xmsz");
     if (!(type[1] %in% types)){
-        cat("rsimTCSAM::getMDFR.Pop.Quantities: Unknown type requested: '",type[1],"'.\n",sep='');
+        cat("rTCSAM02::getMDFR.Pop.Quantities: Unknown type requested: '",type[1],"'.\n",sep='');
         return(NULL);
     }
 
@@ -52,9 +54,21 @@ getMDFR.Pop.Quantities<-function(tcsams=NULL,
     if (substr(type[1],1,3)=="B_y"){
         #biomass trends
         if (verbose) cat("Getting population biomass trends\n");
-        path<-'mr/P_list/B_yxms';
+        path<-'mr/P_list/B_yxmsz';
         dfr<-getMDFR(path,tcsams,verbose=verbose);
-        if (type[1]=="B_yxms") mdfr<-dfr;
+        if (type[1]=="B_yxmsz") mdfr<-dfr;
+        if (type[1]=="B_yxmz"){
+            #abundance trends
+            if (verbose) cat("Getting population B_yxmz.\n");
+            mdfr<-reshape2::dcast(dfr,case+y+x+m+z~.,fun.aggregate=sum,value.var='val');
+            names(mdfr)[6]<-'val';
+        }
+        if (type[1]=="B_yxz"){
+            #abundance trends
+            if (verbose) cat("Getting population B_yxz.\n");
+            mdfr<-reshape2::dcast(dfr,case+y+x+z~.,fun.aggregate=sum,value.var='val');
+            names(mdfr)[5]<-'val';
+        }
         if (type[1]=="B_yxm"){
             if (verbose) cat("Getting population B_yxm.\n");
             mdfr<-reshape2::dcast(dfr,case+y+x+m~.,fun.aggregate=sum,value.var='val');
@@ -128,8 +142,8 @@ getMDFR.Pop.Quantities<-function(tcsams=NULL,
         }
     }
 
-    mdfr<-getMDFR.CanonicalFormat(mdfr);
-    mdfr$type<-"population";
+    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    mdfr$process<-"population";
 
     if (verbose) cat("--rTCSAM02::getMDFR.Pop.Quantities: Done. \n");
     return(mdfr);

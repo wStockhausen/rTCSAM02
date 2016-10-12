@@ -38,8 +38,8 @@ getMDFR.Pop.MeanGrowth<-function(tcsams,verbose=FALSE){
     }
     mdfr<-mdfr[,c('case','pc','y','x','m','s','z','val')];
 
-    mdfr<-getMDFR.CanonicalFormat(mdfr);
-    mdfr$type<-"population";
+    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    mdfr$process<-"population";
     mdfr$m<-"immature";
     mdfr$s<-"all";
 

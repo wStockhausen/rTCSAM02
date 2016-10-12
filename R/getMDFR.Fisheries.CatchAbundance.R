@@ -5,7 +5,7 @@
 #'
 #'@param tcsams - single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
 #'@param category - 'captured','discarded','retained', 'discard mortality', or 'index'
-#'@param cast - casting formula for excluding x,m,s factor levels from an average-at-size across unspecified factors
+#'@param cast - casting formula for excluding y,x,m,s,z factor levels from an average-at-size across unspecified factors
 #'@param verbose - flag (T/F) to print debug info
 #'
 #'@return dataframe in canonical format
@@ -16,7 +16,7 @@
 #'
 getMDFR.Fisheries.CatchAbundance<-function(tcsams,
                                            category=c('captured','discarded','retained','discard mortality','index'),
-                                           cast="x",
+                                           cast="y+x",
                                            verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting fishery catch abundance time series.\n");
 
@@ -36,15 +36,16 @@ getMDFR.Fisheries.CatchAbundance<-function(tcsams,
     }
     mdfr<-getMDFR(path,tcsams,verbose);
     mdfr$category<-category;
+    mdfr$type<-'predicted';
     mdfr<-removeImmOS(mdfr);
 
-    castform<-"case+type+fleet+category+pc+y&&cast~.";
+    castform<-"case+process+fleet+category+type+pc&&cast~.";
     castform<-gsub("&&cast",paste0("+",cast),castform,fixed=TRUE);
     ddfr<-reshape2::dcast(mdfr,castform,fun.aggregate=mean,na.rm=TRUE,value.var='val',drop=TRUE)
     ddfr[['.']]<-ifelse(ddfr[['.']]==0,NA,ddfr[['.']]);
     ddfr<-ddfr[!is.na(ddfr[['.']]),];#remove NA's
 
-    mdfr<-getMDFR.CanonicalFormat(ddfr);
+    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(ddfr);
 
     if (verbose) cat("--Done. \n");
     return(mdfr);

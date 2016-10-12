@@ -5,14 +5,14 @@
 \title{Get fishery catch biomass time series from model results from TCSAM02 model runs as a dataframe}
 \usage{
 getMDFR.Fisheries.CatchBiomass(tcsams, category = c("captured", "discarded",
-  "retained", "discard mortality", "index"), cast = "x", verbose = FALSE)
+  "retained", "discard mortality", "index"), cast = "y+x", verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
 
 \item{category}{- 'captured','discarded','retained', 'discard mortality', or 'index'}
 
-\item{cast}{- casting formula for excluding x,m,s factor levels from an average-at-size across unspecified factors}
+\item{cast}{- casting formula for excluding y,x,m,s,z factor levels from an average-at-size across unspecified factors}
 
 \item{verbose}{- flag (T/F) to print debug info}
 }

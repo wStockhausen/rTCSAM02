@@ -4,9 +4,9 @@
 \alias{getMDFR.Pop.Quantities}
 \title{Extract population quantities from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Pop.Quantities(tcsams = NULL, type = c("R_y", "MB_yx", "B_yxms",
-  "B_yxm", "B_yx", "N_yxmsz", "N_yxmz", "N_yxz", "N_yxms", "N_yxm", "N_yx",
-  "iN_xmsz", "fN_xmsz"), verbose = FALSE)
+getMDFR.Pop.Quantities(tcsams = NULL, type = c("R_y", "MB_yx", "B_yxmsz",
+  "B_yxmz", "B_yxz", "B_yxms", "B_yxm", "B_yx", "N_yxmsz", "N_yxmz", "N_yxz",
+  "N_yxms", "N_yxm", "N_yx", "iN_xmsz", "fN_xmsz"), verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single TCSAM02 model report object, or named list of such}
