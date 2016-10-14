@@ -16,9 +16,8 @@
 getMDFR.Pop.Abundance<-function(tcsams,cast="y+x",verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting population abundance time series.\n");
 
-    path<-'mr/S_list/N_vyxmsz';
+    path<-'mr/P_list/B_yxmsz';
     mdfr<-getMDFR(path,tcsams,verbose);
-    mdfr$fleet<-gsub("_"," ",mdfr$fleet,fixed=TRUE);#replace '_'s in population names with spaces
     mdfr$process<-"population";
     mdfr$type<-'predicted';
     mdfr<-removeImmOS(mdfr);
