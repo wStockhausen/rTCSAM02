@@ -13,7 +13,7 @@
 #'
 #'@export
 #'
-getMDFR.populations.Abundance<-function(tcsams,cast="y+x",verbose=FALSE){
+getMDFR.Pop.Abundance<-function(tcsams,cast="y+x",verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting population abundance time series.\n");
 
     path<-'mr/S_list/N_vyxmsz';
