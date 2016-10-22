@@ -46,6 +46,7 @@ getMDFR.ZScores.Biomass<-function(objs,
         } else {
             ##throw error
         }
+        mdfrpp<-NULL;
         ctNms<-catch.type;
         for (fltNm in fltNms){
             if (fltNm!=''){
@@ -61,13 +62,15 @@ getMDFR.ZScores.Biomass<-function(objs,
                         if ((data.type=="biomass")&&!is.null(ct$biomass)){
                             if (verbose) cat("---Getting biomass zscores\n")
                             mdfrp<-getMDFR.ZScoresForABData(ct$biomass$fits,verbose=verbose);
-                        }
-                        if (!is.null(mdfrp)){
-                            if (verbose) cat("--created dataframe w/",nrow(mdfrp),"rows\n")
-                            mdfrp$process<-fleet.type;
-                            mdfrp$fleet<-fleet;
-                            mdfrp$category<-catch.type;
-                            mdfr<-rbind(mdfr,mdfrp);
+                            if (!is.null(mdfrp)){
+                                if (verbose) cat("--created dataframe w/",nrow(mdfrp),"rows\n")
+                                mdfrp$case<-"tcsam02";
+                                mdfrp$process<-fleet.type;
+                                mdfrp$fleet<-fleet;
+                                mdfrp$category<-catch.type;
+                                mdfrp$type<-'z-score';
+                                mdfr<-rbind(mdfr,mdfrp);
+                            }
                         }
                     } else {
                         if (verbose) cat(ctNm,"not found for",fltNm,"\n");
@@ -75,7 +78,6 @@ getMDFR.ZScores.Biomass<-function(objs,
                 }##ctNms
             }
         }##fltNms
-        if (!is.null(mdfr)) mdfr$case<-"tcsam02";
     } else if (inherits(objs,'list')){
         #objs should be a list of tcsam02.resLst objects
         for (nm in names(objs)){
