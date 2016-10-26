@@ -16,6 +16,8 @@
 #'@export
 #'
 getMDFR<-function(path,tcsams,verbose=FALSE){
+    options(stringsAsFactors=FALSE);
+
     mdfr<-NULL;
     if (inherits(tcsams,'tcsam02.rep')){
         #tcsams is a tcsam02 report object

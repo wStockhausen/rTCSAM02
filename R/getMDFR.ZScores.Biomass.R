@@ -20,6 +20,8 @@ getMDFR.ZScores.Biomass<-function(objs,
                                     catch.type=c('index','retained','discarded','total'),
                                     verbose=FALSE){
     if (verbose) cat("--Starting rTCSAM02::getMDFR.ZScores.Biomass().\n");
+    options(stringsAsFactors=FALSE);
+
     fleet.type<-fleet.type[1];
     catch.type<-catch.type[1];
     data.type<-"biomass";

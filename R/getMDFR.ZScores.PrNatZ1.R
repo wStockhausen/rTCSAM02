@@ -30,6 +30,7 @@ getMDFR.ZScores.PrNatZ1<-function(fits,
                                   type=c("pearsons",'nlls'),
                                   verbose=FALSE){
     if (verbose) cat("---Starting rTCSAM02::getMDFR.ZScores.PrNatZ1(...)\n");
+    options(stringsAsFactors=FALSE);
 
     type<-type[1];
 

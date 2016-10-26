@@ -22,6 +22,8 @@ getMDFR.ZScores.PrNatZ<-function(objs,
                                  residuals.type=c('pearsons','nlls'),
                                  verbose=FALSE){
     if (verbose) cat("--Starting rTCSAM02::getMDFR.ZScore.PrNatZ.\n");
+    options(stringsAsFactors=FALSE);
+
     fleet.type<-fleet.type[1];
     catch.type<-catch.type[1];
     residuals.type<-residuals.type[1];

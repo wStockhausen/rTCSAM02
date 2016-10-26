@@ -17,6 +17,7 @@ getMDFR.Pop.NaturalMortality<-function(tcsams=NULL,
                                       type=c('M_cxm','M_yxm','M_yxmsz'),
                                       verbose=FALSE){
     if (verbose) cat("--rTCSAM02::getMDFR.Pop.NaturalMortality: Getting natural mortality info\n");
+    options(stringsAsFactors=FALSE);
 
     mdfr<-NULL;
     if (type[1]=='M_cxm'){

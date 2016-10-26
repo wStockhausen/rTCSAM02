@@ -19,6 +19,7 @@ getMDFR.Fisheries.CatchBiomass<-function(tcsams,
                                          cast="y+x",
                                          verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting fishery catch biomass time series.\n");
+    options(stringsAsFactors=FALSE);
 
     category<-category[1];
 

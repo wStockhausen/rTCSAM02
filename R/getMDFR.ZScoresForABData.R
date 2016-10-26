@@ -8,6 +8,8 @@
 #'
 #'@return dataframe
 #'
+#'@details None.
+#'
 #'@export
 #'
 getMDFR.ZScoresForABData<-function(afits,

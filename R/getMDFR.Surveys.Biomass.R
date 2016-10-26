@@ -16,6 +16,7 @@
 #'
 getMDFR.Surveys.Biomass<-function(tcsams,category='index',cast="y+x",verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting survey biomass time series.\n");
+    options(stringsAsFactors=FALSE);
 
     category<-category[1];
 

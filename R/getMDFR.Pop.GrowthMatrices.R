@@ -14,6 +14,7 @@
 #'
 getMDFR.Pop.GrowthMatrices<-function(tcsams,verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting growth transition matrices.\n");
+    options(stringsAsFactors=FALSE);
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/T_list/T_czz',tcsams,verbose);

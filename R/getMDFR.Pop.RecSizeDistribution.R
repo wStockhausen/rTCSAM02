@@ -14,6 +14,7 @@
 #'
 getMDFR.Pop.RecSizeDistribution<-function(tcsams,verbose=FALSE){
     if (verbose) cat("--rTCSAM02::getMDFR.Pop.RecSizeDistribution: Getting recruitment size distribution.\n");
+    options(stringsAsFactors=FALSE);
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/R_list/R_cz',tcsams,verbose);

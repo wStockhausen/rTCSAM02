@@ -25,6 +25,7 @@
 getOFCs<-function(repObjs,
                   mdl=NULL,
                   verbose=FALSE){
+    options(stringsAsFactors=FALSE);
     if (inherits(repObjs,'tcsam02.rep')){
         #repObjs is a tcsam02 model report object
         if (is.null(mdl)) mdl<-repObjs$mc$configName;

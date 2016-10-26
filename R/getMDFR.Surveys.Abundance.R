@@ -16,6 +16,7 @@
 #'
 getMDFR.Surveys.Abundance<-function(tcsams,category='index',cast="y+x",verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting survey abundance time series.\n");
+    options(stringsAsFactors=FALSE);
 
     category<-category[1];
 

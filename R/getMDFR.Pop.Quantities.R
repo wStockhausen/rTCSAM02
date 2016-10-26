@@ -24,6 +24,7 @@ getMDFR.Pop.Quantities<-function(tcsams=NULL,
                                  verbose=FALSE){
 
     if (verbose) cat("rTCSAM02::getMDFR.Pop.Quantities: Getting population trends\n");
+    options(stringsAsFactors=FALSE);
 
     types<-c("R_y","MB_yx",
              "B_yxmsz","B_yxmz","B_yxz",

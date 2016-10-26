@@ -19,6 +19,7 @@ getMDFR.Fisheries.CatchAbundance<-function(tcsams,
                                            cast="y+x",
                                            verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting fishery catch abundance time series.\n");
+    options(stringsAsFactors=FALSE);
 
     category<-category[1];
 

@@ -14,6 +14,7 @@
 #'
 getMDFR.Pop.PrM2M<-function(tcsams,verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting molt-to-maturity ogives.\n");
+    options(stringsAsFactors=FALSE);
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/prM2M_cz',tcsams,verbose);

@@ -16,7 +16,7 @@ std model object (a list). The returned object will be a list of class 'tcsam201
 Function to get a TCSAM2015 std object by reading a .std file
 }
 \details{
-If \code{stdFile} is NULL, the user will be prompted to identify a 
+If \code{stdFile} is NULL, the user will be prompted to identify a
 TCSAM2015 model report file from which to source the results object.
 The returned object will be a list of class 'tcsam2015.std'.
 }

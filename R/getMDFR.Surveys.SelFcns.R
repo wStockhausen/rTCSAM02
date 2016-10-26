@@ -15,6 +15,7 @@
 #'
 getMDFR.Surveys.SelFcns<-function(tcsams,verbose=FALSE,cast="x"){
     if (verbose) cat("--rTCSAM02::Getting survey selectivity functions.\n");
+    options(stringsAsFactors=FALSE);
 
     path<-'mp/S_list/sel_vyxmsz';
     mdfr<-getMDFR(path,tcsams,verbose);

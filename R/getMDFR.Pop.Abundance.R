@@ -15,6 +15,7 @@
 #'
 getMDFR.Pop.Abundance<-function(tcsams,cast="y+x",verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting population abundance time series.\n");
+    options(stringsAsFactors=FALSE);
 
     path<-'mr/P_list/B_yxmsz';
     mdfr<-getMDFR(path,tcsams,verbose);

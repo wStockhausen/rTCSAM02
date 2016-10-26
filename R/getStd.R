@@ -7,13 +7,14 @@
 #'
 #'@return std model object (a list). The returned object will be a list of class 'tcsam2015.std'.
 #'
-#'@details If \code{stdFile} is NULL, the user will be prompted to identify a 
+#'@details If \code{stdFile} is NULL, the user will be prompted to identify a
 #'TCSAM2015 model report file from which to source the results object.
 #'The returned object will be a list of class 'tcsam2015.std'.
 #'
 #'@export
 #'
 getStd<-function(stdFile=NULL){
+    options(stringsAsFactors=FALSE);
     if (is.null(stdFile)){
         stdFile<-wtsUtilities::selectFile(ext='std',caption="Select TCSAM02 std file");
     }

@@ -17,6 +17,7 @@
 #'
 getPrs<-function(type='all',inp.dir='.',verbose=FALSE){
     if (verbose) cat("rTCSAM02::getPrs(): Starting...\n")
+    options(stringsAsFactors=FALSE);
     if (!any(type==c('all','active'))) {
         cat("type = '",type,"' undefined for function rTCSAM02::getPrs(...).\n",sep='');
         cat("Returning NULL.\n\n");

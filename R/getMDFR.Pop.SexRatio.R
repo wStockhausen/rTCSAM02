@@ -15,6 +15,8 @@
 #'
 getMDFR.Pop.SexRatio<-function(tcsams,rsims,verbose=FALSE){
     if (verbose) cat("--Getting recruitment sex ratio.\n");
+    options(stringsAsFactors=FALSE);
+
     mdfr<-NULL;
 
     path<-'mp/R_list/Rx_c';

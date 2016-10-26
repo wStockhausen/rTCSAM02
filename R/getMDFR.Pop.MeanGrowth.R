@@ -14,6 +14,7 @@
 #'
 getMDFR.Pop.MeanGrowth<-function(tcsams,verbose=FALSE){
     if (verbose) cat("--rTCSAM02::Getting mean growth increments\n");
+    options(stringsAsFactors=FALSE);
 
     mdfr<-NULL;
     mdfr<-getMDFR('mp/T_list/mnZAM_cz',tcsams,verbose);

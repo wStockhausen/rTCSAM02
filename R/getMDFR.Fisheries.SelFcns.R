@@ -15,6 +15,7 @@
 #'
 getMDFR.Fisheries.SelFcns<-function(tcsams,verbose=FALSE,cast="y+x"){
     if (verbose) cat("--rTCSAM02::Getting fishery selectivity functions.\n");
+    options(stringsAsFactors=FALSE);
 
     path<-'mp/F_list/sel_fyxmsz';
     mdfr<-getMDFR(path,tcsams,verbose);
