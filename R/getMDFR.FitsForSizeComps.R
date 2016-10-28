@@ -57,14 +57,14 @@ getMDFR.FitsForSizeComps<-function(fits,
 
     odfr<-reshape2::melt(oAtZ,value.name='val');
     mdfr<-reshape2::melt(mAtZ,value.name='val');
-    odfr$var<-'obs';
-    mdfr$var<-'est';
+    odfr$var<-'observed';
+    mdfr$var<-'predicted';
     pdfr<-rbind(odfr,mdfr);
 
     rm(odfr,mdfr);
 
     mdfr<-NULL;
-    odx<-(pdfr$var=='obs');
+    odx<-(pdfr$var=='observed');
     for (x in sxs){
         for (m in mss){
             for (s in scs){
