@@ -64,8 +64,8 @@ getRunCommands<-function(os='osx',
     if (tolower(os)=='win'){
         model1<-paste(model,'exe',sep='.');
         if (!nopath) cpy<-"copy &&path2model &&model1";
-        rn.mdl<-"&&model -rs -nox  -configFile &&configFile &&mnPhs &&mxPhs &&mcmc &&nohess &&jitter &&jit.seed &&pin";
-        if (mcmc) rn.mcmc<-"&&model  -configFile &&configFile -mceval";
+        rn.mdl<-"&&model -rs -nox  -configFile &&configFile &&mnPhs &&mxPhs &&mcmc &&nohess &&calcOFL &&jitter &&jit.seed &&pin";
+        if (mcmc) rn.mcmc<-"&&model  -configFile &&configFile -mceval &&calcOFL";
         ##cln is correct for 'win', so do nothing
         run.cmds<-paste(echo.on,cpy,rn.mdl,rn.mcmc,cln,sep="\n");
         path2model<-gsub("/","\\",file.path(path2model,model1),fixed=TRUE);
@@ -73,7 +73,7 @@ getRunCommands<-function(os='osx',
         model1<-model;
         if (!nopath) cpy<-"cp &&path2model ./&&model";
         rn.mdl<-"./&&model -rs -nox  -configFile &&configFile &&mnPhs &&mxPhs &&mcmc &&nohess &&calcOFL &&jitter &&jit.seed &&pin";
-        if (mcmc) rn.mcmc<-"./&&model  -configFile &&configFile -mceval";
+        if (mcmc) rn.mcmc<-"./&&model  -configFile &&configFile -mceval &&calcOFL";
         if (cleanup) cln<-gsub("del ","rm ",cln,fixed=TRUE);
         cdr<-paste('DIR="$( cd "$( dirname "$0" )" && pwd )"','cd ${DIR}',sep='\n');
         run.cmds<-paste("#!/bin/sh",echo.on,cdr,cpy,rn.mdl,rn.mcmc,cln,sep="\n");

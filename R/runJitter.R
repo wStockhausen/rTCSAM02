@@ -90,8 +90,12 @@ runJitter<-function(os='osx',
                 seed    <-par$value[par$name=='seed'];
                 maxgrad <-par$value[par$name=='max gradient'];
                 tbl<-data.frame(idx=r,objFun=objFun,maxGrad=maxgrad,seed=seed);
-                if (r==1) write.table(tbl,file=out.csv,sep=",",col.names=TRUE,row.names=FALSE,append=FALSE)
-                if (r>1)  write.table(tbl,file=out.csv,sep=",",col.names=FALSE,row.names=FALSE,append=TRUE)
+                if (file.exists(out.csv)) {
+                    write.table(tbl,file=out.csv,sep=",",col.names=FALSE,row.names=FALSE,append=TRUE)
+                } else {
+                    #create out.csv file
+                    write.table(tbl,file=out.csv,sep=",",col.names=TRUE,row.names=FALSE,append=FALSE)
+                }
             }
             parList[[fldr]]<-par;
         }
