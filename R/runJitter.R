@@ -111,7 +111,8 @@ runJitter<-function(os='osx',
 
     #re-run case associated with mininum objective function value, save in "best.runxx"
     cat("\n\n---Re-running ADMB program for",idx[1],"out of",numRuns,"as best run---\n");
-    fldr<-paste('best.run',wtsUtilities::formatZeros(best,width=max(2,ceiling(log10(numRuns)))),sep='');
+    ##fldr<-paste('best.run',wtsUtilities::formatZeros(best,width=max(2,ceiling(log10(numRuns)))),sep='');
+    fldr<-"best";
     p2f<-file.path(path,fldr);
     cat("---Output folder is '",p2f,"'\n\n",sep='');
     par<-runTCSAM02(path=p2f,
