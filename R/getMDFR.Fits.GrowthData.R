@@ -50,9 +50,11 @@ getMDFR.Fits.GrowthData<-function(objs,
                                           category=nms.gd[n],type="nlls",
                                           y=gdnx$years,z=gdnx$zPre,val=gdnx$nlls);
                         dfrp4<-data.frame(x=x,m="immature",s="new shell",
-                                          category=nms.gd[n],type="predicted",
+                                          category=nms.gd[n],type="zscores",
                                           y=gdnx$years,z=gdnx$zPre,val=gdnx$zscrs);
-                        mdfr<-rbind(mdfr,dfrp1,dfrp2,dfrp3,dfrp4);
+                        mdfrp<-rbind(dfrp1,dfrp2,dfrp3,dfrp4);
+                        idx<-order(mdfrp$type,mdfrp$y,mdfrp$z,mdfrp$val);
+                        mdfr<-rbind(mdfr,mdfrp[idx,]);
                     }#nx
                 }
             }#n
