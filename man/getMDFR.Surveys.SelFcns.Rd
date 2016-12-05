@@ -4,7 +4,7 @@
 \alias{getMDFR.Surveys.SelFcns}
 \title{Get survey selectivity functions from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Surveys.SelFcns(tcsams, verbose = FALSE, cast = "x")
+getMDFR.Surveys.SelFcns(tcsams, verbose = FALSE, cast = "y+x")
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
