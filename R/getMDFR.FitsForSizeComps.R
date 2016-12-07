@@ -34,7 +34,9 @@ getMDFR.FitsForSizeComps<-function(fits,
     zbs<-dims$z$vls;
 
     n<-length(fits);
+    yrsp<-names(fits);
     yrs<-min(as.numeric(names(fits)),na.rm=TRUE):max(as.numeric(names(fits)),na.rm=TRUE)
+    #yrs<-sort(as.numeric(yrsp));
 
     dms<-c(length(sxs),length(mss),length(scs),length(yrs),length(zbs));
     dmnames<-list(x=sxs,m=mss,s=scs,y=yrs,z=zbs);
@@ -44,7 +46,6 @@ getMDFR.FitsForSizeComps<-function(fits,
     dms<-c(length(sxs),length(mss),length(scs),length(yrs));
     dmnames<-list(x=sxs,m=mss,s=scs,y=yrs);
 
-    yrsp<-names(fits);
     for (i in 1:(n-1)){
         fit<-fits[[i]];
         x<-gsub("_"," ",tolower(fit$x),fixed=TRUE);
@@ -60,6 +61,8 @@ getMDFR.FitsForSizeComps<-function(fits,
     odfr$var<-'observed';
     mdfr$var<-'predicted';
     pdfr<-rbind(odfr,mdfr);
+
+    pdfr<-pdfr[pdfr$y %in% yrsp,];#select only years with observed size comps
 
     rm(odfr,mdfr);
 

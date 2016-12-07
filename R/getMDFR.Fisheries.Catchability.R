@@ -24,7 +24,7 @@ getMDFR.Fisheries.Catchability<-function(tcsams,cast="x",verbose=FALSE){
     castform<-"case+process+fleet+category+type+y&&cast~.";
     castform<-gsub("&&cast",paste0("+",cast),castform,fixed=TRUE);
     ddfr<-reshape2::dcast(mdfr,castform,fun.aggregate=mean,na.rm=TRUE,value.var='val',drop=TRUE)
-    ddfr[['.']]<-ifelse(ddfr[['.']]==0,NA,ddfr[['.']]);
+    #ddfr[['.']]<-ifelse(ddfr[['.']]==0,NA,ddfr[['.']]);
     ddfr<-ddfr[!is.na(ddfr[['.']]),];#remove NA's
 
     mdfr<-rCompTCMs::getMDFR.CanonicalFormat(ddfr);
