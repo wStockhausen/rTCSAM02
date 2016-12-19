@@ -4,6 +4,7 @@
 #'@description Function to get a TCSAM2015 std object by reading a .std file
 #'
 #'@param stdFile - std file from a TCSAM2015 model run. can be NULL.
+#'@param verbose - flag (T/F) to prnt diagnostic info
 #'
 #'@return std model object (a list). The returned object will be a list of class 'tcsam2015.std'.
 #'
@@ -13,7 +14,8 @@
 #'
 #'@export
 #'
-getStd<-function(stdFile=NULL){
+getStd<-function(stdFile=NULL,verbose=FALSE){
+    if (verbose) cat("Starting rTCSAM02::getStd().\n")
     options(stringsAsFactors=FALSE);
     if (is.null(stdFile)){
         stdFile<-wtsUtilities::selectFile(ext='std',caption="Select TCSAM02 std file");
@@ -24,9 +26,10 @@ getStd<-function(stdFile=NULL){
         colnames(stdObj)<-c("row id","name","est","std.dev")
         class(stdObj)<-c('tcsam02.std',class(stdObj));#set class attribute to 'tcsam02.std' for identification
     } else {
-        cat('No std file specified, or specified file does not exist.\n',
+        cat('rTCSAM02::getSTD(): No std file specified, or specified file does not exist.\n',
             'Returning NULL...\n');
         return(NULL);
     }
+    if (verbose) cat("Finished rTCSAM02::getStd().\n")
     return(stdObj);
 }

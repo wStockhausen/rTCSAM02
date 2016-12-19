@@ -5,20 +5,21 @@
 #'
 #'@param tcsams - single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
 #'@param category - 'captured','discarded','retained', 'discard mortality', or 'index'
-#'@param cast - casting formula for excluding y,x,m,s,z factor levels from an average-at-size across unspecified factors
+#'@param cast - casting formula (or NULL) for excluding x,m,s,z factor levels from an average-at-size across unspecified factors
 #'@param verbose - flag (T/F) to print debug info
 #'
 #'@return dataframe in canonical format
 #'
-#'@details Extracts the estimated fishery biomass time series.
+#'@details If 'cast' is not NULL (nor blank), the final cast'ing formula is
+#'"case+process+fleet+category+type+pc+y+cast~.".
 #'
 #'@export
 #'
 getMDFR.Fisheries.CatchBiomass<-function(tcsams,
                                          category=c('captured','discarded','retained','discard mortality','index'),
-                                         cast="y+x",
+                                         cast="x",
                                          verbose=FALSE){
-    if (verbose) cat("--rTCSAM02::Getting fishery catch biomass time series.\n");
+    if (verbose) cat("--starting rTCSAM02::getMDFR.Fisheries.CatchBiomass().\n");
     options(stringsAsFactors=FALSE);
 
     category<-category[1];
@@ -40,14 +41,15 @@ getMDFR.Fisheries.CatchBiomass<-function(tcsams,
     mdfr$type<-'predicted';
     mdfr<-removeImmOS(mdfr);
 
-    castform<-"case+process+fleet+category+type+pc&&cast~.";
-    castform<-gsub("&&cast",paste0("+",cast),castform,fixed=TRUE);
-    ddfr<-reshape2::dcast(mdfr,castform,fun.aggregate=mean,na.rm=TRUE,value.var='val',drop=TRUE)
+    castform<-"case+process+fleet+category+type+pc+y";
+    if (!is.null(cast)|(cast!='')) castform<-paste0(castform,"+",cast);
+    castform<-paste0(castform,"~.");
+    ddfr<-reshape2::dcast(mdfr,castform,fun.aggregate=sum,na.rm=TRUE,value.var='val',drop=TRUE)
     ddfr[['.']]<-ifelse(ddfr[['.']]==0,NA,ddfr[['.']]);
     ddfr<-ddfr[!is.na(ddfr[['.']]),];#remove NA's
 
     mdfr<-rCompTCMs::getMDFR.CanonicalFormat(ddfr);
 
-    if (verbose) cat("--Done. \n");
+    if (verbose) cat("--finished rTCSAM02::getMDFR.Fisheries.CatchBiomass(). \n");
     return(mdfr);
 }

@@ -6,7 +6,7 @@
 \usage{
 getMDFR.Fits.FleetData(objs, fleet.type = c("survey", "fishery"),
   data.type = c("abundance", "biomass", "n.at.z"), catch.type = c("index",
-  "captured", "discard", "retained"), ci = 0.8, verbose = FALSE)
+  "total", "discard", "retained"), ci = 0.8, verbose = FALSE)
 }
 \arguments{
 \item{objs}{- single model report list object, or named list of them}
@@ -15,7 +15,7 @@ getMDFR.Fits.FleetData(objs, fleet.type = c("survey", "fishery"),
 
 \item{data.type}{- data type ('abundance', 'biomass', or 'n.at.z')}
 
-\item{catch.type}{- cath type ('index','captured','discard', or 'retained')}
+\item{catch.type}{- cath type ('index','total','discard', or 'retained')}
 
 \item{ci}{- confidence intervals for observations}
 

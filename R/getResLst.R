@@ -41,8 +41,8 @@ getResLst<-function(inp.dir=NULL,
 
     prs<-getPrs(inp.dir=inp.dir,type=prsType[1],verbose=verbose);
     rep<-getRep(repFile=file.path(inp.dir,rep),verbose=verbose);
-    std<-getStd(stdFile=file.path(inp.dir,paste0(model,".std")));
-    ofc<-getOFCs(rep);
+    std<-getStd(stdFile=file.path(inp.dir,paste0(model,".std")),verbose=verbose);
+    ofc<-getOFCs(rep,verbose=verbose);
 
     resLst<-list(rep=rep,prs=prs,std=std,ofc=ofc);
     class(resLst)<-c('tcsam02.resLst',class(resLst));

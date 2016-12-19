@@ -41,15 +41,16 @@ getPrs<-function(type='all',inp.dir='.',verbose=FALSE){
     if (file.exists(fCSV)){
         if (verbose) cat("rTCSAM02::getPrs(): Reading \n\t'",fCSV,"'.\n",sep='')
         fPRS<-readParamsCSV(fCSV);
+        fvals<-fPRS[,7];
     } else {
-        cat("rTCSAM02::getPrs(): \n\t'",fCSV,"'\ndoes not exist.\n",sep='')
-        cat("Returning NULL\n");
-        return(NULL);
+        cat("rTCSAM02::getPrs(): \n\t'",fCSV,"'\ndoes not exist.\n",sep='');
+        fvals<-NA;
     }
 
     ##combine initial and final values
-    prsObj<-cbind(fPRS,init=iPRS$value);
-    prsObj<-prsObj[,c(1:6,10,7:9)];
+    names(iPRS)[7]<-'init';
+    prsObj<-cbind(iPRS,value=fvals);
+    prsObj<-prsObj[,c(1:7,10,8:9)];
     class(prsObj)<-c('tcsam02.prs',class(prsObj));#set class attribute to 'tcsam02.prs' for identification
 
     if (verbose) cat("rTCSAM02::getPrs(): Done!\n")

@@ -24,7 +24,7 @@
 getMDFR.FitsForSizeComps<-function(fits,
                                    mc,
                                    verbose=FALSE){
-    if (verbose) cat("---Starting getMDFR.FitsForSizeComps(...)\n");
+    if (verbose) cat("---Starting rTCSAM02::getMDFR.FitsForSizeComps(...)\n");
     options(stringsAsFactors=FALSE);
 
     dims<-mc$dims;
@@ -81,6 +81,6 @@ getMDFR.FitsForSizeComps<-function(fits,
         }#m
     }#x
 
-    if (verbose) cat("---Finished getMDFR.FitsForSizeComps(...)\n");
+    if (verbose) cat("---Finished rTCSAM02::getMDFR.FitsForSizeComps(...)\n");
     return(mdfr)
 }

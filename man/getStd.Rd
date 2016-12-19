@@ -4,10 +4,12 @@
 \alias{getStd}
 \title{Get a TCSAM2015 std object by reading a .std file}
 \usage{
-getStd(stdFile = NULL)
+getStd(stdFile = NULL, verbose = FALSE)
 }
 \arguments{
 \item{stdFile}{- std file from a TCSAM2015 model run. can be NULL.}
+
+\item{verbose}{- flag (T/F) to prnt diagnostic info}
 }
 \value{
 std model object (a list). The returned object will be a list of class 'tcsam2015.std'.

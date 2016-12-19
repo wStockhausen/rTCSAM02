@@ -25,6 +25,7 @@
 getOFCs<-function(repObjs,
                   mdl=NULL,
                   verbose=FALSE){
+    if (verbose) cat("Starting rTCSAM02::getOFCs().\n")
     options(stringsAsFactors=FALSE);
     if (inherits(repObjs,'tcsam02.rep')){
         #repObjs is a tcsam02 model report object
@@ -68,6 +69,7 @@ getOFCs<-function(repObjs,
     }
 
     class(mdfr)<-c('tcsam02.ofc',class(mdfr));
+    if (verbose) cat("Finished rTCSAM02::getOFCs().\n")
     return(mdfr)
 }
 #mdfr1<-getObjFunValues.Components(repObjs.fitSD.all)

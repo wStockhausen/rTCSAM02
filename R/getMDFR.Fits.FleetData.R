@@ -6,7 +6,7 @@
 #'@param objs - single model report list object, or named list of them
 #'@param fleet.type - fleet type ('fishery' or 'survey')
 #'@param data.type - data type ('abundance', 'biomass', or 'n.at.z')
-#'@param catch.type - cath type ('index','captured','discard', or 'retained')
+#'@param catch.type - cath type ('index','total','discard', or 'retained')
 #'@param ci - confidence intervals for observations
 #'@param verbose - flag (T/F) to print diagnostic info
 #'
@@ -20,10 +20,13 @@
 getMDFR.Fits.FleetData<-function(objs,
                                  fleet.type=c('survey','fishery'),
                                  data.type=c('abundance', 'biomass', 'n.at.z'),
-                                 catch.type=c('index','captured','discard','retained'),
+                                 catch.type=c('index','total','discard','retained'),
                                  ci=0.80,
                                  verbose=FALSE){
-    if (verbose) cat("--Starting getMDFR.Fits.FleetData().\n");
+    if (verbose) {
+        cat("--Starting rTCSAM02::getMDFR.Fits.FleetData().\n");
+        cat("Extracting fleet.type = ",fleet.type,", data.type = ",data.type,", catch.type = ",catch.type,"\n");
+    }
     options(stringsAsFactors=FALSE);
 
     fleet.type<-fleet.type[1];
