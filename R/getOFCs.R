@@ -72,5 +72,3 @@ getOFCs<-function(repObjs,
     if (verbose) cat("Finished rTCSAM02::getOFCs().\n")
     return(mdfr)
 }
-#mdfr1<-getObjFunValues.Components(repObjs.fitSD.all)
-#mdfr2<-getObjFunValues.Components(list(base=repObjs.fitSD.all,alt1=repObjs.fitSD.all))

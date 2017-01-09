@@ -8,7 +8,7 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
   configFile = "", numRuns = 3, onlyEvalJitter = FALSE,
   in.csv = "jitterInfo.csv", out.csv = "jitterResults.csv",
   calcOFL = FALSE, mcmc = FALSE, mc.N = 1e+06, mc.save = 1000,
-  mc.scale = 1000, plotResults = FALSE)
+  mc.scale = 1000, plotResults = FALSE, cleanup = TRUE)
 }
 \arguments{
 \item{os}{- 'win' or 'mac' or 'osx'}
@@ -40,6 +40,8 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
 \item{mc.scale}{- number of iterations to adjust scale for mcmc calculations}
 
 \item{plotResults}{- T/F to plot final results using \code{???}}
+
+\item{cleanup}{- T/F to clean up files after run}
 }
 \value{
 - list w/ 4 elements:

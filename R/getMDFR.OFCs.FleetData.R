@@ -27,9 +27,13 @@
 #'   \item{objfun - objective function value}
 #' }
 #'
+#' @export
+#'
 getMDFR.OFCs.FleetData<-function(obj,
                                  category=c("surveys","fisheries"),
                                  verbose=FALSE){
+    if (verbose) cat("Starting rTCSAM02::getMDFR.OFCs.FleetData().\n")
+    options(stringsAsFactors=FALSE);
     category<-category[1];
 
     if (inherits(obj,"tcsam02.rep")){
@@ -120,5 +124,6 @@ getMDFR.OFCs.FleetData<-function(obj,
         }#ctynm
     }#fltnm
 
+    if (verbose) cat("finished rTCSAM02::getMDFR.OFCs.FleetData().\n")
     return(dfr);
 }

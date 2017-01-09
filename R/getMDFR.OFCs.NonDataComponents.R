@@ -24,13 +24,13 @@
 #' @export
 #'
 getMDFR.OFCs.NonDataComponents<-function(obj,
-                                         category=c("penalties","penFDevs","components","priors"),
+                                         categories=c("penalties","penFDevs","components","priors"),
                                          verbose=FALSE){
     if (inherits(obj,"tcsam02.rep")){
         #do nothing, will fall out to code below
     } else if (inherits(obj,"tcsam02.resLst")){
         #pull out tcsam02.rep object and process
-        mdfr<-getMDFR.OFCs.NonDataComponents(obj$rep,category,verbose);
+        mdfr<-getMDFR.OFCs.NonDataComponents(obj$rep,categories,verbose);
         return(mdfr);
     } else {
         cat("--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--\n")

@@ -4,15 +4,15 @@
 \alias{getMDFR.OFCs.NonDataComponents}
 \title{Get non-data components from the objective function for a TCSAM02 model as a dataframe}
 \usage{
-getMDFR.OFCs.NonDataComponents(obj, category = c("penalties", "penFDevs",
+getMDFR.OFCs.NonDataComponents(obj, categories = c("penalties", "penFDevs",
   "components", "priors"), verbose = FALSE)
 }
 \arguments{
 \item{obj}{- a tcsam02.resLst or tcsam02.rep object}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
-
 \item{categories}{- non-data-related objective function components to get ("all","penalties","penFDevs","components","priors")}
+
+\item{verbose}{- flag (T/F) to print diagnostic info}
 }
 \value{
 dataframe

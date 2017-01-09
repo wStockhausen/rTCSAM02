@@ -32,6 +32,8 @@
 getMDFR.OFCs.DataComponents<-function(obj,
                                       categories=c("all","surveys","fisheries","growthdata"),
                                       verbose=FALSE){
+    if (verbose) cat("Starting rTCSAM02::getMDFR.OFCs.DataComponents().\n")
+    options(stringsAsFactors=FALSE);
     if (inherits(obj,"tcsam02.rep")){
         #do nothing, will fall out to code below
     } else if (inherits(obj,"tcsam02.resLst")){
@@ -74,5 +76,6 @@ getMDFR.OFCs.DataComponents<-function(obj,
     mdfr$s<-gsub("all_shell","all shell conditions",mdfr$s,fixed=TRUE);
     mdfr$s<-gsub("_"," ",mdfr$s,fixed=TRUE);
 
+    if (verbose) cat("finished rTCSAM02::getMDFR.OFCs.DataComponents().\n")
     return(mdfr);
 }
