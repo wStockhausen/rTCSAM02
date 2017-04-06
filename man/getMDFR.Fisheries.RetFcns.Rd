@@ -22,4 +22,3 @@ Function to get fishery retention functions from model results from TCSAM02 mode
 \details{
 Extracts fishery retention functions.
 }
-

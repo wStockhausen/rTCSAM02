@@ -22,4 +22,3 @@ Function to get annual survey catchabilities from TCSAM02 model runs as a datafr
 \details{
 Extracts annual survey catchabilities.
 }
-

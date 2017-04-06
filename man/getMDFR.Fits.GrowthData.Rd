@@ -20,4 +20,3 @@ Function to get model fits to growth data.
 \details{
 Returned dataframe is in canonical format
 }
-

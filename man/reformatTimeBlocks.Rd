@@ -21,4 +21,3 @@ Reformat rsim, tcsam notation for time blocks to a standard format.
 For 2 time periods and a single year, the standardized format 
 looks like 'yyy1-yyy2;yyy3-yyy4;yyy5'.
 }
-

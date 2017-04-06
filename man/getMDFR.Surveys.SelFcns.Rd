@@ -22,4 +22,3 @@ Function to get survey selectivity functions from model results from TCSAM02 mod
 \details{
 Extracts survey selectivity functions.
 }
-

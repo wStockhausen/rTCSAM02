@@ -22,4 +22,3 @@ Function to get an object from a list object using the specified path into the l
 \details{
 none.
 }
-

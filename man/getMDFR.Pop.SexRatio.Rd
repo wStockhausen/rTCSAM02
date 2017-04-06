@@ -22,4 +22,3 @@ Function to get recruitment sex ratio from model results from TCSAM2015 and rsim
 \details{
 Extracts recruitment sex ratio.
 }
-

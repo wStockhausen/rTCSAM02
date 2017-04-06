@@ -22,4 +22,3 @@ Function to calculate survey Q parameter values for TCSAM02 based on values from
 \details{
 Calculates and returns a list of survey Q parameter values for a TCSAM02 model equivalent to those from a TCSAM2013 model run.
 }
-

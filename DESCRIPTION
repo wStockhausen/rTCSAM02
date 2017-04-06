@@ -1,8 +1,8 @@
 Package: rTCSAM02
 Type: Package
 Title: A set of tools to set up input for, and interact with output from, TCSAM02 model runs.
-Version: 2017.01.26
-Date: 2017-01-26
+Version: 2017.02.22
+Date: 2017-02-22
 Author: William T. Stockhausen
 Maintainer: William T. Stockhausen <ywilliam.stockhausen@noaa.gov>
 Description: This package provides a set of tools to set up input for,
@@ -19,4 +19,4 @@ Imports:
     stats (>= 3.1.2),
     tcltk (>= 3.1.2),
     wtsUtilities (>= 2016.04.21)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

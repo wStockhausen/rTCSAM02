@@ -22,4 +22,3 @@ If \code{repFile} is NULL, the user will be prompted to identify a
 TCSAM02 model report file from which to source the results object.
 The returned object will be a list of class 'tcsam02.rep'.
 }
-

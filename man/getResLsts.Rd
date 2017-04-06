@@ -25,4 +25,3 @@ Function to create a list of tcsam02.resLst objects from a set of model runs.
 \details{
 Uses \code{getResLst} to open a folders with model runs listed in inp.dirs.
 }
-

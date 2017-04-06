@@ -23,4 +23,3 @@ Function to get natural mortality rates from model results from TCSAM02 model ru
 \details{
 Extracts natural mortality rates. Uses \code{reshape2} package.
 }
-

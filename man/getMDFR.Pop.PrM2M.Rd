@@ -20,4 +20,3 @@ Function to get molt-to-maturity ogives from model results from TCSAM02 model ru
 \details{
 Extracts molt-to-maturity ogives.
 }
-

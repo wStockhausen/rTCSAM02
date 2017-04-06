@@ -22,4 +22,3 @@ Function to calculate natural mortality parameter values from a TCSAM2013 model 
 \details{
 Calculates and returns a list of natural mortality parameter values for a TCSAM02 model equivalent to those from a TCSAM2013 model run.
 }
-

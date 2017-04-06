@@ -24,4 +24,3 @@ Returned dataframe is a melted (ala reshape2) version of the requested array,
 with additional columns 'model' and 'modeltype' appended at the "right". The array value
 is in column 'val'. Uses \code{reshape2::melt(...)}.
 }
-

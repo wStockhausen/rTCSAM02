@@ -115,6 +115,8 @@ runTCSAM02<-function(os='osx',
     if (jitter&(!is.null(dfr))) {
         tbl<-read.csv('jitterInfo.csv',header=TRUE);
         dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),dfr);
+        dfr$value[dfr$name=='objective function']<-tbl$objfun[1];
+        dfr$value[dfr$name=='max gradient']<-tbl$maxGrad[1];
     }
 
     if (plotResults){

@@ -18,4 +18,3 @@ Function to create a TCSAM2015 par object from a par file.
 \details{
 Uses \code{wtsUtilities::selectFile} to open a file dialog if in.par is NULL.
 }
-

@@ -31,4 +31,3 @@ Function to get model fits to biomass data for fleet data components.
 Uses \code{getMDFR.FitsForABData()} and \code{getMDFR.FitsForSizeComps()}.
 Returned dataframe is in canonical format
 }
-

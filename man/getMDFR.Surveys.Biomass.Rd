@@ -25,4 +25,3 @@ Function to get survey biomass time series from model results from TCSAM02 model
 \details{
 Extracts the estimated survey biomass time series.
 }
-

@@ -22,4 +22,3 @@ If \code{stdFile} is NULL, the user will be prompted to identify a
 TCSAM2015 model report file from which to source the results object.
 The returned object will be a list of class 'tcsam2015.std'.
 }
-

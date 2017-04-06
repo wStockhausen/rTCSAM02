@@ -22,4 +22,3 @@ Function to calculate selectivity function parameter values from a TCSAM2013 mod
 \details{
 Calculates and returns a list of selectivity function parameter values for a TCSAM02 model equivalent to those from a TCSAM2013 model run.
 }
-

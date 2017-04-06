@@ -26,4 +26,3 @@ Function to get fishery catch abundance time series from model results from TCSA
 If 'cast' is not NULL (nor blank), the final cast'ing formula is
 "case+process+fleet+category+type+pc+y+cast~.".
 }
-

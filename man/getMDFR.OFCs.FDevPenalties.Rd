@@ -30,4 +30,3 @@ Called by \code{getMDFR.OFCs.NonDataComponents()}. Returned dataframe has column
   \item{objfun - objective function value}
 }
 }
-

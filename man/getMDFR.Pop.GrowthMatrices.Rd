@@ -21,4 +21,3 @@ Function to get growth transition matrices from model results from TCSAM02 model
 \details{
 Extracts growth transition matrices.
 }
-

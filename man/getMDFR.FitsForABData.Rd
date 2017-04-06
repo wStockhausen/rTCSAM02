@@ -22,4 +22,3 @@ Function to get fits to abundance or biomass data as a dataframe.
 \details{
 none.
 }
-

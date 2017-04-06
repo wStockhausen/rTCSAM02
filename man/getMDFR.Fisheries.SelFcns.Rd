@@ -22,4 +22,3 @@ Function to get fishery selectivity functions from model results from TCSAM02 mo
 \details{
 Extracts fishery selectivity functions.
 }
-

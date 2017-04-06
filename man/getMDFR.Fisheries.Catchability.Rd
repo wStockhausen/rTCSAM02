@@ -22,4 +22,3 @@ Function to get annual fishery catchabilities from TCSAM02 model runs as a dataf
 \details{
 Extracts annual fishery catchabilities.
 }
-

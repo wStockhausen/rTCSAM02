@@ -27,4 +27,3 @@ Function to get model fits to abundance time series as z-scores for fleet data c
 Uses \code{getMDFR.ZScoresForABData()}.
 Returned dataframe is in canonical format.
 }
-

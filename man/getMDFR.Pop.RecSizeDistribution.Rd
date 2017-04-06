@@ -20,4 +20,3 @@ Function to get recruitment size distribution from model results from TCSAM02 mo
 \details{
 Extracts mean growth increments.
 }
-

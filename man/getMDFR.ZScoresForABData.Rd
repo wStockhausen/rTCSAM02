@@ -20,4 +20,3 @@ Function to get z-scores for abundance, biomass data from fits to data as datafr
 \details{
 None.
 }
-

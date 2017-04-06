@@ -67,4 +67,3 @@ be relative to the \code{path} variable. If showPlot=TRUE, the report file, prs 
 and std files are read in and the associated objects are saved to 'ModelResults.RData'
 as a tcsam02 resLst  object, respectively.
 }
-

@@ -25,4 +25,3 @@ Function to get survey abundance time series from model results from TCSAM02 mod
 \details{
 Extracts the estimated survey abundance time series.
 }
-

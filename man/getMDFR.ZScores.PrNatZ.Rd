@@ -29,4 +29,3 @@ Function to get model fits to size frequencies as z-scores for fleet data compon
 Uses \code{getMDFR.ZScores.PrNatZ1()}.
 Returned dataframe is in canonical form.
 }
-

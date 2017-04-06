@@ -27,4 +27,3 @@ Function to get model fits to biomass time series as z-scores for fleet data com
 Uses \code{getMDFR.ZScoresForABData()}.
 Returned dataframe is in canonical format.
 }
-

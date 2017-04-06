@@ -39,4 +39,3 @@ Returned dataframe has columns:
   \item{objfun - objective function value}
 }
 }
-

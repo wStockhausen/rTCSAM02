@@ -32,4 +32,3 @@ Returned dataframe has columns:
  \item{var - variable type}
 }
 }
-

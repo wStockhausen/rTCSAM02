@@ -31,4 +31,3 @@ The returned dataframe has columns named
 The "variable" column indicates whether the "value" is a weight ('wgt'),
 negative log-likelihood ('nll'), or objective function value ('objfun').
 }
-

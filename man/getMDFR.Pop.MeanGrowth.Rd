@@ -20,4 +20,3 @@ Function to get mean growth increments from model results from TCSAM2015 and rsi
 \details{
 Extracts mean growth increments.
 }
-

@@ -52,4 +52,3 @@ EchoOut.dat, CheckFile.dat, and fimn.log files are deleted.\cr
 If the path associated with \code{configFile} is a relative one, it should
 be relative to the path for model output.
 }
-
