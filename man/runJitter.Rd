@@ -5,7 +5,7 @@
 \title{Function to run TCSAM02 multiple times using jittered initial parameter values.}
 \usage{
 runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
-  configFile = "", numRuns = 3, onlyEvalJitter = FALSE,
+  configFile = "", numRuns = 3, minPhase = 1, onlyEvalJitter = FALSE,
   in.csv = "jitterInfo.csv", out.csv = "jitterResults.csv",
   calcOFL = FALSE, mcmc = FALSE, mc.N = 1e+06, mc.save = 1000,
   mc.scale = 1000, plotResults = FALSE, cleanup = TRUE)
@@ -22,6 +22,8 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
 \item{configFile}{- path to model configuration file}
 
 \item{numRuns}{- number of jitter runs to make}
+
+\item{minPhase}{- phase in which to start optimization}
 
 \item{onlyEvalJitter}{- flag (T/F) to only evaluate a (previous) set of jitter runs, not make new runs}
 

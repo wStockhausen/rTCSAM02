@@ -24,6 +24,7 @@
 #'@param path2model - path to model executable
 #'@param configFile - path to model configuration file
 #'@param numRuns    - number of jitter runs to make
+#'@param minPhase - phase in which to start optimization
 #'@param onlyEvalJitter - flag (T/F) to only evaluate a (previous) set of jitter runs, not make new runs
 #'@param in.csv - filename for jitter info (seed, obj fun value) from ADMB model run
 #'@param out.csv - filename for jittered results
@@ -50,6 +51,7 @@ runJitter<-function(os='osx',
                     path2model='',
                     configFile='',
                     numRuns=3,
+                    minPhase=1,
                     onlyEvalJitter=FALSE,
                     in.csv='jitterInfo.csv',
                     out.csv='jitterResults.csv',
@@ -80,6 +82,7 @@ runJitter<-function(os='osx',
                             path2model=path2model,
                             configFile=configFile,
                             pin=FALSE,
+                            minPhase=minPhase,
                             calcOFL=FALSE,
                             hess=FALSE,
                             mcmc=FALSE,
@@ -112,7 +115,7 @@ runJitter<-function(os='osx',
     seed<-tbl$seed[idx[1]];
     if (onlyEvalJitter){parList<-NULL;}
 
-    #re-run case associated with mininum objective function value, save in "best.runxx"
+    #re-run case associated with mininum objective function value, save in "best"
     cat("\n\n---Re-running ADMB program for",idx[1],"out of",numRuns,"as best run---\n");
     ##fldr<-paste('best.run',wtsUtilities::formatZeros(best,width=max(2,ceiling(log10(numRuns)))),sep='');
     fldr<-"best";
@@ -124,6 +127,7 @@ runJitter<-function(os='osx',
                     path2model=path2model,
                     configFile=configFile,
                     pin=FALSE,
+                    minPhase=minPhase,
                     calcOFL=TRUE,
                     hess=TRUE,
                     mcmc=mcmc,
