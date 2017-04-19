@@ -1,17 +1,17 @@
 #'
-#' @title Get data-related components from the objective function for a TCSAM02 model as a dataframe
+#' @title Get data-related components from the objective function for a (list of) TCSAM02 model(s) as a dataframe
 #'
-#' @description Function to get data-related components from the objective function for a TCSAM02 model as a dataframe.
+#' @description Function to get data-related components from the objective function for a (list of) TCSAM02 model(s) as a dataframe.
 #'
-#' @param obj - a tcsam02.resLst or tcsam02.rep object
-#' @param categories - data-related objective function components to get ("all","surveys","fisheries","growthdata")
+#' @param obj - a list of tcsam02.resLst objects, a tcsam02.resLst,  or a tcsam02.rep object
+#' @param categories - data-related objective function components to get ("all","surveys","fisheries","growthdata","effortdata")
 #' @param verbose - flag (T/F) to print diagnostic info
 #'
 #' @return dataframe
 #'
 #' @details Returned dataframe has columns:
 #' \itemize{
-#'   \item{case - model case (blank, to be filled in by caller)}
+#'   \item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
 #'   \item{category - fleet category}
 #'   \item{fleet - fleet name}
 #'   \item{catch.type - catch type}
@@ -30,7 +30,7 @@
 #' @export
 #'
 getMDFR.OFCs.DataComponents<-function(obj,
-                                      categories=c("all","surveys","fisheries","growthdata"),
+                                      categories=c("all","surveys","fisheries","growthdata","effortdata"),
                                       verbose=FALSE){
     if (verbose) cat("Starting rTCSAM02::getMDFR.OFCs.DataComponents().\n")
     options(stringsAsFactors=FALSE);
@@ -39,6 +39,19 @@ getMDFR.OFCs.DataComponents<-function(obj,
     } else if (inherits(obj,"tcsam02.resLst")){
         #pull out tcsam02.rep object and process
         mdfr<-getMDFR.OFCs.DataComponents(obj$rep,categories,verbose);
+        return(mdfr);
+    } else if ((class(obj)[1]=="list") &&inherits(obj[[1]],"tcsam02.resLst")){
+        #assume this is a list of tcsam02.resLst objects
+        if (verbose) cat("Processing list of tcsam02.resLst objects\n",sep='')
+        mdfr<-NULL;
+        for (case in names(obj)){
+            if (verbose) cat("\tProcessing list element '",case,"'\n",sep='')
+            dfr<-getMDFR.OFCs.DataComponents(obj[[case]]$rep,categories,verbose);
+            if (!is.null(dfr)){
+                dfr$case<-case;
+                mdfr<-rbind(mdfr,dfr);
+            }
+        }
         return(mdfr);
     } else {
         cat("--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--\n")
@@ -51,7 +64,7 @@ getMDFR.OFCs.DataComponents<-function(obj,
     }
 
     #obj should now be a tcsam02.rep object
-    if ("all" %in% categories) categories<-c("surveys","fisheries","growthdata");
+    if ("all" %in% categories) categories<-c("surveys","fisheries","growthdata","effortdata");
 
     mdfr<-NULL;
     for (dc in c("surveys","fisheries")){
@@ -62,6 +75,10 @@ getMDFR.OFCs.DataComponents<-function(obj,
     }
     if ("growthdata" %in% categories){
         dfr<-getMDFR.OFCs.GrowthData(obj,verbose=verbose);
+        mdfr<-rbind(mdfr,dfr);
+    }
+    if ("effortdata" %in% categories){
+        dfr<-getMDFR.OFCs.EffortData(obj,verbose=verbose);
         mdfr<-rbind(mdfr,dfr);
     }
 

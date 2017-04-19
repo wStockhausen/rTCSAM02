@@ -1,9 +1,9 @@
 #'
-#' @title Get non-data components from the objective function for a TCSAM02 model as a dataframe
+#' @title Get non-data components from the objective function for a (list of) TCSAM02 model(s) as a dataframe
 #'
-#' @description Function to get non-data components from the objective function for a TCSAM02 model as a dataframe.
+#' @description Function to get non-data components from the objective function for a (list of) TCSAM02 model(s) as a dataframe.
 #'
-#' @param obj - a tcsam02.resLst or tcsam02.rep object
+#' @param obj - a list of tcsam02.resLst objects, a tcsam02.resLst,  or a tcsam02.rep object
 #' @param categories - non-data-related objective function components to get ("all","penalties","penFDevs","components","priors")
 #' @param  verbose - flag (T/F) to print diagnostic info
 #'
@@ -11,7 +11,7 @@
 #'
 #' @details Returned dataframe has columns
 #' \itemize{
-#'   \item{case - model case [blank, to be filled in by calling function]}
+#'   \item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
 #'   \item{category - objective function component category}
 #'   \item{type - type name}
 #'   \item{element - element name}
@@ -24,13 +24,26 @@
 #' @export
 #'
 getMDFR.OFCs.NonDataComponents<-function(obj,
-                                         categories=c("penalties","penFDevs","components","priors"),
+                                         categories=c("all","penalties","penFDevs","components","priors"),
                                          verbose=FALSE){
     if (inherits(obj,"tcsam02.rep")){
         #do nothing, will fall out to code below
     } else if (inherits(obj,"tcsam02.resLst")){
         #pull out tcsam02.rep object and process
         mdfr<-getMDFR.OFCs.NonDataComponents(obj$rep,categories,verbose);
+        return(mdfr);
+    } else if ((class(obj)[1]=="list") &&inherits(obj[[1]],"tcsam02.resLst")){
+        #assume this is a list of tcsam02.resLst objects
+        if (verbose) cat("Processing list of tcsam02.resLst objects\n",sep='')
+        mdfr<-NULL;
+        for (case in names(obj)){
+            if (verbose) cat("\tProcessing list element '",case,"'\n",sep='')
+            dfr<-getMDFR.OFCs.NonDataComponents(obj[[case]]$rep,categories,verbose);
+            if (!is.null(dfr)){
+                dfr$case<-case;
+                mdfr<-rbind(mdfr,dfr);
+            }
+        }
         return(mdfr);
     } else {
         cat("--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--\n")

@@ -2,13 +2,13 @@
 % Please edit documentation in R/getMDFR.OFCs.NonDataComponents.R
 \name{getMDFR.OFCs.NonDataComponents}
 \alias{getMDFR.OFCs.NonDataComponents}
-\title{Get non-data components from the objective function for a TCSAM02 model as a dataframe}
+\title{Get non-data components from the objective function for a (list of) TCSAM02 model(s) as a dataframe}
 \usage{
-getMDFR.OFCs.NonDataComponents(obj, categories = c("penalties", "penFDevs",
-  "components", "priors"), verbose = FALSE)
+getMDFR.OFCs.NonDataComponents(obj, categories = c("all", "penalties",
+  "penFDevs", "components", "priors"), verbose = FALSE)
 }
 \arguments{
-\item{obj}{- a tcsam02.resLst or tcsam02.rep object}
+\item{obj}{- a list of tcsam02.resLst objects, a tcsam02.resLst,  or a tcsam02.rep object}
 
 \item{categories}{- non-data-related objective function components to get ("all","penalties","penFDevs","components","priors")}
 
@@ -18,12 +18,12 @@ getMDFR.OFCs.NonDataComponents(obj, categories = c("penalties", "penFDevs",
 dataframe
 }
 \description{
-Function to get non-data components from the objective function for a TCSAM02 model as a dataframe.
+Function to get non-data components from the objective function for a (list of) TCSAM02 model(s) as a dataframe.
 }
 \details{
 Returned dataframe has columns
 \itemize{
-  \item{case - model case [blank, to be filled in by calling function]}
+  \item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
   \item{category - objective function component category}
   \item{type - type name}
   \item{element - element name}

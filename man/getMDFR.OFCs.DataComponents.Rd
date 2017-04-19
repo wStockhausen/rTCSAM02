@@ -2,15 +2,15 @@
 % Please edit documentation in R/getMDFR.OFCs.DataComponents.R
 \name{getMDFR.OFCs.DataComponents}
 \alias{getMDFR.OFCs.DataComponents}
-\title{Get data-related components from the objective function for a TCSAM02 model as a dataframe}
+\title{Get data-related components from the objective function for a (list of) TCSAM02 model(s) as a dataframe}
 \usage{
 getMDFR.OFCs.DataComponents(obj, categories = c("all", "surveys", "fisheries",
-  "growthdata"), verbose = FALSE)
+  "growthdata", "effortdata"), verbose = FALSE)
 }
 \arguments{
-\item{obj}{- a tcsam02.resLst or tcsam02.rep object}
+\item{obj}{- a list of tcsam02.resLst objects, a tcsam02.resLst,  or a tcsam02.rep object}
 
-\item{categories}{- data-related objective function components to get ("all","surveys","fisheries","growthdata")}
+\item{categories}{- data-related objective function components to get ("all","surveys","fisheries","growthdata","effortdata")}
 
 \item{verbose}{- flag (T/F) to print diagnostic info}
 }
@@ -18,12 +18,12 @@ getMDFR.OFCs.DataComponents(obj, categories = c("all", "surveys", "fisheries",
 dataframe
 }
 \description{
-Function to get data-related components from the objective function for a TCSAM02 model as a dataframe.
+Function to get data-related components from the objective function for a (list of) TCSAM02 model(s) as a dataframe.
 }
 \details{
 Returned dataframe has columns:
 \itemize{
-  \item{case - model case (blank, to be filled in by caller)}
+  \item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
   \item{category - fleet category}
   \item{fleet - fleet name}
   \item{catch.type - catch type}
