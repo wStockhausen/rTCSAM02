@@ -6,7 +6,7 @@
 #'@param objs - single model report list object, or named list of them
 #'@param verbose - flag (T/F) to print diagnostic info
 #'
-#'@return dataframe
+#'@return dataframe (or NULL)
 #'
 #'@details Returned dataframe is in canonical format
 #'

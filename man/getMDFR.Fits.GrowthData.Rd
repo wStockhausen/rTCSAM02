@@ -12,7 +12,7 @@ getMDFR.Fits.GrowthData(objs, verbose = FALSE)
 \item{verbose}{- flag (T/F) to print diagnostic info}
 }
 \value{
-dataframe
+dataframe (or NULL)
 }
 \description{
 Function to get model fits to growth data.
