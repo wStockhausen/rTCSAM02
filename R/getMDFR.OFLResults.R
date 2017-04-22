@@ -18,7 +18,7 @@ getMDFR.OFLResults<-function(objs,
     options(stringsAsFactors=FALSE);
 
     mdfr<-NULL;
-    if ((class(objs)[1]=='list')&&inherits(obj[[1]],"tcsam02.resLst")){
+    if ((class(objs)[1]=='list')&&inherits(objs[[1]],"tcsam02.resLst")){
         #objs should be a list of tcsam02 resLst objects
         for (nm in names(objs)){
             mdfrp<-getMDFR.OFLResults(objs[[nm]],
@@ -33,6 +33,26 @@ getMDFR.OFLResults<-function(objs,
             idx<-!(names(ofl) %in% c("eqNatZF0_xmsz","eqNatZFM_xmsz"))
             mdfr<-as.data.frame(list(case="",ofl[names(ofl)[idx]]));
         }
+    } else if ((class(objs)[1]=='list')&&inherits(objs[[1]],"tcsam02.rep")){
+        #objs should be a list of tcsam02 repLst objects
+        for (nm in names(objs)){
+            mdfrp<-getMDFR.OFLResults(objs[[nm]],
+                                          verbose=verbose);
+            if (!is.null(mdfrp)) mdfrp$case<-nm;
+            mdfr<-rbind(mdfr,mdfrp);
+        }
+    } else if (inherits(objs,'tcsam02.rep')){
+        #objs is a single tcsam02 rep object
+        ofl<-objs$rep$oflResults;
+        if (!is.null(ofl)){
+            idx<-!(names(ofl) %in% c("eqNatZF0_xmsz","eqNatZFM_xmsz"))
+            mdfr<-as.data.frame(list(case="",ofl[names(ofl)[idx]]));
+        }
+    } else {
+        cat("---getMDFR.OFLResults: ERROR!\n");
+        cat("getMDFR.OFLResults: unrecognized input\n");
+        cat("'objs' should be a tcsam02.resLst or tcsam02.rep object, or lists thereof.\n")
+        return(NULL)
     }
 
     if (verbose) cat("--Finished rTCSAM02::getMDFR.OFLResults().\n");
