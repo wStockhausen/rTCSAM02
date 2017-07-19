@@ -54,7 +54,7 @@ getMDFR.FitsForABData<-function(afits,
                 uci<-NULL;
             } else {
                 cat('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
-                cat('Error in getMDFR.ZScores.\n')
+                cat('Error in getMDFR.FitsForABData.\n')
                 cat("pdfType '",pdfType,"' not recognized!!\n")
                 cat("Exiting function.\n")
                 cat('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
@@ -65,17 +65,6 @@ getMDFR.FitsForABData<-function(afits,
                                   y=as.numeric(names(obs)),
                                   val=obs,lci=lci,uci=uci,var="observed");
                 mdfr<-rbind(mdfr,dfrp1);
-                # dfrp2<-NULL;
-                # dfrp3<-NULL;
-                # if (!is.null(uci)){
-                #     dfrp2<-data.frame(x=afit$x,m=afit$m,s=afit$s,
-                #                       y=as.numeric(names(obs)),
-                #                      val=lci,var="lci");
-                #     dfrp3<-data.frame(x=afit$x,m=afit$m,s=afit$s,
-                #                       y=as.numeric(names(obs)),
-                #                      val=uci,var="uci");
-                # }
-                # mdfr<-rbind(mdfr,dfrp1,dfrp2,dfrp3);
             }
         }#!is.null(afit)
     }#n

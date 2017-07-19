@@ -1,8 +1,8 @@
 Package: rTCSAM02
 Type: Package
 Title: A set of tools to set up input for, and interact with output from, TCSAM02 model runs.
-Version: 2017.04.21
-Date: 2017-04-21
+Version: 2017.07.19
+Date: 2017-07-19
 Author: William T. Stockhausen
 Maintainer: William T. Stockhausen <ywilliam.stockhausen@noaa.gov>
 Description: This package provides a set of tools to set up input for,
@@ -10,6 +10,15 @@ Description: This package provides a set of tools to set up input for,
 License: MIT + file LICSENSE
 Depends:
     R (>= 3.1.2)
+Requires:
+    ggplot2 (>= 1.0.0),
+    graphics (>= 3.1.2),
+    grid (>= 3.1.2),
+    reshape2 (>= 1.4.1),
+    sqldf (>= 0.4-10),
+    stats (>= 3.1.2),
+    tcltk (>= 3.1.2),
+    wtsUtilities (>= 2016.04.21)
 Imports:
     ggplot2 (>= 1.0.0),
     graphics (>= 3.1.2),
