@@ -7,8 +7,8 @@
 runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
   configFile = "", numRuns = 3, minPhase = 1, onlyEvalJitter = FALSE,
   in.csv = "jitterInfo.csv", out.csv = "jitterResults.csv",
-  calcOFL = FALSE, mcmc = FALSE, mc.N = 1e+06, mc.save = 1000,
-  mc.scale = 1000, plotResults = FALSE, cleanup = TRUE)
+  calcOFL = FALSE, calcOFLJitter = FALSE, mcmc = FALSE, mc.N = 1e+06,
+  mc.save = 1000, mc.scale = 1000, plotResults = FALSE, cleanup = TRUE)
 }
 \arguments{
 \item{os}{- 'win' or 'mac' or 'osx'}
@@ -31,7 +31,9 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
 
 \item{out.csv}{- filename for jittered results}
 
-\item{calcOFL}{- flag (T/F) to perform OFL calculations}
+\item{calcOFL}{- flag (T/F) to perform OFL calculations for "best" model}
+
+\item{calcOFLJitter}{- flag (T/F) to perform OFL calculations while jittering}
 
 \item{mcmc}{- flag (T/F) to run mcmc on "best" model}
 

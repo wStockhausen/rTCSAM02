@@ -114,7 +114,20 @@ runTCSAM02<-function(os='osx',
     #get jitter info
     if (jitter&(!is.null(dfr))) {
         tbl<-read.csv('jitterInfo.csv',header=TRUE);
-        dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),dfr);
+        if ("B0" %in% colnames(tbl)){
+            dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
+                       data.frame(name='MMB', value=tbl$MMB[1]),
+                       data.frame(name='B0',  value=tbl$B0[1]),
+                       data.frame(name='Bmsy',value=tbl$Bmsy[1]),
+                       data.frame(name='Fmsy',value=tbl$Fmsy[1]),
+                       data.frame(name='OFL', value=tbl$OFL[1]),
+                       data.frame(name='curB',value=tbl$curB[1]),
+                       dfr);
+        } else {
+            dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
+                       data.frame(name='MMB', value=tbl$MMB[1]),
+                       dfr);
+        }
         dfr$value[dfr$name=='objective function']<-tbl$objfun[1];
         dfr$value[dfr$name=='max gradient']<-tbl$maxGrad[1];
     }
