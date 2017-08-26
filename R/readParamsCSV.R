@@ -1,14 +1,14 @@
 #'
-#'@title Read a TCSAM2015 model parameters csv file and return a dataframe
+#'@title Read a TCSAM02 model parameters csv file and return a dataframe
 #'
-#'@description Function to read a TCSAM2015 parameters csv file and return a dataframe.
+#'@description Function to read a TCSAM02 parameters csv file and return a dataframe.
 #'
-#'@param csvFile - parameters csv file from a TCSAM2015 model run. can be NULL.
+#'@param csvFile - parameters csv file from a TCSAM02 model run. can be NULL.
 #'
 #'@return a dataframe (or NULL).
 #'
-#'@details If csvFile is NULL, the user will be prompted to identify a 
-#'TCSAM2015 model parameters csv file to read. Uses functions
+#'@details If csvFile is NULL, the user will be prompted to identify a
+#'TCSAM02 model parameters csv file to read. Uses functions
 #'\itemize{
 #'  \item \code{wtsUtilities::selectFile(...)}
 #'}

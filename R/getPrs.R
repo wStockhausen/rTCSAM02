@@ -1,17 +1,17 @@
 #'
-#'@title Get a TCSAM2015 prs object by reading initial and final parameters csv files
+#'@title Get a TCSAM02 prs object by reading initial and final parameters csv files
 #'
-#'@description Function to get a TCSAM2015 prs object by reading initial and final parameters csv file.
+#'@description Function to get a TCSAM02 prs object by reading initial and final parameters csv file.
 #'
 #'@param type - 'all' or 'active'
 #'@param inp.dir - folder for files
 #'
-#'@return A prs model object (a dataframe). The returned object will be a list of class 'tcsam2015.prs'.
+#'@return A prs model object (a dataframe). The returned object will be a list of class 'tcsam02.prs'.
 #'
 #'@details To create the prs object, this function reads 2 csv-type parameter value files,
 #'one associated with the initial parameter values and one associated with the final values.
 #'The user can select to return either all the parameters, or only the active parameters (ones
-#'with phase > 0). The returned object will be a dataframe of class 'tcsam2015.prs'.
+#'with phase > 0). The returned object will be a dataframe of class 'tcsam02.prs'.
 #'
 #'@export
 #'
@@ -49,8 +49,8 @@ getPrs<-function(type='all',inp.dir='.',verbose=FALSE){
 
     ##combine initial and final values
     names(iPRS)[7]<-'init';
-    prsObj<-cbind(iPRS,value=fvals);
-    prsObj<-prsObj[,c(1:7,10,8:9)];
+    prsObj<-cbind(iPRS[,c("category","process","label","type","name",
+                          "index","phase","idx.mn","idx.mx","min","max","init")],value=fvals);
     class(prsObj)<-c('tcsam02.prs',class(prsObj));#set class attribute to 'tcsam02.prs' for identification
 
     if (verbose) cat("rTCSAM02::getPrs(): Done!\n")

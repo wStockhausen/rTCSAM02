@@ -2,23 +2,23 @@
 % Please edit documentation in R/getStd.R
 \name{getStd}
 \alias{getStd}
-\title{Get a TCSAM2015 std object by reading a .std file}
+\title{Get a TCSAM02 std object by reading a .std file}
 \usage{
 getStd(stdFile = NULL, verbose = FALSE)
 }
 \arguments{
-\item{stdFile}{- std file from a TCSAM2015 model run. can be NULL.}
+\item{stdFile}{- std file from a TCSAM02 model run. can be NULL.}
 
 \item{verbose}{- flag (T/F) to prnt diagnostic info}
 }
 \value{
-std model object (a list). The returned object will be a list of class 'tcsam2015.std'.
+std model object (a list). The returned object will be a list of class 'tcsam02.std'.
 }
 \description{
-Function to get a TCSAM2015 std object by reading a .std file
+Function to get a TCSAM02 std object by reading a .std file
 }
 \details{
 If \code{stdFile} is NULL, the user will be prompted to identify a
-TCSAM2015 model report file from which to source the results object.
-The returned object will be a list of class 'tcsam2015.std'.
+TCSAM02 model report file from which to source the results object.
+The returned object will be a list of class 'tcsam02.std'.
 }

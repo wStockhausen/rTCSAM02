@@ -1,16 +1,16 @@
 #'
-#'@title Get a TCSAM2015 std object by reading a .std file
+#'@title Get a TCSAM02 std object by reading a .std file
 #'
-#'@description Function to get a TCSAM2015 std object by reading a .std file
+#'@description Function to get a TCSAM02 std object by reading a .std file
 #'
-#'@param stdFile - std file from a TCSAM2015 model run. can be NULL.
+#'@param stdFile - std file from a TCSAM02 model run. can be NULL.
 #'@param verbose - flag (T/F) to prnt diagnostic info
 #'
-#'@return std model object (a list). The returned object will be a list of class 'tcsam2015.std'.
+#'@return std model object (a list). The returned object will be a list of class 'tcsam02.std'.
 #'
 #'@details If \code{stdFile} is NULL, the user will be prompted to identify a
-#'TCSAM2015 model report file from which to source the results object.
-#'The returned object will be a list of class 'tcsam2015.std'.
+#'TCSAM02 model report file from which to source the results object.
+#'The returned object will be a list of class 'tcsam02.std'.
 #'
 #'@export
 #'
