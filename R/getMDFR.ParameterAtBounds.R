@@ -1,19 +1,20 @@
 #'
-#' @title Get parameter values from a set of TCSAM02 model runs as a dataframe
+#' @title Get parameters at one of their bounds from a set of TCSAM02 model runs as a dataframe
 #'
-#' @description Function to get parameter values from a set of TCSAM02 model runs as a dataframe.
+#' @description Function to get parameters at one of their bounds from a set of TCSAM02 model runs as a dataframe.
 #'
 #' @param tcsams - a tcsam02.resLst object or named list of such
+#' @param delta - relative fraction of range which defines being at a boundary
 #' @param verbose - flag to print debugging info
 #'
 #' @return - a dataframe
 #'
-#' @details Returns a dataframe with parameter estimates and standard deviations (if the std object exists) by model run.
+#' @details Returns a dataframe with parameters at one of their bounds.
 #'
 #' @export
 #'
-getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
-    if (verbose) cat("--starting rTCSAM02::getMDFR.ParameterValues().\n");
+getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
+    if (verbose) cat("--starting rTCSAM02::ParametersAtBounds().\n");
     options(stringsAsFactors=FALSE);
 
     if (inherits(tcsams,'tcsam02.resLst')){
@@ -33,6 +34,7 @@ getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
                 mdfr<-rbind(mdfr,mdfrp);
             }
         }
+        if (verbose) cat("--finished rTCSAM02::ParametersAtBounds().\n");
         return(mdfr);
     } else {
         cat("Error in getMDFR.ParameterValues(tcsams).\n")
@@ -43,22 +45,15 @@ getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
 
     #tcsams is a single tcsam02.resLst object
     if (verbose) cat("\nProcessing resLst object")
-    #want to combine prs and std objects
-    mdfrp<-tcsams$prs;
-    std<-tcsams$std;
-    mdfrp$name<-gsub(" ","",mdfrp$name,fixed=TRUE);
-    mdfrp$stdv<-NA;
-    if (!is.null(std)){
-        uPNs<-unique(mdfrp$name);
-        for (uPN in uPNs){
-            idp<-which(mdfrp$name==uPN);
-            ids<-which(std$name==uPN);
-            if (length(ids)>0) {
-                mdfrp$stdv[idp]<-std$std.dev[ids];
-            }
-        }
-    }
+    dfr<-getMDFR.ParameterValues(tcsams,verbose);
+    testLower<-(dfr$value-dfr$min)<delta*(dfr$max-dfr$min);
+    testUpper<-(dfr$max-dfr$value)<delta*(dfr$max-dfr$min);
+    dfr$test<-"ok";
+    dfr$test[testLower]<-"at lower bound";
+    dfr$test[testUpper]<-"at upper bound";
 
-    mdfr<-cbind(case="tcsam",mdfrp);
+    mdfrp<-dfr[testUpper|testLower,c("category","process","name","type","index","min","max","value","test","label")];
+    mdfr<-cbind(case="tcsam",mdfrp)
+    if (verbose) cat("--finished rTCSAM02::ParametersAtBounds().\n");
     return(mdfr);
 }
