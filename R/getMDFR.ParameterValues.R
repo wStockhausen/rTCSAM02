@@ -25,7 +25,7 @@ getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
         nl<-length(tcsams);
         nms<-names(tcsams);
         for (l in 1:nl){
-            if (verobse) cat("Processing",nms[l],"\n")
+            if (verbose) cat("Processing",nms[l],"\n")
             tcsam1<-tcsams[[l]];
             mdfrp<-getMDFR.ParameterValues(tcsams=tcsam1,verbose=verbose);
             if (!is.null(mdfrp)){
@@ -42,7 +42,7 @@ getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
     }
 
     #tcsams is a single tcsam02.resLst object
-    if (verbose) cat("\nProcessing resLst object")
+    if (verbose) cat("\nProcessing resLst object\n")
     #want to combine prs and std objects
     mdfrp<-tcsams$prs;
     std<-tcsams$std;
@@ -59,6 +59,7 @@ getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
         }
     }
 
+    cat(names(mdfrp))
     mdfrp$label<-gsub("_"," ",mdfrp$label,fixed=TRUE);
 
     mdfr<-cbind(case="tcsam",mdfrp);
