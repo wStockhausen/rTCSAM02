@@ -38,6 +38,7 @@ getMDFR.Fits.EffectiveNs<-function(objs,
                                             verbose=verbose);
             if (!is.null(mdfrp)) mdfrp$case<-nm;
             mdfr<-rbind(mdfr,mdfrp);
+            rm(mdfrp);
         }
     } else if (inherits(objs,'tcsam02.resLst')){
         #objs is a single tcsam02 resLst object
