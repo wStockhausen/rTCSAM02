@@ -59,7 +59,7 @@ getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
         }
     }
 
-    cat(names(mdfrp))
+    #cat(names(mdfrp))
     mdfrp$label<-gsub("_"," ",mdfrp$label,fixed=TRUE);
 
     mdfr<-cbind(case="tcsam",mdfrp);
