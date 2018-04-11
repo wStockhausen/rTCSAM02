@@ -2,12 +2,12 @@
 % Please edit documentation in R/getMDFR.Fits.GrowthData.R
 \name{getMDFR.Fits.GrowthData}
 \alias{getMDFR.Fits.GrowthData}
-\title{Get model fits to growth data}
+\title{Get model fits to growth data as a dataframe}
 \usage{
 getMDFR.Fits.GrowthData(objs, verbose = FALSE)
 }
 \arguments{
-\item{objs}{- single model report list object, or named list of them}
+\item{objs}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
 
 \item{verbose}{- flag (T/F) to print diagnostic info}
 }
@@ -15,8 +15,8 @@ getMDFR.Fits.GrowthData(objs, verbose = FALSE)
 dataframe (or NULL)
 }
 \description{
-Function to get model fits to growth data.
+Function to get model fits to growth data as a dataframe.
 }
 \details{
-Returned dataframe is in canonical format
+Returned dataframe is in canonical format.
 }

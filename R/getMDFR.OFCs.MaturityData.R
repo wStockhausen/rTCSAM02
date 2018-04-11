@@ -1,7 +1,7 @@
 #'
-#' @title Get objective function components for growth data from a tcsam02.rep object
+#' @title Get objective function components for maturity data from a tcsam02.rep object
 #'
-#' @description Function to get objective function components for growth data from a tcsam02.rep object.
+#' @description Function to get objective function components for maturity data from a tcsam02.rep object.
 #'
 #' @param obj - a tcsam02.resLst or tcsam02.rep object
 #' @param verbose - flag (T/F) to print diagnostic info
@@ -11,16 +11,16 @@
 #' @details Returned dataframe has columns:
 #' \itemize{
 #'   \item{case - model case (blank, to be filled in by caller)}
-#'   \item{category - "growth data"}
+#'   \item{category - "maturity data"}
 #'   \item{fleet - dummy value ("")}
 #'   \item{catch.type - dummy value ("")}
-#'   \item{data.type - data type ("growth data")}
+#'   \item{data.type - data type ("maturity data")}
 #'   \item{fit.type - dummy value ("")}
 #'   \item{nll.type - likelihood type}
-#'   \item{y - year (dummy = 'all)}
+#'   \item{y - year}
 #'   \item{x - sex}
-#'   \item{m - maturity state ("immature")}
-#'   \item{s  - shell condition ("new shell")}
+#'   \item{m - maturity state ("")}
+#'   \item{s - shell condition ("new shell")}
 #'   \item{ wgt - likelihood weight}
 #'   \item{nll - (unweighted) negative log-likelihood}
 #'   \item{objfun - objective function value}
@@ -28,19 +28,19 @@
 #'
 #' @export
 #'
-getMDFR.OFCs.GrowthData<-function(obj,
+getMDFR.OFCs.MaturityData<-function(obj,
                                  verbose=FALSE){
 
-    category<-"growthdata";
+    category<-"maturitydata";
     if (inherits(obj,"tcsam02.rep")){
         #do nothing, will fall out to code below
     } else if (inherits(obj,"tcsam02.resLst")){
         #pull out tcsam02.rep object and process
-        mdfr<-getMDFR.OFCs.GrowthData(obj$rep,verbose);
+        mdfr<-getMDFR.OFCs.MaturityData(obj$rep,verbose);
         return(mdfr);
     } else {
         cat("--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--\n")
-        cat("Error in rTCSAM02::getMDFR.OFCs.GrowthData().\n")
+        cat("Error in rTCSAM02::getMDFR.OFCs.MaturityData().\n")
         cat("Input object not reducible to a tcsam02.rep object!\n")
         cat("Classes = ",class(obj),"\n");
         cat("Returning NULL.\n")
@@ -57,25 +57,21 @@ getMDFR.OFCs.GrowthData<-function(obj,
     for (dcnm in dcnms){
         if (verbose) cat("Processing data component",dcnm,"\n")
         dc<-lst[[dcnm]];
-        xnms<-names(dc);
-        xnms<-xnms[xnms!=''];
-        for (xnm in xnms){
-            fit<-dc[[xnm]];
+            fit<-dc;
             if (!is.null(fit)){
-                dfrp<-reshape2::dcast(data=data.frame(y=fit$years,nlls=fit$nlls),
+                dfrp<-reshape2::dcast(data=data.frame(y=fit$y,nlls=fit$nlls),
                                       formula=y~.,fun.aggregate=wtsUtilities::Sum,value.var="nlls");
                 rw<-data.frame(case="",
-                               category="growth data",
+                               category="maturity data",
                                fleet="",
                                catch.type="",
                                data.type=dcnm,
                                fit.type="",
                                nll.type=fit$type,
-                               y=dfrp$y,x=tolower(xnm),m="immature",s="new shell",
+                               y=dfrp$y,x="male",m="",s="new shell",
                                wgt=fit$wgt,nll=dfrp[["."]],objfun=fit$wgt*dfrp[["."]]);
                 dfr<-rbind(dfr,rw);
             }
-        }#xnm
     }#dcnm
 
     return(dfr);

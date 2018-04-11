@@ -5,12 +5,12 @@
 \title{Get data-related components from the objective function for a (list of) TCSAM02 model(s) as a dataframe}
 \usage{
 getMDFR.OFCs.DataComponents(obj, categories = c("all", "surveys", "fisheries",
-  "growthdata", "effortdata"), verbose = FALSE)
+  "growthdata", "maturitydata", "effortdata"), verbose = FALSE)
 }
 \arguments{
-\item{obj}{- a list of tcsam02.resLst objects, a tcsam02.resLst,  or a tcsam02.rep object}
+\item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
 
-\item{categories}{- data-related objective function components to get ("all","surveys","fisheries","growthdata","effortdata")}
+\item{categories}{- data-related objective function components to get ("all","surveys","fisheries","growthdata","maturitydata","effortdata")}
 
 \item{verbose}{- flag (T/F) to print diagnostic info}
 }
@@ -34,7 +34,7 @@ Returned dataframe has columns:
   \item{x - sex}
   \item{m - maturity state}
   \item{s  - shell condition}
-  \item{ wgt - likelihood weight}
+  \item{wgt - likelihood weight}
   \item{nll - (unweighted) negative log-likelihood}
   \item{objfun - objective function value}
 }

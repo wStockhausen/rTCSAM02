@@ -3,7 +3,7 @@
 #'
 #' @description Function to get non-data components from the objective function for a (list of) TCSAM02 model(s) as a dataframe.
 #'
-#' @param obj - a list of tcsam02.resLst objects, a tcsam02.resLst,  or a tcsam02.rep object
+#' @param obj - a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such
 #' @param categories - non-data-related objective function components to get ("all","penalties","penFDevs","components","priors")
 #' @param  verbose - flag (T/F) to print diagnostic info
 #'
@@ -26,26 +26,26 @@
 getMDFR.OFCs.NonDataComponents<-function(obj,
                                          categories=c("all","penalties","penFDevs","components","priors"),
                                          verbose=FALSE){
-    if (inherits(obj,"tcsam02.rep")){
-        #do nothing, will fall out to code below
-    } else if (inherits(obj,"tcsam02.resLst")){
-        #pull out tcsam02.rep object and process
-        mdfr<-getMDFR.OFCs.NonDataComponents(obj$rep,categories,verbose);
-        return(mdfr);
-    } else if ((class(obj)[1]=="list") &&inherits(obj[[1]],"tcsam02.resLst")){
-        #assume this is a list of tcsam02.resLst objects
-        if (verbose) cat("Processing list of tcsam02.resLst objects\n",sep='')
-        mdfr<-NULL;
+    if (verbose) cat("Starting rTCSAM02::getMDFR.OFCs.NonDataComponents().\n")
+    options(stringsAsFactors=FALSE);
+    mdfr<-NULL;
+    if ((class(obj)[1]=="list")){
+        if (verbose) cat("--Processing list\n",sep='')
         for (case in names(obj)){
             if (verbose) cat("\tProcessing list element '",case,"'\n",sep='')
-            dfr<-getMDFR.OFCs.NonDataComponents(obj[[case]]$rep,categories,verbose);
+            dfr<-getMDFR.OFCs.NonDataComponents(obj[[case]],categories,verbose);
             if (!is.null(dfr)){
                 dfr$case<-case;
                 mdfr<-rbind(mdfr,dfr);
             }
         }
         return(mdfr);
-    } else {
+    } else  if (inherits(obj,"tcsam02.resLst")){
+        #pull out tcsam02.rep object and process
+        if (verbose) cat("--Processing tcsam02.resLst object\n",sep='')
+        mdfr<-getMDFR.OFCs.NonDataComponents(obj$rep,categories,verbose);
+        return(mdfr);
+    } else if (!inherits(obj,"tcsam02.rep")){
         cat("--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--\n")
         cat("Error in rTCSAM02::getMDFR.OFCs.NonDataComponents().\n")
         cat("Input object not reducible to a tcsam02.rep object!\n")
@@ -56,9 +56,10 @@ getMDFR.OFCs.NonDataComponents<-function(obj,
     }
 
     #obj should now be a tcsam02.rep object
+    if (verbose) cat("----Processing tcsam02.rep object\n",sep='');
+
     if ("all" %in% categories) categories<-c("penalties","penFDevs","components","priors");
 
-    mdfr<-NULL;
     for (category in categories){
 
         if (category=="penFDevs") {

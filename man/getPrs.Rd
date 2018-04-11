@@ -19,7 +19,8 @@ Function to get a TCSAM02 prs object by reading initial and final parameters csv
 }
 \details{
 To create the prs object, this function reads 2 csv-type parameter value files,
-one associated with the initial parameter values and one associated with the final values.
-The user can select to return either all the parameters, or only the active parameters (ones
+one associated with the initial parameter values and one associated with the final values
+(tcsam02...init.csv and tcsam02...final.csv, respectively).
+The user can select to return either "all" the parameters, or only the "active" parameters (ones
 with phase > 0). The returned object will be a dataframe of class 'tcsam02.prs'.
 }

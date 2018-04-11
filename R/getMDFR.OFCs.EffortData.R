@@ -32,13 +32,11 @@ getMDFR.OFCs.EffortData<-function(obj,
                                  verbose=FALSE){
 
     category<-"effortdata";
-    if (inherits(obj,"tcsam02.rep")){
-        #do nothing, will fall out to code below
-    } else if (inherits(obj,"tcsam02.resLst")){
+    if (inherits(obj,"tcsam02.resLst")){
         #pull out tcsam02.rep object and process
         mdfr<-getMDFR.OFCs.EffortData(obj$rep,verbose);
         return(mdfr);
-    } else {
+    } else if (!inherits(obj,"tcsam02.rep")){
         cat("--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--\n")
         cat("Error in rTCSAM02::getMDFR.OFCs.EffortData().\n")
         cat("Input object not reducible to a tcsam02.rep object!\n")

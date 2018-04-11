@@ -4,10 +4,10 @@
 \alias{getOFCs}
 \title{Get model components in the objective function as a tcsam02.ofc (melted dataframe) object}
 \usage{
-getOFCs(repObjs, mdl = NULL, verbose = FALSE)
+getOFCs(obj, mdl = NULL, verbose = FALSE)
 }
 \arguments{
-\item{repObjs}{- tcsam02 model report object or list of such}
+\item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
 
 \item{mdl}{- name to associate with model results object}
 
@@ -20,10 +20,10 @@ a melted dataframe with class tcsam02.ofc
 Function to get model components in the objective function as a tcsam02.ofc (melted dataframe) object.
 }
 \details{
-If repObjs is a list of tcsam02 model report objects (tcsam02.rep), then the function
+If obj is a list of tcsam02 resLst (tcsam.resLst) or rep (tcsam02.rep) objects, then the function
 is called recursively for each object, with the associated list component name used as
-mdl. If repObjs is a tcsam02 model report object and mdl is NULL (the default), then
-repObjs$mc$configName is used as the model name.
+mdl. If obj is a tcsam02 resLst or rep object and mdl is NULL (the default), then
+the configName is used as the model name.
 
 The returned dataframe has columns named
 "model", "type", "category", "name", "level", "variable", and "value".

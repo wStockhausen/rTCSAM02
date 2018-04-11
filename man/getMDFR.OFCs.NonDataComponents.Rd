@@ -8,7 +8,7 @@ getMDFR.OFCs.NonDataComponents(obj, categories = c("all", "penalties",
   "penFDevs", "components", "priors"), verbose = FALSE)
 }
 \arguments{
-\item{obj}{- a list of tcsam02.resLst objects, a tcsam02.resLst,  or a tcsam02.rep object}
+\item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
 
 \item{categories}{- non-data-related objective function components to get ("all","penalties","penFDevs","components","priors")}
 
