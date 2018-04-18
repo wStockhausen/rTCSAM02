@@ -13,12 +13,12 @@
 #'
 #'When all the models requested have been run,
 #'the function determines the seed associated with the 1st model run that yielded
-#'the smallest value for the objective function and re-runs the modelusing this seed
+#'the smallest value for the objective function and re-runs the model using this seed
 #'to re-create the model run resulting in the minimum objectve function to recreate
 #'the model output files. The final model run is done estimating the hessian, so
 #'standard deviations for estimated model parameters are available in the .std file.
 #'
-#'@param os   - 'win' or 'mac' or 'osx'
+#'@param os   - 'win', 'mac', 'osx', or 'linux'
 #'@param path - path for model output
 #'@param model      - TCSAM02 model executable name
 #'@param path2model - path to model executable
@@ -34,8 +34,9 @@
 #'@param mc.N - number of mcmc iterations to make
 #'@param mc.save - number of iterations to skip when saving mcmc calculations
 #'@param mc.scale - number of iterations to adjust scale for mcmc calculations
-#'@param plotResults - T/F to plot final results using \code{???}
-#'@param cleanup - T/F to clean up files after run
+#'@param saveResults - T/F to save final results to best/ModelResults.RData
+#'@param cleanup - T/F to clean up SOME model output files after each run
+#'@param cleanupAll - T/F to clean up ALMOST ALL model output files after each run
 #'
 #'@return - list w/ 4 elements:
 #'  imx  - index of (1st) smallest value for the objective function
@@ -62,8 +63,9 @@ runJitter<-function(os='osx',
                     mc.N=1000000,
                     mc.save=1000,
                     mc.scale=1000,
-                    plotResults=FALSE,
-                    cleanup=TRUE){
+                    saveResults=FALSE,
+                    cleanup=TRUE,
+                    cleanupAll=FALSE){
     #start timing
     stm<-Sys.time();
 
@@ -91,7 +93,7 @@ runJitter<-function(os='osx',
                             jitter=TRUE,
                             jit.seed=NULL,
                             cleanup=cleanup,
-                            plotResults=FALSE);
+                            saveResults=FALSE);
             if (!is.null(par)){
                 rc<-rc+1;
                 objFun  <-par$value[par$name=='objective function'];
@@ -114,6 +116,13 @@ runJitter<-function(os='osx',
                 } else {
                     #create out.csv file
                     write.table(tbl,file=out.csv,sep=",",col.names=TRUE,row.names=FALSE,append=FALSE)
+                }
+                if (cleanupAll){
+                    cat("Cleaning up 'all' files\n\n")
+                    kpf<-c("tmp.sh","tcsam02.par");            #files to keep
+                    fns<-list.files(path=p2f,full.names=FALSE);#vector of file names in folder p2f
+                    rmf<-fns[!(fns %in% kpf)];                 #vector of file names in nfolder p2f to remove
+                    file.remove(file.path(p2f,rmf));           #leave only files to keep
                 }
             }
             parList[[fldr]]<-par;
@@ -151,7 +160,7 @@ runJitter<-function(os='osx',
                         jitter=TRUE,
                         jit.seed=seed,
                         cleanup=FALSE,
-                        plotResults=plotResults);
+                        saveResults=saveResults);
 
         #print timing-related info
         etm<-Sys.time();

@@ -10,7 +10,7 @@
 #'to the random number generator. The jit.seed and final objective function value are
 #'saved for each model run in a csv file (the value of out.csv).
 #'
-#'@param os   - 'win' or 'mac' or 'osx'
+#'@param os   - 'win', 'mac', 'osx', or 'linux'
 #'@param path - path for model output
 #'@param model - TCSAM02 model executable name
 #'@param path2model - path to model executable
@@ -26,16 +26,16 @@
 #'@param mc.scale - number of iterations to adjust scale for mcmc calculations
 #'@param jitter  - T/F to jitter parameters
 #'@param jit.seed - seed for random number generator (or NULL)
-#'@param plotResults - T/F to plot results using \code{plotTCSAM02I(...)}
-#'@param cleanup - flag (T/F) to clean up unnecessary files
+#'@param saveResults - T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}
+#'@param cleanup - flag (T/F) to clean up some output files
 #'
 #'@return - dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter jit.seed (if jittered)
 #'and par file info, or NULL if par file does not exist.
 #'
 #'@details If the path associated with \code{configFile} is a relative one, it should
-#'be relative to the \code{path} variable. If showPlot=TRUE, the report file, prs file,
-#'and std files are read in and the associated objects are saved to 'ModelResults.RData'
-#'as a tcsam02 resLst  object, respectively.
+#'be relative to the \code{path} variable. If saveResults=TRUE, getResLSt() is used to read in
+#'the report file, prs file, and std files are read in and the resulting tcsam02.resLst object is
+#' saved to 'ModelResults.RData'.
 #'
 #'@export
 #'
@@ -55,7 +55,7 @@ runTCSAM02<-function(os='osx',
                      mc.scale=1000,
                      jitter=FALSE,
                      jit.seed=NULL,
-                     plotResults=hess,
+                     saveResults=hess,
                      cleanup=TRUE){
     #start timing
     stm<-Sys.time();
@@ -132,12 +132,9 @@ runTCSAM02<-function(os='osx',
         dfr$value[dfr$name=='max gradient']<-tbl$maxGrad[1];
     }
 
-    if (plotResults){
-        repObj<-getRep(paste0(model,".rep"));
-        prsObj<-getPrs(type='all');
-        stdObj<-getStd(paste0(model,".std"));
-        resLst<-getResLst("./")
-        save(repObj,prsObj,stdObj,file="ModelResults.RData")
+    if (saveResults){
+        resLst<-getResLst(inp.dir="./",rep=paste0(model,".rep"),model=model,prsType='all')
+        save(resLst,file="ModelResults.RData")
         # plotTCSAM2015I(repObj=repObj,
         #                prsObj=prsObj,
         #                stdObj=stdObj,

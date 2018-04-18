@@ -8,10 +8,11 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
   configFile = "", numRuns = 3, minPhase = 1, onlyEvalJitter = FALSE,
   in.csv = "jitterInfo.csv", out.csv = "jitterResults.csv",
   calcOFL = FALSE, calcOFLJitter = FALSE, mcmc = FALSE, mc.N = 1e+06,
-  mc.save = 1000, mc.scale = 1000, plotResults = FALSE, cleanup = TRUE)
+  mc.save = 1000, mc.scale = 1000, saveResults = FALSE, cleanup = TRUE,
+  cleanupAll = FALSE)
 }
 \arguments{
-\item{os}{- 'win' or 'mac' or 'osx'}
+\item{os}{- 'win', 'mac', 'osx', or 'linux'}
 
 \item{path}{- path for model output}
 
@@ -43,9 +44,11 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
 
 \item{mc.scale}{- number of iterations to adjust scale for mcmc calculations}
 
-\item{plotResults}{- T/F to plot final results using \code{???}}
+\item{saveResults}{- T/F to save final results to best/ModelResults.RData}
 
-\item{cleanup}{- T/F to clean up files after run}
+\item{cleanup}{- T/F to clean up SOME model output files after each run}
+
+\item{cleanupAll}{- T/F to clean up ALMOST ALL model output files after each run}
 }
 \value{
 - list w/ 4 elements:
@@ -68,7 +71,7 @@ saved for each model run in a csv file (the value of out.csv).
 
 When all the models requested have been run,
 the function determines the seed associated with the 1st model run that yielded
-the smallest value for the objective function and re-runs the modelusing this seed
+the smallest value for the objective function and re-runs the model using this seed
 to re-create the model run resulting in the minimum objectve function to recreate
 the model output files. The final model run is done estimating the hessian, so
 standard deviations for estimated model parameters are available in the .std file.
