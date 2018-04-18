@@ -14,11 +14,12 @@ getMDFR.FitsForABData(afits, ci = 0.95, verbose = FALSE)
 \item{verbose}{- flag (T/F) to print dagnostic info}
 }
 \value{
-dataframe
+dataframe (not in "canonical" format)
 }
 \description{
 Function to get fits to abundance or biomass data as a dataframe.
 }
 \details{
-none.
+Fits that have both observations and model estimates identically zero are excluded
+from the returned dataframe. Note that the returned dataframe is NOT in canonical format.
 }

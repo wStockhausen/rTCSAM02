@@ -7,9 +7,10 @@
 #'@param ci - confidence intervals
 #'@param verbose - flag (T/F) to print dagnostic info
 #'
-#'@return dataframe
+#'@return dataframe (not in "canonical" format)
 #'
-#'@details none.
+#'@details Fits that have both observations and model estimates identically zero are excluded
+#'from the returned dataframe. Note that the returned dataframe is NOT in canonical format.
 #'
 getMDFR.FitsForABData<-function(afits,
                                 ci=0.95,
@@ -61,28 +62,36 @@ getMDFR.FitsForABData<-function(afits,
                 return(NULL)
             }
             if (tolower(pdfType)!='none'){
-                dfrp1<-data.frame(x=afit$x,m=afit$m,s=afit$s,
-                                  y=as.numeric(names(obs)),
-                                  val=obs,lci=lci,uci=uci,var="observed");
-                mdfr<-rbind(mdfr,dfrp1);
+                #don't include in mdfr if both observations and model estimates are identically zero
+                if((sum(abs(obs))+sum(abs(nll$mod)))>0){
+                    #observed values
+                    dfrp1<-data.frame(x=afit$x,m=afit$m,s=afit$s,
+                                      y=as.numeric(names(obs)),
+                                      val=obs,lci=lci,uci=uci,var="observed");
+                    #predicted values
+                    dfrp2<-data.frame(x=afit$x,m=afit$m,s=afit$s,
+                                     y=as.numeric(names(nll$mod)),
+                                     val=nll$mod,lci=NA,uci=NA,var='predicted');
+                    mdfr<-rbind(mdfr,dfrp1,dfrp2);
+                }
             }
         }#!is.null(afit)
     }#n
 
-    #predicted values
-    for (n in 1:nf){
-        afit<-afits[[n]];
-        if (!is.null(afit)){
-            nll<-afit$nll;
-            pdfType<-nll$nll.type;
-            if (tolower(pdfType)!='none'){
-                dfrp<-data.frame(x=afit$x,m=afit$m,s=afit$s,
-                                 y=as.numeric(names(nll$mod)),
-                                 val=nll$mod,lci=NA,uci=NA,var='predicted');
-                mdfr<-rbind(mdfr,dfrp);
-            }
-        }
-    }
+    # #predicted values
+    # for (n in 1:nf){
+    #     afit<-afits[[n]];
+    #     if (!is.null(afit)){
+    #         nll<-afit$nll;
+    #         pdfType<-nll$nll.type;
+    #         if (tolower(pdfType)!='none'){
+    #             dfrp<-data.frame(x=afit$x,m=afit$m,s=afit$s,
+    #                              y=as.numeric(names(nll$mod)),
+    #                              val=nll$mod,lci=NA,uci=NA,var='predicted');
+    #             mdfr<-rbind(mdfr,dfrp);
+    #         }
+    #     }
+    # }
 
     mdfr$x<-gsub("_"," ",tolower(mdfr$x),fixed=TRUE);
     mdfr$m<-gsub("_"," ",tolower(mdfr$m),fixed=TRUE);
