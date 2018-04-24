@@ -36,6 +36,7 @@
 #'@param mc.scale - number of iterations to adjust scale for mcmc calculations
 #'@param saveResults - T/F to save final results to best/ModelResults.RData
 #'@param cleanup - T/F to clean up SOME model output files after each run
+#'@param keepFiles - vector of file names to keep, not clean up, after model run
 #'@param cleanupAll - T/F to clean up ALMOST ALL model output files after each run
 #'
 #'@return - list w/ 4 elements:
@@ -65,6 +66,7 @@ runJitter<-function(os='osx',
                     mc.scale=1000,
                     saveResults=FALSE,
                     cleanup=TRUE,
+                    keepFiles=c("tmp.sh","tcsam02.par"),
                     cleanupAll=FALSE){
     #start timing
     stm<-Sys.time();
@@ -117,15 +119,14 @@ runJitter<-function(os='osx',
                     #create out.csv file
                     write.table(tbl,file=out.csv,sep=",",col.names=TRUE,row.names=FALSE,append=FALSE)
                 }
-                if (cleanupAll){
-                    cat("Cleaning up 'all' files\n\n")
-                    kpf<-c("tmp.sh","tcsam02.par");            #files to keep
-                    fns<-list.files(path=p2f,full.names=FALSE);#vector of file names in folder p2f
-                    rmf<-fns[!(fns %in% kpf)];                 #vector of file names in nfolder p2f to remove
-                    file.remove(file.path(p2f,rmf));           #leave only files to keep
-                }
-            }
+            }#par not NULL
             parList[[fldr]]<-par;
+            if (cleanupAll){
+                cat("Cleaning up 'all' files\n\n")
+                fns<-list.files(path=p2f,full.names=FALSE);#vector of file names in folder p2f
+                rmf<-fns[!(fns %in% keepFiles)];           #vector of file names in nfolder p2f to remove
+                file.remove(file.path(p2f,rmf));           #leave only files to keep
+            }
         }
     }
 

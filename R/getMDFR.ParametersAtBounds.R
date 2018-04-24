@@ -21,14 +21,14 @@ getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
         #tcsams is a tcsam02 resLst object
         #do nothing and drop out of "if" statement
     } else if (inherits(tcsams,'list')){
-        #tcsams is a list of tcsam02.resLst objects
+        #tcsams should be a list of tcsam02.resLst objects
         mdfr<-NULL;
         nl<-length(tcsams);
         nms<-names(tcsams);
         for (l in 1:nl){
             if (verobse) cat("Processing",nms[l],"\n")
             tcsam1<-tcsams[[l]];
-            mdfrp<-getMDFR.ParameterValues(tcsams=tcsam1,verbose=verbose);
+            mdfrp<-getMDFR.ParametersAtBounds(tcsams=tcsam1,verbose=verbose);
             if (!is.null(mdfrp)){
                 if (!is.null(nms[l])) mdfrp$case<-nms[l];
                 mdfr<-rbind(mdfr,mdfrp);
@@ -37,7 +37,7 @@ getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
         if (verbose) cat("--finished rTCSAM02::ParametersAtBounds().\n");
         return(mdfr);
     } else {
-        cat("Error in getMDFR.ParameterValues(tcsams).\n")
+        cat("Error in getMDFR.ParametersAtBounds(tcsams).\n")
         cat("'tcsams' should be a 'tcsam02.resLst' object or a list of such.\n")
         cat("Returning NULL.\n")
         return(NULL);
@@ -46,13 +46,17 @@ getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
     #tcsams is a single tcsam02.resLst object
     if (verbose) cat("\nProcessing resLst object")
     dfr<-getMDFR.ParameterValues(tcsams,verbose);
-    testLower<-(dfr$value-dfr$min)<delta*(dfr$max-dfr$min);
-    testUpper<-(dfr$max-dfr$value)<delta*(dfr$max-dfr$min);
+    testLower<-(dfr$final_param_value-dfr$min_param)<delta*(dfr$max_param-dfr$min_param);
+    testUpper<-(dfr$max_param-dfr$final_param_value)<delta*(dfr$max_param-dfr$min_param);
     dfr$test<-"ok";
     dfr$test[testLower]<-"at lower bound";
     dfr$test[testUpper]<-"at upper bound";
 
-    mdfrp<-dfr[testUpper|testLower,c("category","process","name","type","index","min","max","value","test","label")];
+    cols<-c("category","process","name","type","index","parameter_scale",
+            "min_arith","max_arith","final_arith_value",
+            "min_param","max_param","final_param_value",
+            "test","label")
+    mdfrp<-dfr[testUpper|testLower,cols];
     mdfr<-cbind(case="tcsam",mdfrp)
     if (verbose) cat("--finished rTCSAM02::ParametersAtBounds().\n");
     return(mdfr);

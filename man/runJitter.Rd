@@ -9,7 +9,7 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
   in.csv = "jitterInfo.csv", out.csv = "jitterResults.csv",
   calcOFL = FALSE, calcOFLJitter = FALSE, mcmc = FALSE, mc.N = 1e+06,
   mc.save = 1000, mc.scale = 1000, saveResults = FALSE, cleanup = TRUE,
-  cleanupAll = FALSE)
+  keepFiles = c("tmp.sh", "tcsam02.par"), cleanupAll = FALSE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -47,6 +47,8 @@ runJitter(os = "osx", path = ".", model = "tcsam02", path2model = "",
 \item{saveResults}{- T/F to save final results to best/ModelResults.RData}
 
 \item{cleanup}{- T/F to clean up SOME model output files after each run}
+
+\item{keepFiles}{- vector of file names to keep, not clean up, after model run}
 
 \item{cleanupAll}{- T/F to clean up ALMOST ALL model output files after each run}
 }
