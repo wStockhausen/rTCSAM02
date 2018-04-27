@@ -22,6 +22,7 @@
 #'   \item{x - sex}
 #'   \item{m - maturity state}
 #'   \item{s  - shell condition}
+#'   \item{ rmse - root mean squared error}
 #'   \item{ wgt - likelihood weight}
 #'   \item{nll - (unweighted) negative log-likelihood}
 #'   \item{objfun - objective function value}
@@ -89,37 +90,41 @@ getMDFR.OFCs.FleetData<-function(obj,
                                            x=fit$x,
                                            m=fit$m,
                                            s=fit$s,
+                                           rmse=fit$fit$effN,
                                            wgt=fit$fit$wgt,
                                            nll=fit$fit$nll,
                                            objfun=fit$fit$objfun);
                             dfr<-rbind(dfr,rw);
                         }
                     }#ifit
-                } else {
+                } else { #not n.at.z
                     dc<-cty[[dcnm]]$fits;
                     nfits<-length(dc);
-                    for (ifit in 1:nfits){
-                        fit<-dc[[ifit]];
-                        if (!is.null(fit)){
-                            if (verbose) cat("Processing fit",ifit,"\n")
-                            rw<-data.frame(case="",
-                                           category=paste(category,"data"),
-                                           fleet=gsub("_"," ",fltnm,fixed=TRUE),
-                                           catch.type=gsub("."," ",ctynm,fixed=TRUE),
-                                           data.type=dcnm,
-                                           fit.type=cty[[dcnm]]$fit.type,
-                                           nll.type=fit$nll$nll.type,
-                                           y='all',
-                                           x=fit$x,
-                                           m=fit$m,
-                                           s=fit$s,
-                                           wgt=fit$nll$wgt,
-                                           nll=fit$nll$nll,
-                                           objfun=fit$nll$objfun);
-                            dfr<-rbind(dfr,rw);
-                        }
-                    }#ifit
-                }
+                    if (nfits>0){
+                        for (ifit in 1:nfits){
+                            fit<-dc[[ifit]];
+                            if (!is.null(fit)){
+                                if (verbose) cat("Processing fit",ifit,"\n")
+                                rw<-data.frame(case="",
+                                               category=paste(category,"data"),
+                                               fleet=gsub("_"," ",fltnm,fixed=TRUE),
+                                               catch.type=gsub("."," ",ctynm,fixed=TRUE),
+                                               data.type=dcnm,
+                                               fit.type=cty[[dcnm]]$fit.type,
+                                               nll.type=fit$nll$nll.type,
+                                               y='all',
+                                               x=fit$x,
+                                               m=fit$m,
+                                               s=fit$s,
+                                               rmse=ifelse(is.null(fit$nll$rmse),0,fit$nll$rmse),
+                                               wgt=fit$nll$wgt,
+                                               nll=fit$nll$nll,
+                                               objfun=fit$nll$objfun);
+                                dfr<-rbind(dfr,rw);
+                            }
+                        }#ifit
+                    }#nfits>0
+                }#if (n.at.z)
             }#dcnm
         }#ctynm
     }#fltnm

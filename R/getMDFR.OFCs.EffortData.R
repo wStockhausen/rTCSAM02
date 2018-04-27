@@ -21,6 +21,7 @@
 #'   \item{x - sex}
 #'   \item{m - maturity state ("immature")}
 #'   \item{s  - shell condition ("new shell")}
+#'   \item{ rmse - root mean squared error}
 #'   \item{ wgt - likelihood weight}
 #'   \item{nll - (unweighted) negative log-likelihood}
 #'   \item{objfun - objective function value}
@@ -76,7 +77,11 @@ getMDFR.OFCs.EffortData<-function(obj,
                        fit.type="",
                        nll.type="lognormal",
                        y='all',x=mdfr$x,m=mdfr$m,s=mdfr$s,
-                       wgt=dc$wgt,nll=mdfr$val,objfun=dc$wgt*mdfr$val,stringsAsFactors=FALSE);
+                       rmse=dc$stdv,
+                       wgt=dc$wgt,
+                       nll=mdfr$val,
+                       objfun=dc$wgt*mdfr$val,
+                       stringsAsFactors=FALSE);
         dfr<-rbind(dfr,rw);
     }#dcnm
 

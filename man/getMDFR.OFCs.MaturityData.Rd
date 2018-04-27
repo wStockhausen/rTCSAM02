@@ -31,6 +31,7 @@ Returned dataframe has columns:
   \item{x - sex}
   \item{m - maturity state ("")}
   \item{s - shell condition ("new shell")}
+  \item{ rmse - root mean squared error}
   \item{ wgt - likelihood weight}
   \item{nll - (unweighted) negative log-likelihood}
   \item{objfun - objective function value}

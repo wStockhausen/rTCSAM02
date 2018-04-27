@@ -2,7 +2,7 @@
 % Please edit documentation in R/getMDFR.OFLResults.R
 \name{getMDFR.OFLResults}
 \alias{getMDFR.OFLResults}
-\title{Get model fits to OFL results}
+\title{Get OFL results as a datframe}
 \usage{
 getMDFR.OFLResults(objs, verbose = FALSE)
 }
@@ -15,8 +15,8 @@ getMDFR.OFLResults(objs, verbose = FALSE)
 dataframe
 }
 \description{
-Function to get model fits to OFL results.
+Function to get a dataframe of OFL results.
 }
 \details{
-Returned dataframe is NOT in canonical format
+Returned dataframe is NOT in canonical format.
 }

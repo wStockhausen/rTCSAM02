@@ -21,6 +21,7 @@
 #'   \item{x - sex}
 #'   \item{m - maturity state ("immature")}
 #'   \item{s  - shell condition ("new shell")}
+#'   \item{ rmse - root mean squared error}
 #'   \item{ wgt - likelihood weight}
 #'   \item{nll - (unweighted) negative log-likelihood}
 #'   \item{objfun - objective function value}
@@ -72,7 +73,10 @@ getMDFR.OFCs.GrowthData<-function(obj,
                                fit.type="",
                                nll.type=fit$type,
                                y=dfrp$y,x=tolower(xnm),m="immature",s="new shell",
-                               wgt=fit$wgt,nll=dfrp[["."]],objfun=fit$wgt*dfrp[["."]]);
+                               rmse=fit$rmse,
+                               wgt=fit$wgt,
+                               nll=dfrp[["."]],
+                               objfun=fit$wgt*dfrp[["."]]);
                 dfr<-rbind(dfr,rw);
             }
         }#xnm
