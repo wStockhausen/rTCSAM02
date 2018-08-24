@@ -18,6 +18,7 @@
 #'@param jitter - flag (T/F) to use jitter initial values
 #'@param jit.seed - value for random number seed to generate jitter
 #'@param calcOFL - flag (T/F) to do OFL calculations
+#'@param fullClean - flag to clean up almost all files (use when making multiple jitter runs)
 #'@param cleanup - flag (T/F) to clean up unnecessary files
 #'
 #'@details. If \code{cleanup} is TRUE, then .bar, .b0*, .p0*, .r0*, variance,
@@ -42,6 +43,7 @@ getRunCommands<-function(os='osx',
                          jitter=FALSE,
                          jit.seed=NULL,
                          calcOFL=FALSE,
+                         fullClean=TRUE,
                          cleanup=TRUE){
     nopath<-FALSE;
     if ((path2model=='.')||(path2model=='./')||(path2model=='.\\')||(path2model=="")) nopath=TRUE;
@@ -58,6 +60,12 @@ getRunCommands<-function(os='osx',
             del EchoData.dat
             del CheckFile.dat
             del fmin.log";
+        if (fullClean){
+            fullcln<-"del *.rep
+                      del &&model.ModelFits.?-1.R
+                      del &&model.SimData.init.dat";
+            cln<-paste0(cln,"\n",fullcln);
+        }
     }
     rn.mcmc<-'';
     cpy<-'';

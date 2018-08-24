@@ -4,11 +4,11 @@
 \alias{runTCSAM02}
 \title{Function to run TCSAM02.}
 \usage{
-runTCSAM02(os = "osx", path = ".", model = "tcsam02", path2model = "",
-  configFile = "", pin = FALSE, minPhase = 1, maxPhase = NULL,
-  calcOFL = FALSE, hess = FALSE, mcmc = FALSE, mc.N = 1e+06,
-  mc.save = 1000, mc.scale = 1000, jitter = FALSE, jit.seed = NULL,
-  saveResults = hess, cleanup = TRUE)
+runTCSAM02(os = "osx", path = ".", model = "tcsam02",
+  path2model = "", configFile = "", pin = FALSE, minPhase = 1,
+  maxPhase = NULL, calcOFL = FALSE, hess = FALSE, mcmc = FALSE,
+  mc.N = 1e+06, mc.save = 1000, mc.scale = 1000, jitter = FALSE,
+  jit.seed = NULL, saveResults = hess, cleanup = TRUE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -65,5 +65,6 @@ saved for each model run in a csv file (the value of out.csv).
 If the path associated with \code{configFile} is a relative one, it should
 be relative to the \code{path} variable. If saveResults=TRUE, getResLSt() is used to read in
 the report file, prs file, and std files are read in and the resulting tcsam02.resLst object is
-saved to 'ModelResults.RData'.
+saved to 'ModelResults.RData'. If jitter=TRUE, hess=FALSE, and cleanup=TRUE, then most output files
+(including the .rep files) are deleted after the model run to save disk space.
 }

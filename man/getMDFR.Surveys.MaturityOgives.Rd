@@ -4,7 +4,8 @@
 \alias{getMDFR.Surveys.MaturityOgives}
 \title{Get survey maturity ogives by year from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Surveys.MaturityOgives(tcsams, category = "index", verbose = FALSE)
+getMDFR.Surveys.MaturityOgives(tcsams, category = "index",
+  verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}

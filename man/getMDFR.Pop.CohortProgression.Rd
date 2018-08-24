@@ -4,7 +4,8 @@
 \alias{getMDFR.Pop.CohortProgression}
 \title{Get cohort progression time series from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Pop.CohortProgression(tcsams, cast = "x+m+s+z", verbose = FALSE)
+getMDFR.Pop.CohortProgression(tcsams, cast = "x+m+s+z",
+  verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}

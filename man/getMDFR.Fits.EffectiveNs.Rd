@@ -5,7 +5,8 @@
 \title{Get effective N's for fleet size compositions}
 \usage{
 getMDFR.Fits.EffectiveNs(objs, fleet.type = c("survey", "fishery"),
-  catch.type = c("index", "total", "discard", "retained"), verbose = FALSE)
+  catch.type = c("index", "total", "discard", "retained"),
+  verbose = FALSE)
 }
 \arguments{
 \item{objs}{- single model report list object, or named list of them}

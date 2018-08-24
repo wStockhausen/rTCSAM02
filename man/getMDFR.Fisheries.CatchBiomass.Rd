@@ -4,8 +4,9 @@
 \alias{getMDFR.Fisheries.CatchBiomass}
 \title{Get fishery catch biomass time series from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Fisheries.CatchBiomass(tcsams, category = c("captured", "discarded",
-  "retained", "discard mortality", "index"), cast = "x", verbose = FALSE)
+getMDFR.Fisheries.CatchBiomass(tcsams, category = c("captured",
+  "discarded", "retained", "discard mortality", "index"), cast = "x",
+  verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}

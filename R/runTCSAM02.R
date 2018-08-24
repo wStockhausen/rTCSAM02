@@ -35,7 +35,8 @@
 #'@details If the path associated with \code{configFile} is a relative one, it should
 #'be relative to the \code{path} variable. If saveResults=TRUE, getResLSt() is used to read in
 #'the report file, prs file, and std files are read in and the resulting tcsam02.resLst object is
-#' saved to 'ModelResults.RData'.
+#' saved to 'ModelResults.RData'. If jitter=TRUE, hess=FALSE, and cleanup=TRUE, then most output files
+#' (including the .rep files) are deleted after the model run to save disk space.
 #'
 #'@export
 #'
@@ -86,6 +87,7 @@ runTCSAM02<-function(os='osx',
                              jitter=jitter,
                              jit.seed=jit.seed,
                              calcOFL=calcOFL,
+                             fullClean=jitter&(!hess)&cleanup,
                              cleanup=cleanup)
     if (tolower(os)=='win'){
         cat(run.cmds,file="tmp.bat")
