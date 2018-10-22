@@ -19,7 +19,7 @@ mcmc.ExtractOFLResults<-function(mcmc){
   for (i in 1:n){
     if (!is.null(mcmc[[i]][["objFun"]])) {v[i,"objFun"]<-mcmc[[i]][["objFun"]];}
     for (nm in nms[2:length(nms)]){
-      if(!is.null(mcmc[[i]][["oflResults"]][[nm]])) {v[i,nm]<-mcmc[[i]][["oflResults"]][[nm]];}
+      if(!is.null(mcmc[[i]][["ptrOFLResults"]][[nm]])) {v[i,nm]<-mcmc[[i]][["ptrOFLResults"]][[nm]];}
     }
   }
   dfr<-data.frame(v);

@@ -12,7 +12,7 @@
 #'
 #' @export
 #'
-mcmc.InvertList<-function(mcmc,verbose=FALSE){
+mcmc.InvertMCMCList<-function(mcmc,verbose=FALSE){
   nms<-names(mcmc[[1]]);
   lst<-list();
   for (nm in nms){
