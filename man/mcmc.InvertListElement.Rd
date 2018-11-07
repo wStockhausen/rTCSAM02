@@ -2,14 +2,14 @@
 % Please edit documentation in R/mcmc.InvertListElement.R
 \name{mcmc.InvertListElement}
 \alias{mcmc.InvertListElement}
-\title{Invert an element of an mcmc list}
+\title{Invert an element of a sublist list}
 \usage{
 mcmc.InvertListElement(mcmc, element = "", verbose = FALSE)
 }
 \arguments{
-\item{mcmc}{- mcmc list}
+\item{mcmc}{- an mcmc results list from a TCSAM02 model run}
 
-\item{element}{- name of element to extract}
+\item{element}{- name of a list element to extract}
 
 \item{verbose}{- T/F to print diagnostic info}
 }
