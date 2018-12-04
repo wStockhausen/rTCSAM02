@@ -19,6 +19,9 @@
 #'@param minPhase - phase to start minimization (or NULL)
 #'@param maxPhase - final minimization phase (or NULL)
 #'@param calcOFL - flag (T/F) to perform OFL calculations
+#'@param calcTAC - flag (T/F) to calculate the TAC for the next fishing year
+#'@param HCR - integer indicating the Harvest Control Rule used to calculate the TAC
+#'@param calcDynB0 - flag to calculate dynamic B0
 #'@param hess - T/F to compute hessian (and .std file)
 #'@param mcmc - T/F to run mcmc
 #'@param mc.N - number of mcmc iterations to do
@@ -27,7 +30,9 @@
 #'@param jitter  - T/F to jitter parameters
 #'@param jit.seed - seed for random number generator (or NULL)
 #'@param saveResults - T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}
+#'@param test - flag (T/F) to run function in "test" mode
 #'@param cleanup - flag (T/F) to clean up some output files
+#'@param verbose - flag to print debugging info
 #'
 #'@return - dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter jit.seed (if jittered)
 #'and par file info, or NULL if par file does not exist.
@@ -46,9 +51,14 @@ runTCSAM02<-function(os='osx',
                      path2model='',
                      configFile='',
                      pin=FALSE,
+                     pinFile=NULL,
+                     mseMode=NULL,
                      minPhase=1,
                      maxPhase=NULL,
                      calcOFL=FALSE,
+                     calcTAC=FALSE,
+                     HCR=1,
+                     calcDynB0=FALSE,
                      hess=FALSE,
                      mcmc=FALSE,
                      mc.N=1000000,
@@ -57,7 +67,10 @@ runTCSAM02<-function(os='osx',
                      jitter=FALSE,
                      jit.seed=NULL,
                      saveResults=hess,
-                     cleanup=TRUE){
+                     test=TRUE,
+                     cleanup=TRUE,
+                     verbose=FALSE){
+
     #start timing
     stm<-Sys.time();
 
@@ -77,6 +90,8 @@ runTCSAM02<-function(os='osx',
                              path2model=path2model,
                              configFile=configFile,
                              pin=pin,
+                             pinFile=pinFile,
+                             mseMode=mseMode,
                              minPhase=minPhase,
                              maxPhase=maxPhase,
                              hess=hess,
@@ -87,16 +102,19 @@ runTCSAM02<-function(os='osx',
                              jitter=jitter,
                              jit.seed=jit.seed,
                              calcOFL=calcOFL,
+                             calcTAC=calcTAC,
+                             HCR=HCR,
+                             calcDynB0=calcDynB0,
                              fullClean=jitter&(!hess)&cleanup,
                              cleanup=cleanup)
     if (tolower(os)=='win'){
         cat(run.cmds,file="tmp.bat")
         Sys.chmod("tmp.bat",mode='7777')
-        system("tmp.bat",wait=TRUE);
+        if (!test) system("tmp.bat",wait=TRUE);
     } else {
         cat(run.cmds,file="./tmp.sh")
         Sys.chmod("./tmp.sh",mode='7777')
-        system("./tmp.sh",wait=TRUE);
+        if (!test) system("./tmp.sh",wait=TRUE);
     }
 
     #print timing-related info
@@ -111,39 +129,35 @@ runTCSAM02<-function(os='osx',
 
     #parse par file into dataframe
     par<-paste(model,'.par',sep='')
-    dfr<-readParFile(par);
+    dfr<-NULL;
+    if (!test) dfr<-rTCSAM02::readParFile(par);
 
     #get jitter info
-    if (jitter&(!is.null(dfr))) {
-        tbl<-read.csv('jitterInfo.csv',header=TRUE);
-        if ("B0" %in% colnames(tbl)){
-            dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
-                       data.frame(name='MMB', value=tbl$MMB[1]),
-                       data.frame(name='B0',  value=tbl$B0[1]),
-                       data.frame(name='Bmsy',value=tbl$Bmsy[1]),
-                       data.frame(name='Fmsy',value=tbl$Fmsy[1]),
-                       data.frame(name='OFL', value=tbl$OFL[1]),
-                       data.frame(name='curB',value=tbl$curB[1]),
-                       dfr);
-        } else {
-            dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
-                       data.frame(name='MMB', value=tbl$MMB[1]),
-                       dfr);
+    if (!test){
+        if (jitter&(!is.null(dfr))) {
+            tbl<-read.csv('jitterInfo.csv',header=TRUE);
+            if ("B0" %in% colnames(tbl)){
+                dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
+                           data.frame(name='MMB', value=tbl$MMB[1]),
+                           data.frame(name='B0',  value=tbl$B0[1]),
+                           data.frame(name='Bmsy',value=tbl$Bmsy[1]),
+                           data.frame(name='Fmsy',value=tbl$Fmsy[1]),
+                           data.frame(name='OFL', value=tbl$OFL[1]),
+                           data.frame(name='curB',value=tbl$curB[1]),
+                           dfr);
+            } else {
+                dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
+                           data.frame(name='MMB', value=tbl$MMB[1]),
+                           dfr);
+            }
+            dfr$value[dfr$name=='objective function']<-tbl$objfun[1];
+            dfr$value[dfr$name=='max gradient']<-tbl$maxGrad[1];
         }
-        dfr$value[dfr$name=='objective function']<-tbl$objfun[1];
-        dfr$value[dfr$name=='max gradient']<-tbl$maxGrad[1];
-    }
+    }#!test
 
-    if (saveResults){
-        resLst<-getResLst(inp.dir="./",rep=paste0(model,".rep"),model=model,prsType='all')
+    if (!test & saveResults){
+        resLst<-rTCSAM02::getResLst(inp.dir="./",rep=paste0(model,".rep"),model=model,prsType='all')
         save(resLst,file="ModelResults.RData")
-        # plotTCSAM2015I(repObj=repObj,
-        #                prsObj=prsObj,
-        #                stdObj=stdObj,
-        #                ggtheme=theme_grey(),
-        #                showPlot=TRUE,
-        #                pdf="TCSAM2015.pdf",
-        #                width=14,height=8)
     }
 
     #return dataframe (and return to original folder as working directory)

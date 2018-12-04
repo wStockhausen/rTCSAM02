@@ -5,10 +5,12 @@
 \title{Function to run TCSAM02.}
 \usage{
 runTCSAM02(os = "osx", path = ".", model = "tcsam02",
-  path2model = "", configFile = "", pin = FALSE, minPhase = 1,
-  maxPhase = NULL, calcOFL = FALSE, hess = FALSE, mcmc = FALSE,
-  mc.N = 1e+06, mc.save = 1000, mc.scale = 1000, jitter = FALSE,
-  jit.seed = NULL, saveResults = hess, cleanup = TRUE)
+  path2model = "", configFile = "", pin = FALSE, pinFile = NULL,
+  mseMode = NULL, minPhase = 1, maxPhase = NULL, calcOFL = FALSE,
+  calcTAC = FALSE, HCR = 1, calcDynB0 = FALSE, hess = FALSE,
+  mcmc = FALSE, mc.N = 1e+06, mc.save = 1000, mc.scale = 1000,
+  jitter = FALSE, jit.seed = NULL, saveResults = hess, test = TRUE,
+  cleanup = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -29,6 +31,12 @@ runTCSAM02(os = "osx", path = ".", model = "tcsam02",
 
 \item{calcOFL}{- flag (T/F) to perform OFL calculations}
 
+\item{calcTAC}{- flag (T/F) to calculate the TAC for the next fishing year}
+
+\item{HCR}{- integer indicating the Harvest Control Rule used to calculate the TAC}
+
+\item{calcDynB0}{- flag to calculate dynamic B0}
+
 \item{hess}{- T/F to compute hessian (and .std file)}
 
 \item{mcmc}{- T/F to run mcmc}
@@ -45,7 +53,11 @@ runTCSAM02(os = "osx", path = ".", model = "tcsam02",
 
 \item{saveResults}{- T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}}
 
+\item{test}{- flag (T/F) to run function in "test" mode}
+
 \item{cleanup}{- flag (T/F) to clean up some output files}
+
+\item{verbose}{- flag to print debugging info}
 }
 \value{
 - dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter jit.seed (if jittered)

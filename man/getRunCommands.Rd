@@ -5,10 +5,12 @@
 \title{Generate run commands for a tcsam02 model run}
 \usage{
 getRunCommands(os = "osx", model = "tcsam02", path2model = "",
-  configFile = "", pin = FALSE, hess = FALSE, minPhase = NULL,
-  maxPhase = NULL, mcmc = FALSE, mc.N = 1e+06, mc.save = 1000,
-  mc.scale = 1000, jitter = FALSE, jit.seed = NULL,
-  calcOFL = FALSE, fullClean = TRUE, cleanup = TRUE)
+  configFile = "", pin = FALSE, pinFile = NULL, mseMode = NULL,
+  hess = FALSE, minPhase = NULL, maxPhase = NULL, mcmc = FALSE,
+  mc.N = 1e+06, mc.save = 1000, mc.scale = 1000, jitter = FALSE,
+  jit.seed = NULL, calcOFL = FALSE, calcTAC = FALSE, HCR = 1,
+  calcDynB0 = FALSE, fullClean = TRUE, cleanup = TRUE,
+  verbose = FALSE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -20,6 +22,10 @@ getRunCommands(os = "osx", model = "tcsam02", path2model = "",
 \item{configFile}{- filename (including path) to model configuration file}
 
 \item{pin}{- flag (T/F) to use a pin file}
+
+\item{pinFile}{- name of pin file (if different from default)}
+
+\item{mseMode}{- mse mode for model run (NULL [off: default], "opModMode", "estModMode")}
 
 \item{hess}{- flag (T/F) to calculate the hessian}
 
@@ -41,9 +47,17 @@ getRunCommands(os = "osx", model = "tcsam02", path2model = "",
 
 \item{calcOFL}{- flag (T/F) to do OFL calculations}
 
+\item{calcTAC}{- flag (T/F) to calculate the TAC for the next fishing year}
+
+\item{HCR}{- integer indicating the Harvest Control Rule used to calculate the TAC}
+
+\item{calcDynB0}{- flag (T/F) to do dynamic B0 calculations}
+
 \item{fullClean}{- flag to clean up almost all files (use when making multiple jitter runs)}
 
 \item{cleanup}{- flag (T/F) to clean up unnecessary files}
+
+\item{verbose}{- flag (T/F) to print diagnostic info}
 }
 \description{
 Function to generate a script to make a tcsam02 model run
