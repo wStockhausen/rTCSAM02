@@ -8,7 +8,7 @@ getCorr(dfr = NULL, folder = NULL, model = "tcsam02",
   minLevel = 0.95)
 }
 \arguments{
-\item{dfr}{- dataframe from a call to \link{\code{readCorFile}}, or NULL}
+\item{dfr}{- dataframe from a call to readCorFile, or NULL}
 
 \item{folder}{- folder containing the model run (if dfr is NULL)}
 

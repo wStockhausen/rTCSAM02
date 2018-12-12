@@ -3,7 +3,7 @@
 #'
 #' @description Function to find substantially-correlated model parameters, based on the model "cor" file.
 #'
-#' @param dfr - dataframe from a call to \link{\code{readCorFile}}, or NULL
+#' @param dfr - dataframe from a call to readCorFile, or NULL
 #' @param folder - folder containing the model run (if dfr is NULL)
 #' @param model - model name (default is "tcsam02")
 #' @param minLevel - minimum correlation level to use to report parameters

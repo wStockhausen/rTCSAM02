@@ -128,19 +128,23 @@ runMSE<-function(os='osx',
         baseRunFolder<-file.path(topLevelFolder,paste0("BaseModelRun",firstYr));
         if (!dir.exists(baseRunFolder)) dir.create(baseRunFolder,recursive=FALSE);
         cat("#--Base model run folder is \n\t'",baseRunFolder,"'\n",sep="");
+        #--copy all files from baseFilesFolder to baseRunFolder
+        fs<-list.files(path=baseFilesFolder,pattern=glob2rx("*.*"),full.names=FALSE);
+        for (f in fs) file.copy(from=file.path(baseFilesFolder,f),
+                                to=file.path(baseRunFolder,f),overwrite=TRUE);
 
         #--run TCSAM02 to create base model
         cat("#--Running base model.\n");
         runTCSAM02(os=os,
                    path=baseRunFolder,
-                   configFile=file.path("..","BaseModelFiles",baseModelInfo$configFile),
+                   configFile=baseModelInfo$configFile,
                    model=model,
                    path2model=path2model,
                    pin=ifelse(!is.null(baseModelInfo$pin),
                               baseModelInfo$pin,FALSE),
                    pinFile=ifelse(!is.null(baseModelInfo$pinFile),
-                                  file.path("..","BaseModelFiles",baseModelInfo$pinFile),
-                                  "../BaseModelFiles/tcsam02.pin"),
+                                  baseModelInfo$pinFile,
+                                  "tcsam02.pin"),
                    mseMode=NULL,
                    minPhase=ifelse(!is.null(baseModelInfo$minPhase),
                                    baseModelInfo$minPhase,FALSE),
