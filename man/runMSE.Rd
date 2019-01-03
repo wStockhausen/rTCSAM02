@@ -13,10 +13,11 @@ runMSE(os = "osx", topLevelFolder = ".", model = "tcsam02",
   ChelaHeights = NULL)), pin = TRUE, pinFile = "tcsam02.pin", minPhase = 1,
   jitter = FALSE, calcTAC = TRUE, HCR = 1), opModInfo = list(path = ".",
   configFile = "OpMod.Configuration.inp", optsFile = "OpMod.Options.inp",
-  mpiFile = "OpMod.ParametersInfo,inp", pinFile = "opMod.pin"),
-  estModInfo = list(path = ".", configFile = "EstMod.Configuration.inp",
-  optsFile = "EstMod.Options.inp", minPhase = 5), keepFiles = c("tmp.sh",
-  "tcsam02.par"), cleanupAll = FALSE, test = TRUE, verbose = TRUE)
+  mpiFile = "OpMod.ParametersInfo,inp", pinFile = "opMod.pin", minPhase =
+  5, maxPhase = 6), estModInfo = list(path = ".", configFile =
+  "EstMod.Configuration.inp", optsFile = "EstMod.Options.inp", minPhase =
+  5), keepFiles = c("tmp.sh", "tcsam02.par"), cleanupAll = FALSE,
+  test = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
