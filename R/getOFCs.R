@@ -76,9 +76,13 @@ getOFCs<-function(obj,
             }#parameter!=NULL
         }#parameters
     }#categories
-    mdfr<-reshape2::melt(dfr,id.vars=c('model','type','category','name','level'),measure.vars=c('wgt','nll','objfun'))
-
-    class(mdfr)<-c('tcsam02.ofc',class(mdfr));
+    mdfr<-NULL;
+    if (!is.null(dfr)&&(nrow(dfr)>0)) {
+      mdfr<-reshape2::melt(dfr,
+                           id.vars=c('model','type','category','name','level'),
+                           measure.vars=c('wgt','nll','objfun'))
+      class(mdfr)<-c('tcsam02.ofc',class(mdfr));
+    }
     if (verbose) cat("Finished rTCSAM02::getOFCs().\n")
     return(mdfr)
 }
