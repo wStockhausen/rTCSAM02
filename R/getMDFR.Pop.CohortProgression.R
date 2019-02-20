@@ -5,6 +5,7 @@
 #'
 #'@param tcsams - single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
 #'@param cast - casting formula for excluding x,m,s,z factor levels from a sum across the unspecified factors
+#'@param path - path into tcsams object at which to find cohortprogression
 #'@param verbose - flag (T/F) to print debug info
 #'
 #'@return dataframe in canonical format
@@ -13,14 +14,27 @@
 #'
 #'@export
 #'
-getMDFR.Pop.CohortProgression<-function(tcsams,cast="x+m+s+z",verbose=FALSE){
+getMDFR.Pop.CohortProgression<-function(tcsams,
+                                        cast="x+m+s+z",
+                                        path='cohortprogression/n_yxmsz',
+                                        verbose=FALSE){
     if (verbose) cat("--starting rTCSAM02::getMDFR.Pop.CohortProgression().\n");
     options(stringsAsFactors=FALSE);
 
-    path<-'cohortprogression/n_yxmsz';
-    mdfr<-getMDFR(path,tcsams,verbose);
+    if (path=='cohortprogression/n_yxmsz'){
+      mdfr<-getMDFR(path,tcsams,verbose);
+    } else {
+        obj<-getObj(path,tcsams,verbose=verbose);
+        if (!is.null(obj)){
+            mdfr<-reshape2::melt(obj,value.name='val',as.is=TRUE);
+            mdfr$case<-'tcsam';
+        }
+    }
     mdfr$process<-"population";
+    mdfr$fleet<-'';
+    mdfr$category<-'';
     mdfr$type<-'predicted';
+    mdfr$pc<-';'
     mdfr<-removeImmOS(mdfr);
 
     castform<-"case+process+fleet+category+type+pc+y";

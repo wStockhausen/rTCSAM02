@@ -5,12 +5,14 @@
 \title{Get cohort progression time series from model results from TCSAM02 model runs as a dataframe}
 \usage{
 getMDFR.Pop.CohortProgression(tcsams, cast = "x+m+s+z",
-  verbose = FALSE)
+  path = "cohortprogression/n_yxmsz", verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
 
 \item{cast}{- casting formula for excluding x,m,s,z factor levels from a sum across the unspecified factors}
+
+\item{path}{- path into tcsams object at which to find cohortprogression}
 
 \item{verbose}{- flag (T/F) to print debug info}
 }
