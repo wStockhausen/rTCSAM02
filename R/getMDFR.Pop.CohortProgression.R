@@ -5,7 +5,7 @@
 #'
 #'@param tcsams - single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
 #'@param cast - casting formula for excluding x,m,s,z factor levels from a sum across the unspecified factors
-#'@param path - path into tcsams object at which to find cohortprogression
+#'@param path - path into tcsams object at which to find the cohort progression array
 #'@param verbose - flag (T/F) to print debug info
 #'
 #'@return dataframe in canonical format

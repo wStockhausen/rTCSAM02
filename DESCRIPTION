@@ -1,8 +1,8 @@
 Package: rTCSAM02
 Type: Package
 Title: A set of tools to set up input for, and interact with output from, TCSAM02 model runs.
-Version: 2019.02.20
-Date: 2019-02-20
+Version: 2019.02.21
+Date: 2019-02-21
 Author: William T. Stockhausen
 Maintainer: William T. Stockhausen <ywilliam.stockhausen@noaa.gov>
 Description: This package provides a set of tools to set up input for,

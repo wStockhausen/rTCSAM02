@@ -12,7 +12,7 @@ getMDFR.Pop.CohortProgression(tcsams, cast = "x+m+s+z",
 
 \item{cast}{- casting formula for excluding x,m,s,z factor levels from a sum across the unspecified factors}
 
-\item{path}{- path into tcsams object at which to find cohortprogression}
+\item{path}{- path into tcsams object at which to find the cohort progression array}
 
 \item{verbose}{- flag (T/F) to print debug info}
 }

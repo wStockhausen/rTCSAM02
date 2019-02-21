@@ -4,10 +4,12 @@
 \alias{getMDFR.Pop.PrM2M}
 \title{Get molt-to-maturity ogives from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Pop.PrM2M(tcsams, verbose = FALSE)
+getMDFR.Pop.PrM2M(tcsams, path = "mp/prM2M_cz", verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
+\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, named list of the latter, or general list}
+
+\item{path}{- path into tcsams object at which to find the prM2M array}
 
 \item{verbose}{- flag (T/F) to print debug info}
 }
