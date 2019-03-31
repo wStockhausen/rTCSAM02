@@ -31,7 +31,7 @@ getMDFR.Pop.PrM2M<-function(tcsams,
             mdfr$s<-"all";
         }
     } else {
-      mdfr<-getMDFR('mp/prM2M_cz',tcsams,verbose);
+      mdfr<-getMDFR('mp/prM2M_cz',tcsams,verbose=verbose);
       if (is.null(mdfr)) mdfr<-getMDFR('mp/prMolt2Mat_cz',tcsams,verbose);
 
       mdfr$y<-'';
