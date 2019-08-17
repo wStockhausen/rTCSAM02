@@ -1,7 +1,7 @@
 #'
-#' @title Get objective function components for maturity data from a tcsam02.rep object
+#' @title Get objective function components for chela height data from a tcsam02.rep object
 #'
-#' @description Function to get objective function components for maturity data from a tcsam02.rep object.
+#' @description Function to get objective function components for chela height data from a tcsam02.rep object.
 #'
 #' @param obj - a tcsam02.resLst or tcsam02.rep object
 #' @param verbose - flag (T/F) to print diagnostic info
@@ -11,15 +11,15 @@
 #' @details Returned dataframe has columns:
 #' \itemize{
 #'   \item{case - model case (blank, to be filled in by caller)}
-#'   \item{category - "maturity data"}
+#'   \item{category - "chela height data"}
 #'   \item{fleet - dummy value ("")}
 #'   \item{catch.type - dummy value ("")}
-#'   \item{data.type - data type ("maturity data")}
+#'   \item{data.type - data type ("chela height data")}
 #'   \item{fit.type - dummy value ("")}
 #'   \item{nll.type - likelihood type}
 #'   \item{y - year}
 #'   \item{x - sex}
-#'   \item{m - maturity state ("")}
+#'   \item{m - chela height state ("")}
 #'   \item{s - shell condition ("new shell")}
 #'   \item{ rmse - root mean squared error}
 #'   \item{ wgt - likelihood weight}
@@ -29,19 +29,19 @@
 #'
 #' @export
 #'
-getMDFR.OFCs.MaturityData<-function(obj,
+getMDFR.OFCs.ChelaHeightData<-function(obj,
                                  verbose=FALSE){
 
-    category<-"maturitydata";
+    category<-"chelaheightdata";
     if (inherits(obj,"tcsam02.rep")){
         #do nothing, will fall out to code below
     } else if (inherits(obj,"tcsam02.resLst")){
         #pull out tcsam02.rep object and process
-        mdfr<-getMDFR.OFCs.MaturityData(obj$rep,verbose);
+        mdfr<-getMDFR.OFCs.ChelaHeightData(obj$rep,verbose);
         return(mdfr);
     } else {
         cat("--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--\n")
-        cat("Error in rTCSAM02::getMDFR.OFCs.MaturityData().\n")
+        cat("Error in rTCSAM02::getMDFR.OFCs.ChelaHeightData().\n")
         cat("Input object not reducible to a tcsam02.rep object!\n")
         cat("Classes = ",class(obj),"\n");
         cat("Returning NULL.\n")
@@ -63,13 +63,13 @@ getMDFR.OFCs.MaturityData<-function(obj,
                 dfrp<-reshape2::dcast(data=data.frame(y=fit$y,nlls=fit$nlls),
                                       formula=y~.,fun.aggregate=wtsUtilities::Sum,value.var="nlls");
                 rw<-data.frame(case="",
-                               category="maturity data",
-                               fleet="",
+                               category="chela height data",
+                               fleet=fit$fleet,
                                catch.type="",
                                data.type=dcnm,
                                fit.type="",
                                nll.type=fit$type,
-                               y=dfrp$y,x="male",m="",s="new shell",
+                               y=dfrp$y,x=tolower(fit$sex),m="",s="new shell",
                                rmse=fit$rmse,
                                wgt=fit$wgt,
                                nll=dfrp[["."]],
