@@ -31,7 +31,7 @@
 #' @export
 #'
 getMDFR.OFCs.DataComponents<-function(obj,
-                                      categories=c("all","surveys","fisheries","growthdata","maturitydata","effortdata"),
+                                      categories=c("all","surveys","fisheries","growthdata","maturityogivedata","effortdata"),
                                       verbose=FALSE){
     if (verbose) cat("Starting rTCSAM02::getMDFR.OFCs.DataComponents().\n")
     options(stringsAsFactors=FALSE);
@@ -65,7 +65,7 @@ getMDFR.OFCs.DataComponents<-function(obj,
     #obj should now be a tcsam02.rep object
     if (verbose) cat("----Processing tcsam02.rep object\n",sep='')
 
-    if ("all" %in% categories) categories<-c("surveys","fisheries","growthdata","maturitydata","effortdata");
+    if ("all" %in% categories) categories<-c("surveys","fisheries","growthdata","maturityogivedata","effortdata");
 
     for (dc in c("surveys","fisheries")){
         if (dc %in% categories) {
@@ -77,8 +77,8 @@ getMDFR.OFCs.DataComponents<-function(obj,
         dfr<-getMDFR.OFCs.GrowthData(obj,verbose=verbose);
         mdfr<-rbind(mdfr,dfr);
     }
-    if ("maturitydata" %in% categories){
-        dfr<-getMDFR.OFCs.MaturityData(obj,verbose=verbose);
+    if ("maturityogivedata" %in% categories){
+        dfr<-getMDFR.OFCs.MaturityOgiveData(obj,verbose=verbose);
         mdfr<-rbind(mdfr,dfr);
     }
     if ("effortdata" %in% categories){

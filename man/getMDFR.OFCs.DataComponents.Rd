@@ -5,7 +5,7 @@
 \title{Get data-related components from the objective function for a (list of) TCSAM02 model(s) as a dataframe}
 \usage{
 getMDFR.OFCs.DataComponents(obj, categories = c("all", "surveys",
-  "fisheries", "growthdata", "maturitydata", "effortdata"),
+  "fisheries", "growthdata", "maturityogivedata", "effortdata"),
   verbose = FALSE)
 }
 \arguments{
