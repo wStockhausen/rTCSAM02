@@ -9,8 +9,8 @@ runTCSAM02(os = "osx", path = ".", model = "tcsam02",
   mseMode = NULL, minPhase = 1, maxPhase = NULL, calcOFL = FALSE,
   calcTAC = FALSE, HCR = 1, calcDynB0 = FALSE, hess = FALSE,
   mcmc = FALSE, mc.N = 1e+06, mc.save = 1000, mc.scale = 1000,
-  jitter = FALSE, jit.seed = NULL, saveResults = hess, test = TRUE,
-  cleanup = TRUE, verbose = FALSE)
+  jitter = FALSE, jit.seed = NULL, saveResults = hess,
+  test = FALSE, cleanup = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}

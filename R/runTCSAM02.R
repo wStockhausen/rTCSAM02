@@ -67,7 +67,7 @@ runTCSAM02<-function(os='osx',
                      jitter=FALSE,
                      jit.seed=NULL,
                      saveResults=hess,
-                     test=TRUE,
+                     test=FALSE,
                      cleanup=TRUE,
                      verbose=FALSE){
 
