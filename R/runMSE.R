@@ -165,7 +165,7 @@ runMSE<-function(os='osx',
                    saveResults=ifelse(!is.null(baseModelInfo$saveResults),
                                       baseModelInfo$cleanup,FALSE),
                    test=ifelse(!is.null(baseModelInfo$test),
-                               baseModelInfo$test,FALSE),
+                               baseModelInfo$test,test),
                    cleanup=ifelse(!is.null(baseModelInfo$jitter),
                                   baseModelInfo$cleanup,FALSE),
                    verbose=verbose);
@@ -179,15 +179,17 @@ runMSE<-function(os='osx',
         baseOMSFile<-list.files(baseRunFolder,pattern=glob2rx("OpModStateFile*.txt"),full.names=TRUE);
         cat("#--Copying base TAC file:\n\t",baseTACFile,"\n");
         cat("#--Copying base OMS file:\n\t",baseOMSFile,"\n");
-        myFileCopy(baseTACFile,file.path(opModFilesFolder,"TAC.txt"));
-        myFileCopy(baseOMSFile,file.path(opModFilesFolder,"OpModStateFile.txt"));
-        #----dataset files from base model files folder
-        for (f in dataFileNames) myFileCopy(file.path(baseFilesFolder,f), file.path(opModFilesFolder,f));
-        #----other files from input operating model files folder
-        myFileCopy(file.path(currDir,opModInfo$path,opModInfo$configFile),opModConfigFile)
-        myFileCopy(file.path(currDir,opModInfo$path,opModInfo$optsFile),  opModOptsFile)
-        myFileCopy(file.path(currDir,opModInfo$path,opModInfo$mpiFile),   opModMPIFile);
-        myFileCopy(file.path(currDir,opModInfo$path,opModInfo$pinFile),   opModPinFile);
+        if (!test){
+            myFileCopy(baseTACFile,file.path(opModFilesFolder,"TAC.txt"));
+            myFileCopy(baseOMSFile,file.path(opModFilesFolder,"OpModStateFile.txt"));
+            #----dataset files from base model files folder
+            for (f in dataFileNames) myFileCopy(file.path(baseFilesFolder,f), file.path(opModFilesFolder,f));
+            #----other files from input operating model files folder
+            myFileCopy(file.path(currDir,opModInfo$path,opModInfo$configFile),opModConfigFile)
+            myFileCopy(file.path(currDir,opModInfo$path,opModInfo$optsFile),  opModOptsFile)
+            myFileCopy(file.path(currDir,opModInfo$path,opModInfo$mpiFile),   opModMPIFile);
+            myFileCopy(file.path(currDir,opModInfo$path,opModInfo$pinFile),   opModPinFile);
+        }
         cat("#--Copied base OpMod congfig file:\n\t",opModConfigFile,"\n");
         cat("#--Copied base OpMod options file:\n\t",opModOptsFile,"\n");
         cat("#--Copied base OpMod MPI file:    \n\t",opModMPIFile,"\n");
@@ -197,11 +199,13 @@ runMSE<-function(os='osx',
         if (!dir.exists(estModFilesFolder)) dir.create(estModFilesFolder,recursive=TRUE);
         cat("#--Creating EstMod files folder:",estModFilesFolder,sep="\n\t");
         #--copy EstMod Config and Options file from the input estimation model files folder
-        myFileCopy(file.path(currDir,estModInfo$path,estModInfo$configFile),estModConfigFile);
-        myFileCopy(file.path(currDir,estModInfo$path,estModInfo$optsFile),  estModOptsFile);
-        #--copy EstMod MPI and Pin files from the base run folder
-        myFileCopy(file.path(baseRunFolder,paste0("EstMod.ParametersInfo.",firstYr,".inp")), estModMPIFile);
-        myFileCopy(file.path(baseRunFolder,paste0("EstModPinFile_",firstYr,".txt")),         estModPinFile);
+        if (!test){
+            myFileCopy(file.path(currDir,estModInfo$path,estModInfo$configFile),estModConfigFile);
+            myFileCopy(file.path(currDir,estModInfo$path,estModInfo$optsFile),  estModOptsFile);
+            #--copy EstMod MPI and Pin files from the base run folder
+            myFileCopy(file.path(baseRunFolder,paste0("EstMod.ParametersInfo.",firstYr,".inp")), estModMPIFile);
+            myFileCopy(file.path(baseRunFolder,paste0("EstModPinFile_",firstYr,".txt")),         estModPinFile);
+        }
         cat("#--Copied base EstMod congfig file:\n\t",estModConfigFile,"\n");
         cat("#--Copied base EstMod options file:\n\t",estModOptsFile,"\n");
         cat("#--Copied base EstMod MPI file:    \n\t",estModMPIFile,"\n");
@@ -225,20 +229,24 @@ runMSE<-function(os='osx',
     estModFiles<-list.files(estModFilesFolder,pattern="*.*");
 
     #make MSE runs
+    testFail<-test;#test estimation failure in run 2, year minRunID+5
     cat("\n\n#--Starting MSE runs\n")
     runIDs <- (minRunID-1)+(1:numRuns);
-    for (r in runIDs){
-        cat("#----Starting MSE run",r,"\n")
+    r<-0;
+    while (r < numRuns){
+        r <- r + 1;
+        cat("#----Starting MSE run",runIDs[r],"\n")
         #move to top-level folder
         setwd(topLevelFolder);
         #--make folder for MSE run and copy base files
-        runFolder<-paste('run',wtsUtilities::formatZeros(r,width=max(3,ceiling(log10(max(runIDs))))),sep='');
+        runFolder<-paste('run',wtsUtilities::formatZeros(runIDs[r],width=max(3,ceiling(log10(max(runIDs))))),sep='');
         runFolder<-file.path(topLevelFolder,runFolder);
         cat("#------runFolder will be\n\t",runFolder,"\n");
-        if (!dir.exists(runFolder)) dir.create(runFolder,recursive=TRUE);
+        if (dir.exists(runFolder)) file.remove(runFolder);
+        dir.create(runFolder,recursive=TRUE);
 
         for (y in (firstYr-1+(1:numYrs))){
-            cat("\n\n#----Running TCSAM MSE for year",y,paste0("(max",firstYr-1+numYrs,") in run"),r,"out of",max(runIDs),"---\n");
+            cat("\n\n#----Running TCSAM MSE for year",y,paste0("(max",firstYr-1+numYrs,") in run"),runIDs[r],"out of",max(runIDs),"---\n");
 
             #--define and create OpMod working folder
             opfldr<-paste0(wtsUtilities::formatZeros(y,width=4),".OpMod");
@@ -247,116 +255,141 @@ runMSE<-function(os='osx',
             if (!dir.exists(opModRunFolder)) dir.create(opModRunFolder,recursive=TRUE);
             #----copy required files into working folder
             #------copy ALL files from opModFilesFolder
-            for (f in opModFiles) myFileCopy(file.path(opModFilesFolder,f),file.path(opModRunFolder,f));
-            #------update newly-copied config file in opModRunFolder for year "y"
-            tmpCFG<-file.path(opModRunFolder,basename(opModConfigFile));
-            str <- readLines(tmpCFG);
-            str<-gsub("&&year",y,str);#assessment year in OpModMode is y
-            writeLines(str,tmpCFG); rm(str,tmpCFG);
-            #------identify state and TAC files from "last" year (already in opModRunFolder )
-            opModStateFile<-file.path(opModRunFolder,"OpModStateFile.txt");
-            opModTACFile  <-file.path(opModRunFolder,"TAC.txt");
+            if (!test) {
+                for (f in opModFiles) myFileCopy(file.path(opModFilesFolder,f),file.path(opModRunFolder,f));
+                #------update newly-copied config file in opModRunFolder for year "y"
+                tmpCFG<-file.path(opModRunFolder,basename(opModConfigFile));
+                str <- readLines(tmpCFG);
+                str<-gsub("&&year",y,str);#assessment year in OpModMode is y
+                writeLines(str,tmpCFG); rm(str,tmpCFG);
+                #------identify state and TAC files from "last" year (already in opModRunFolder )
+                opModStateFile<-file.path(opModRunFolder,"OpModStateFile.txt");
+                opModTACFile  <-file.path(opModRunFolder,"TAC.txt");
+            }
             if (y==firstYr){
                 #--Do nothing: already copied the correct files
+                ok<-TRUE;#--should not have failure at this point
             } else {
                 #--copy OpMod state from previous year to OpModRunFolder
                 oldOpModRunFolder<-paste(wtsUtilities::formatZeros(y-1,width=4),".OpMod",sep='');
                 oldOpModStateFile<-file.path(runFolder,oldOpModRunFolder,paste0("OpModStateFile_",y,".txt"));
-                myFileCopy(oldOpModStateFile,opModStateFile);
+                if (!test) myFileCopy(oldOpModStateFile,opModStateFile);
                 #--copy TAC from EstMod folder for previous year to OpModRunFolder
                 #opModTACFile  <-file.path(opModRunFolder,"TAC.txt");#<-TODO: FOR TESTING ONLY. COMMENT THIS LINE OUT!!
                 estModTACFile<-file.path(estModRunFolder,paste0("TAC_",y,".txt"));
-                myFileCopy(estModTACFile,opModTACFile);#<-TODO: FOR PRODUCTION. UNCOMMENT THIS LINE!!
-                #copy dataset files from previous EstMod run to OpModRunFolder
-                for (f in dataFileNames) myFileCopy(file.path(estModRunFolder,f), file.path(opModRunFolder,f));
+                ok<-FALSE;#want this TRUE if testing, because next will be FALSE
+                if (test) ok<-TRUE;
+                if (file.exists(estModTACFile)){
+                    myFileCopy(estModTACFile,opModTACFile);#<-TODO: FOR PRODUCTION. UNCOMMENT THIS LINE!!
+                    #copy dataset files from previous EstMod run to OpModRunFolder
+                    for (f in dataFileNames) myFileCopy(file.path(estModRunFolder,f), file.path(opModRunFolder,f));
+                    ok<-TRUE;
+                }
             }
 
-            #create EstModRunFolder for "next" year for OpMod output
-            estfldr<-paste0(wtsUtilities::formatZeros(y+1,width=4),'.EstMod');
-            estModRunFolder<-file.path(runFolder,estfldr);#--path to working folder
-            cat("#----estModRunFolder will be\n\t",estModRunFolder,"\n");
-            if (!dir.exists(estModRunFolder)) dir.create(estModRunFolder,recursive=TRUE);
-            #copy existing files into folder
-            myFileCopy(estModConfigFile, file.path(estModRunFolder,basename(estModConfigFile)));
-            myFileCopy(estModOptsFile,   file.path(estModRunFolder,basename(estModOptsFile)));
-            if (y==firstYr){
-                #copy MPI and pin files from estModFilesFolder
-                myFileCopy(estModMPIFile, file.path(estModRunFolder,basename(estModMPIFile)));
-                myFileCopy(estModPinFile, file.path(estModRunFolder,basename(estModPinFile)));
-            } else {
-                #copy MPI and pin files from estModRunFolder for previous year
-                prvEstModRunFolder<-file.path(runFolder,paste(wtsUtilities::formatZeros(y,width=4),'.EstMod',sep=''))
-                myFileCopy(file.path(prvEstModRunFolder,paste0("EstMod.ParametersInfo.",y,".inp")), file.path(estModRunFolder,basename(estModMPIFile)));
-                myFileCopy(file.path(prvEstModRunFolder,paste0("EstModPinFile_",y,".txt")),         file.path(estModRunFolder,basename(estModPinFile)));
+            if (test&testFail&(runIDs[r]==(minRunID+2))&(y==(firstYr+5))){
+                cat("#--SIMULATING FAILURE\n");
+                ok<-FALSE;      #simulate failure
+                testFail<-FALSE;#stop testing failure
             }
-            #--update config file for year "y+1"
-            tmpCFG<-file.path(estModRunFolder,basename(estModConfigFile));
-            str <- readLines(tmpCFG);
-            str<-gsub("&&year",y+1,str);#assessment year in EstModMode is y+1
-            writeLines(str,tmpCFG); rm(str,tmpCFG);
 
-            #enter OpMod folder and run operating model with current TAC
-            cat("#--------Running OpModMode for year",y,"of run",r,"out of",max(runIDs),"---\n");
-            setwd(opModRunFolder)
-            par<-runTCSAM02(path=".",
-                            os=os,
-                            model=model,
-                            path2model=path2model,
-                            configFile=basename(opModConfigFile),
-                            pin=TRUE,
-                            pinFile=basename(opModPinFile),
-                            mseMode="mseOpModMode",
-                            minPhase=opModInfo$minPhase,
-                            maxPhase=opModInfo$maxPhase,
-                            calcOFL=FALSE,
-                            calcDynB0=FALSE,
-                            hess=FALSE,
-                            mcmc=FALSE,
-                            jitter=FALSE,
-                            jit.seed=NULL,
-                            cleanup=FALSE,
-                            test=FALSE,
-                            saveResults=FALSE);
-            #copy data files for EstMod run to estModRunFolder folder
-            if (!test&cleanupAll){
-                p2f<-opModRunFolder;
-                cat("Cleaning up 'all' files\n\n")
-                fns<-list.files(path=p2f,full.names=FALSE);#vector of file names in folder
-                rmf<-fns[!(fns %in% keepFiles)];           #vector of file names in folder to remove
-                file.remove(file.path(p2f,rmf));           #leave only files to keep
-            }#--cleanupAll
+            if (ok){ #--estimation succeeded last year (or testing w/out failure)
+                #create EstModRunFolder for "next" year for OpMod output
+                estfldr<-paste0(wtsUtilities::formatZeros(y+1,width=4),'.EstMod');
+                estModRunFolder<-file.path(runFolder,estfldr);#--path to working folder
+                cat("#----estModRunFolder will be\n\t",estModRunFolder,"\n");
+                if (!dir.exists(estModRunFolder)) dir.create(estModRunFolder,recursive=TRUE);
+                if (!test){
+                    #copy existing files into folder
+                    myFileCopy(estModConfigFile, file.path(estModRunFolder,basename(estModConfigFile)));
+                    myFileCopy(estModOptsFile,   file.path(estModRunFolder,basename(estModOptsFile)));
+                    if (y==firstYr){
+                        #copy MPI and pin files from estModFilesFolder
+                        myFileCopy(estModMPIFile, file.path(estModRunFolder,basename(estModMPIFile)));
+                        myFileCopy(estModPinFile, file.path(estModRunFolder,basename(estModPinFile)));
+                    } else {
+                        #copy MPI and pin files from estModRunFolder for previous year
+                        prvEstModRunFolder<-file.path(runFolder,paste(wtsUtilities::formatZeros(y,width=4),'.EstMod',sep=''))
+                        myFileCopy(file.path(prvEstModRunFolder,paste0("EstMod.ParametersInfo.",y,".inp")), file.path(estModRunFolder,basename(estModMPIFile)));
+                        myFileCopy(file.path(prvEstModRunFolder,paste0("EstModPinFile_",y,".txt")),         file.path(estModRunFolder,basename(estModPinFile)));
+                    }
+                    #--update config file for year "y+1"
+                    tmpCFG<-file.path(estModRunFolder,basename(estModConfigFile));
+                    str <- readLines(tmpCFG);
+                    str<-gsub("&&year",y+1,str);#assessment year in EstModMode is y+1
+                    writeLines(str,tmpCFG); rm(str,tmpCFG);
+                }
 
-            cat("#--------running EstModMode for year",y+1,"of run",r,"out of",max(runIDs),"---\n\n");
-            setwd(estModRunFolder)
-            if (!test)
-            par<-runTCSAM02(path=".",
-                            os=os,
-                            model=model,
-                            path2model=path2model,
-                            configFile=basename(estModConfigFile),
-                            pin=TRUE,
-                            pinFile=basename(estModPinFile),
-                            mseMode="mseEstModMode",
-                            minPhase=estModInfo$minPhase,
-                            maxPhase=estModInfo$maxPhase,
-                            calcOFL=TRUE,
-                            calcTAC=TRUE,
-                            HCR=HCR,
-                            calcDynB0=FALSE,
-                            hess=FALSE,
-                            mcmc=FALSE,
-                            jitter=FALSE,
-                            jit.seed=NULL,
-                            cleanup=FALSE,
-                            test=test,
-                            saveResults=FALSE);
-            if (!test&cleanupAll){
-                p2f<-estModRunFolder;
-                cat("Cleaning up 'all' files\n\n")
-                fns<-list.files(path=p2f,full.names=FALSE);#vector of file names in folder p2f
-                rmf<-fns[!(fns %in% keepFiles)];           #vector of file names in nfolder p2f to remove
-                file.remove(file.path(p2f,rmf));           #leave only files to keep
-            }#--cleanupAll
+                #enter OpMod folder and run operating model with current TAC
+                cat("#--------Running OpModMode for year",y,"of run",runIDs[r],"out of",max(runIDs),"---\n");
+                setwd(opModRunFolder)
+                if (!test)
+                    par<-runTCSAM02(path=".",
+                                    os=os,
+                                    model=model,
+                                    path2model=path2model,
+                                    configFile=basename(opModConfigFile),
+                                    pin=TRUE,
+                                    pinFile=basename(opModPinFile),
+                                    mseMode="mseOpModMode",
+                                    minPhase=opModInfo$minPhase,
+                                    maxPhase=opModInfo$maxPhase,
+                                    calcOFL=FALSE,
+                                    calcDynB0=FALSE,
+                                    hess=FALSE,
+                                    mcmc=FALSE,
+                                    jitter=FALSE,
+                                    jit.seed=NULL,
+                                    cleanup=FALSE,
+                                    test=FALSE,
+                                    saveResults=FALSE);
+                #copy data files for EstMod run to estModRunFolder folder
+                if (!test&cleanupAll){
+                    p2f<-opModRunFolder;
+                    cat("Cleaning up 'all' files\n\n")
+                    fns<-list.files(path=p2f,full.names=FALSE);#vector of file names in folder
+                    rmf<-fns[!(fns %in% keepFiles)];           #vector of file names in folder to remove
+                    file.remove(file.path(p2f,rmf));           #leave only files to keep
+                }#--cleanupAll
+
+                cat("#--------running EstModMode for year",y+1,"of run",runIDs[r],"out of",max(runIDs),"---\n\n");
+                setwd(estModRunFolder)
+                if (!test)
+                    par<-runTCSAM02(path=".",
+                                    os=os,
+                                    model=model,
+                                    path2model=path2model,
+                                    configFile=basename(estModConfigFile),
+                                    pin=TRUE,
+                                    pinFile=basename(estModPinFile),
+                                    mseMode="mseEstModMode",
+                                    minPhase=estModInfo$minPhase,
+                                    maxPhase=estModInfo$maxPhase,
+                                    calcOFL=TRUE,
+                                    calcTAC=TRUE,
+                                    HCR=HCR,
+                                    calcDynB0=FALSE,
+                                    hess=FALSE,
+                                    mcmc=FALSE,
+                                    jitter=FALSE,
+                                    jit.seed=NULL,
+                                    cleanup=FALSE,
+                                    test=test,
+                                    saveResults=FALSE);
+                if (!test&cleanupAll){
+                    p2f<-estModRunFolder;
+                    cat("Cleaning up 'all' files\n\n")
+                    fns<-list.files(path=p2f,full.names=FALSE);#vector of file names in folder p2f
+                    rmf<-fns[!(fns %in% keepFiles)];           #vector of file names in nfolder p2f to remove
+                    file.remove(file.path(p2f,rmf));           #leave only files to keep
+                }#--cleanupAll
+            } else {#--estimation failed last year
+                cat("\n----ESTIMATION FAILED! Re-starting Run",runIDs[r],"\n")
+                #--reset run counter to re-do this run
+                r<-r-1;
+                #--break out of year loop because model will fail otherwise
+                break;
+            }
         }#--y
     }#--r
 
