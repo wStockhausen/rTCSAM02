@@ -6,8 +6,8 @@
 #'@details
 #'This function creates a shell script ('./tmp.sh') in the
 #'working directory and uses it to run a version of the TCSAM02 model.\cr
-#'Initial model parameters can be jittered based on the system clock time as a jit.seed
-#'to the random number generator. The jit.seed and final objective function value are
+#'Initial model parameters can be jittered based on the system clock time or using iSeed
+#'to set the random number generator. The iSeed and final objective function value are
 #'saved for each model run in a csv file (the value of out.csv).
 #'
 #'@param os   - 'win', 'mac', 'osx', or 'linux'
@@ -28,13 +28,13 @@
 #'@param mc.save - number of iterations to skip when saving mcmc calculations
 #'@param mc.scale - number of iterations to adjust scale for mcmc calculations
 #'@param jitter  - T/F to jitter parameters
-#'@param jit.seed - seed for random number generator (or NULL)
+#'@param iSeed - seed for random number generator (or NULL)
 #'@param saveResults - T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}
 #'@param test - flag (T/F) to run function in "test" mode
 #'@param cleanup - flag (T/F) to clean up some output files
 #'@param verbose - flag to print debugging info
 #'
-#'@return - dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter jit.seed (if jittered)
+#'@return - dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter iSeed (if jittered)
 #'and par file info, or NULL if par file does not exist.
 #'
 #'@details If the path associated with \code{configFile} is a relative one, it should
@@ -65,7 +65,7 @@ runTCSAM02<-function(os='osx',
                      mc.save=1000,
                      mc.scale=1000,
                      jitter=FALSE,
-                     jit.seed=NULL,
+                     iSeed=NULL,
                      saveResults=hess,
                      test=FALSE,
                      cleanup=TRUE,
@@ -100,7 +100,7 @@ runTCSAM02<-function(os='osx',
                              mc.save=mc.save,
                              mc.scale=mc.scale,
                              jitter=jitter,
-                             jit.seed=jit.seed,
+                             iSeed=iSeed,
                              calcOFL=calcOFL,
                              calcTAC=calcTAC,
                              HCR=HCR,

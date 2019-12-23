@@ -6,18 +6,18 @@
 \usage{
 runMSE(os = "osx", topLevelFolder = ".", model = "tcsam02",
   path2model = "", HCR = 1, numRuns = 3, minRunID = 1,
-  firstYr = 2018, numYrs = 10, runBaseModel = TRUE,
+  firstYr = 2018, numYrs = 10, iSeeds = NULL, runBaseModel = TRUE,
   baseModelInfo = list(path = ".", configFile = "ModelConfig.inp",
   datasets = list(file = "Datasets.inp", components = list(Bio = "Info",
   Fishery = c("TCF", "SCF", "GTF", "RKF"), Survey = "NMFS", Growth = "EBS",
   ChelaHeights = NULL)), pin = TRUE, pinFile = "tcsam02.pin", minPhase = 1,
-  jitter = FALSE, calcTAC = TRUE, HCR = 1), opModInfo = list(path = ".",
-  configFile = "OpMod.Configuration.inp", optsFile = "OpMod.Options.inp",
-  mpiFile = "OpMod.ParametersInfo,inp", pinFile = "opMod.pin", minPhase =
-  5, maxPhase = 6), estModInfo = list(path = ".", configFile =
-  "EstMod.Configuration.inp", optsFile = "EstMod.Options.inp", minPhase =
-  5), keepFiles = c("tmp.sh", "tcsam02.par"), cleanupAll = FALSE,
-  test = TRUE, verbose = TRUE)
+  jitter = FALSE, iSeed = NULL, calcTAC = TRUE, HCR = 1),
+  opModInfo = list(path = ".", configFile = "OpMod.Configuration.inp",
+  optsFile = "OpMod.Options.inp", mpiFile = "OpMod.ParametersInfo,inp",
+  pinFile = "opMod.pin", minPhase = 5, maxPhase = 6),
+  estModInfo = list(path = ".", configFile = "EstMod.Configuration.inp",
+  optsFile = "EstMod.Options.inp", minPhase = 5), keepFiles = c("tmp.sh",
+  "tcsam02.par"), cleanupAll = FALSE, test = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -37,6 +37,8 @@ runMSE(os = "osx", topLevelFolder = ".", model = "tcsam02",
 \item{firstYr}{- first year for projection (i.e., the assessment year, or max year + 1, of base model)}
 
 \item{numYrs}{- number of years to run model forward}
+
+\item{iSeeds}{- matrix [(number of total possible runs) x (number of years)] of random number seed values (or NULL)}
 
 \item{runBaseModel}{- flag to run base model to calculate TAC and create operating model state for first projection year}
 
@@ -63,5 +65,13 @@ runMSE(os = "osx", topLevelFolder = ".", model = "tcsam02",
 This functions runs the TCSAM02 MSE for one harvest strategy.
 }
 \details{
-TODO!
+\code{numRuns} is the number of *successful* iterations the MSE is to complete before stopping.
+If a model run fails for some reason during an iteration in the MSE, the iteration is restarted from the
+\code{firstYr} with a *new* seed for the random number generator (RNG). If the input matrix \code{iSeeds}
+is NULL, then the new RNG seed is based on the system clock. However, if the matrix is supplied,
+the seed is taken from the first element in the "next" row of the matrix (a counter for the
+*total* number of MSE iterations is used to track this; a separate counter tracks the number of
+*successful* iterations). Thus, if \code{iSeeds} is supplied, the number of rows in the matrix needs to be
+larger than (or equal to) the *total* number of MSE iterations actually undergone to achieve \code{numRuns}
+*successful* iterations.
 }

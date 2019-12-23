@@ -3,7 +3,15 @@
 #'
 #'@description This functions runs the TCSAM02 MSE for one harvest strategy.
 #'
-#'@details TODO!
+#'@details \code{numRuns} is the number of *successful* iterations the MSE is to complete before stopping.
+#'If a model run fails for some reason during an iteration in the MSE, the iteration is restarted from the
+#'\code{firstYr} with a *new* seed for the random number generator (RNG). If the input matrix \code{iSeeds}
+#'is NULL, then the new RNG seed is based on the system clock. However, if the matrix is supplied,
+#'the seed is taken from the first element in the "next" row of the matrix (a counter for the
+#'*total* number of MSE iterations is used to track this; a separate counter tracks the number of
+#'*successful* iterations). Thus, if \code{iSeeds} is supplied, the number of rows in the matrix needs to be
+#'larger than (or equal to) the *total* number of MSE iterations actually undergone to achieve \code{numRuns}
+#'*successful* iterations.
 #'
 #'@param os   - 'win', 'mac', 'osx', or 'linux'
 #'@param topLevelFolder - path to top-level folder for MSE model runs
@@ -15,6 +23,7 @@
 #'@param minRunID   - integer identifying first run label for the series of runs (default=1)
 #'@param firstYr    - first year for projection (i.e., the assessment year, or max year + 1, of base model)
 #'@param numYrs     - number of years to run model forward
+#'@param iSeeds - matrix [(number of total possible runs) x (number of years)] of random number seed values (or NULL)
 #'@param runBaseModel - flag to run base model to calculate TAC and create operating model state for first projection year
 #'@param baseModelInfo - list of parameters to run base model (if necessary)
 #'@param opModInfo - list of parameters to run operating model
@@ -37,6 +46,7 @@ runMSE<-function(os='osx',
                  minRunID=1,
                  firstYr=2018,
                  numYrs=10,
+                 iSeeds=NULL,
                  runBaseModel=TRUE,
                  baseModelInfo=list(path=".",
                                     configFile="ModelConfig.inp",
@@ -51,6 +61,7 @@ runMSE<-function(os='osx',
                                     pinFile="tcsam02.pin",
                                     minPhase=1,
                                     jitter=FALSE,
+                                    iSeed=NULL,
                                     calcTAC=TRUE,
                                     HCR=1),
                  opModInfo=list(path=".",
@@ -160,8 +171,8 @@ runMSE<-function(os='osx',
                                     baseModelInfo$calcDynB0,FALSE),
                    jitter=ifelse(!is.null(baseModelInfo$jitter),
                                  baseModelInfo$jitter,FALSE),
-                   jit.seed=ifelse(!is.null(baseModelInfo$jit.seed),
-                                   baseModelInfo$jit.seed,-1),
+                   iSeed=ifelse(!is.null(baseModelInfo$iSeed),
+                                   baseModelInfo$iSeed,-1),
                    saveResults=ifelse(!is.null(baseModelInfo$saveResults),
                                       baseModelInfo$cleanup,FALSE),
                    test=ifelse(!is.null(baseModelInfo$test),
@@ -232,9 +243,11 @@ runMSE<-function(os='osx',
     testFail<-test;#test estimation failure in run 2, year minRunID+5
     cat("\n\n#--Starting MSE runs\n")
     runIDs <- (minRunID-1)+(1:numRuns);
-    r<-0;
+    r <-0;#--SUCCESSFUL run counter
+    rt<-0;#--TOTAL run counter (suucessful + unsuccessful)
     while (r < numRuns){
-        r <- r + 1;
+        r  <- r  + 1;#--increment SUCCESSFUL run counter (will be decremented if run fails)
+        rt <- rt + 1;#--increment TOTAL run counter
         cat("#----Starting MSE run",runIDs[r],"\n")
         #move to top-level folder
         setwd(topLevelFolder);
@@ -324,6 +337,8 @@ runMSE<-function(os='osx',
                 cat("#--------Running OpModMode for year",y,"of run",runIDs[r],"out of",max(runIDs),"---\n");
                 setwd(opModRunFolder)
                 if (!test)
+                    iSeed<-NULL;
+                    if (!is.null(iSeeds)) iSeed<-iSeeds[rt,y-firstYr+1];
                     par<-runTCSAM02(path=".",
                                     os=os,
                                     model=model,
@@ -339,7 +354,7 @@ runMSE<-function(os='osx',
                                     hess=FALSE,
                                     mcmc=FALSE,
                                     jitter=FALSE,
-                                    jit.seed=NULL,
+                                    iSeed=iSeed,
                                     cleanup=FALSE,
                                     test=FALSE,
                                     saveResults=FALSE);
@@ -372,7 +387,7 @@ runMSE<-function(os='osx',
                                     hess=FALSE,
                                     mcmc=FALSE,
                                     jitter=FALSE,
-                                    jit.seed=NULL,
+                                    iSeed=NULL,
                                     cleanup=FALSE,
                                     test=test,
                                     saveResults=FALSE);
@@ -385,8 +400,7 @@ runMSE<-function(os='osx',
                 }#--cleanupAll
             } else {#--estimation failed last year
                 cat("\n----ESTIMATION FAILED! Re-starting Run",runIDs[r],"\n")
-                #--reset run counter to re-do this run
-                r<-r-1;
+                r<-r-1;#--decrement SUCCESSFUL run counter to re-do this run (note that rt is NOT decremented)
                 #--break out of year loop because model will fail otherwise
                 break;
             }
@@ -395,6 +409,8 @@ runMSE<-function(os='osx',
 
     #print timing-related info
     cat("\n\n#--MSE timing information--\n");
+    cat("number of successful runs:",r,"\n");
+    cat("number of total runs     :",rt,"\n");
     etm<-Sys.time();
     elt<-etm-stm;
     cat("start time: ")

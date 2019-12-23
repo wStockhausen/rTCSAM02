@@ -18,7 +18,7 @@
 #'@param mc.save - number of iterations to skip when saving mcmc calculations
 #'@param mc.scale - number of iterations to adjust scale for mcmc calculations
 #'@param jitter - flag (T/F) to use jitter initial values
-#'@param jit.seed - value for random number seed to generate jitter
+#'@param iSeed - value for random number seed
 #'@param calcOFL - flag (T/F) to do OFL calculations
 #'@param calcTAC - flag (T/F) to calculate the TAC for the next fishing year
 #'@param HCR - integer indicating the Harvest Control Rule used to calculate the TAC
@@ -49,7 +49,7 @@ getRunCommands<-function(os='osx',
                          mc.save=1000,
                          mc.scale=1000,
                          jitter=FALSE,
-                         jit.seed=NULL,
+                         iSeed=NULL,
                          calcOFL=FALSE,
                          calcTAC=FALSE,
                          HCR=1,
@@ -81,7 +81,7 @@ getRunCommands<-function(os='osx',
     }
     rn.mcmc<-'';
     cpy<-'';
-    opts <- " -rs -nox  -configFile &&configFile &&mnPhs &&mxPhs &&mcmc &&nohess &&calcOFL &&calcTAC &&HCR &&calcDynB0 &&jitter &&jit.seed &&pin !!pinFile &&mseMode";
+    opts <- " -rs -nox  -configFile &&configFile &&mnPhs &&mxPhs &&mcmc &&nohess &&calcOFL &&calcTAC &&HCR &&calcDynB0 &&jitter &&iSeed &&pin !!pinFile &&mseMode";
     if (tolower(os)=='win'){
         model1<-paste(model,'exe',sep='.');
         if (!nopath) cpy<-"copy &&path2model &&model1";
@@ -122,8 +122,8 @@ getRunCommands<-function(os='osx',
     run.cmds<-gsub("&&calcDynB0",str,run.cmds,fixed=TRUE);
     str<-''; if (jitter) str<-"-jitter";
     run.cmds<-gsub("&&jitter",str,run.cmds,fixed=TRUE);
-    str<-''; if (is.numeric(jit.seed)) str<-paste("-iSeed",jit.seed);
-    run.cmds<-gsub("&&jit.seed",str,run.cmds,fixed=TRUE);
+    str<-''; if (is.numeric(iSeed)) str<-paste("-iSeed",iSeed);
+    run.cmds<-gsub("&&iSeed",str,run.cmds,fixed=TRUE);
     str<-''; if (mcmc) str<-paste("-mcmc",mc.N,"-mcsave",mc.save,"-mcscale",mc.scale);
     run.cmds<-gsub("&&mcmc",str,run.cmds,fixed=TRUE);
     str<-''; if (!is.null(minPhase)) str<-paste0("-phase ",minPhase);

@@ -9,8 +9,8 @@ runTCSAM02(os = "osx", path = ".", model = "tcsam02",
   mseMode = NULL, minPhase = 1, maxPhase = NULL, calcOFL = FALSE,
   calcTAC = FALSE, HCR = 1, calcDynB0 = FALSE, hess = FALSE,
   mcmc = FALSE, mc.N = 1e+06, mc.save = 1000, mc.scale = 1000,
-  jitter = FALSE, jit.seed = NULL, saveResults = hess,
-  test = FALSE, cleanup = TRUE, verbose = FALSE)
+  jitter = FALSE, iSeed = NULL, saveResults = hess, test = FALSE,
+  cleanup = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -49,7 +49,7 @@ runTCSAM02(os = "osx", path = ".", model = "tcsam02",
 
 \item{jitter}{- T/F to jitter parameters}
 
-\item{jit.seed}{- seed for random number generator (or NULL)}
+\item{iSeed}{- seed for random number generator (or NULL)}
 
 \item{saveResults}{- T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}}
 
@@ -60,7 +60,7 @@ runTCSAM02(os = "osx", path = ".", model = "tcsam02",
 \item{verbose}{- flag to print debugging info}
 }
 \value{
-- dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter jit.seed (if jittered)
+- dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter iSeed (if jittered)
 and par file info, or NULL if par file does not exist.
 }
 \description{
@@ -69,8 +69,8 @@ This function runs a TCSAM02 model once.
 \details{
 This function creates a shell script ('./tmp.sh') in the
 working directory and uses it to run a version of the TCSAM02 model.\cr
-Initial model parameters can be jittered based on the system clock time as a jit.seed
-to the random number generator. The jit.seed and final objective function value are
+Initial model parameters can be jittered based on the system clock time or using iSeed
+to set the random number generator. The iSeed and final objective function value are
 saved for each model run in a csv file (the value of out.csv).
 
 

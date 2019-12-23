@@ -8,7 +8,7 @@ getRunCommands(os = "osx", model = "tcsam02", path2model = "",
   configFile = "", pin = FALSE, pinFile = NULL, mseMode = NULL,
   hess = FALSE, minPhase = NULL, maxPhase = NULL, mcmc = FALSE,
   mc.N = 1e+06, mc.save = 1000, mc.scale = 1000, jitter = FALSE,
-  jit.seed = NULL, calcOFL = FALSE, calcTAC = FALSE, HCR = 1,
+  iSeed = NULL, calcOFL = FALSE, calcTAC = FALSE, HCR = 1,
   calcDynB0 = FALSE, fullClean = TRUE, cleanup = TRUE,
   verbose = FALSE)
 }
@@ -43,7 +43,7 @@ getRunCommands(os = "osx", model = "tcsam02", path2model = "",
 
 \item{jitter}{- flag (T/F) to use jitter initial values}
 
-\item{jit.seed}{- value for random number seed to generate jitter}
+\item{iSeed}{- value for random number seed}
 
 \item{calcOFL}{- flag (T/F) to do OFL calculations}
 
