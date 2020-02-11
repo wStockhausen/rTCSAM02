@@ -3,7 +3,7 @@
 #'
 #'@description Function to get model fits to size frequencies as z-scores for fleet data components.
 #'
-#'@param repObjs - single model report list object, or named list of them
+#'@param objs - single model report list object, or named list of them
 #'@param fleet.type - fleet type ('fishery' or 'survey')
 #'@param catch.type - catch type ('index','retained','discarded',or 'total')
 #'@param residuals.type - residual type ('pearsons' or 'nlls')
@@ -102,7 +102,7 @@ getMDFR.ZScores.PrNatZ<-function(objs,
         #throw n error
     }
 
-    if (!is.null(mdfr)) mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
 
     if (verbose) cat("--Finished rTCSAM02::getMDFR.ZScores.NatZ().\n");
     return(mdfr);

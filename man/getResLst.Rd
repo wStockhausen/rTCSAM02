@@ -4,8 +4,13 @@
 \alias{getResLst}
 \title{Create a tcsam02.resLst object from a model run}
 \usage{
-getResLst(inp.dir = NULL, rep = "tcsam02.rep", model = "tcsam02",
-  prsType = c("all", "active"), verbose = FALSE)
+getResLst(
+  inp.dir = NULL,
+  rep = "tcsam02.rep",
+  model = "tcsam02",
+  prsType = c("all", "active"),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{inp.dir}{- a folder with model output}

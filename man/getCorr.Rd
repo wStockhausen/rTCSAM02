@@ -4,8 +4,7 @@
 \alias{getCorr}
 \title{Find substantially-correlated model parameters, based on the model "cor" file}
 \usage{
-getCorr(dfr = NULL, folder = NULL, model = "tcsam02",
-  minLevel = 0.95)
+getCorr(dfr = NULL, folder = NULL, model = "tcsam02", minLevel = 0.95)
 }
 \arguments{
 \item{dfr}{- dataframe from a call to readCorFile, or NULL}

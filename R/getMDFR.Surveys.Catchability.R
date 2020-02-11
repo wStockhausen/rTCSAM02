@@ -27,7 +27,7 @@ getMDFR.Surveys.Catchability<-function(tcsams,cast="x",verbose=FALSE){
     ddfr[['.']]<-ifelse(ddfr[['.']]==0,NA,ddfr[['.']]);
     ddfr<-ddfr[!is.na(ddfr[['.']]),];#remove NA's
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(ddfr);
+    mdfr<-getMDFR.CanonicalFormat(ddfr);
 
     if (verbose) cat("--rTCSAM02::getMDFR.Surveys.Catchability() done. \n");
     return(mdfr);

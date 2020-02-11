@@ -79,7 +79,7 @@ getMDFR.Fits.GrowthData<-function(objs,
     }
     if (!is.null(mdfr)) {
         mdfr$case<-"tcsam02";
-        mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+        mdfr<-getMDFR.CanonicalFormat(mdfr);
     }
     if (verbose) cat("--Finished getMDFR.Fits.GrowthData().\n");
     return(mdfr);

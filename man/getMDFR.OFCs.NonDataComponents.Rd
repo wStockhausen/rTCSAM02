@@ -4,8 +4,11 @@
 \alias{getMDFR.OFCs.NonDataComponents}
 \title{Get non-data components from the objective function for a (list of) TCSAM02 model(s) as a dataframe}
 \usage{
-getMDFR.OFCs.NonDataComponents(obj, categories = c("all", "penalties",
-  "penFDevs", "components", "priors"), verbose = FALSE)
+getMDFR.OFCs.NonDataComponents(
+  obj,
+  categories = c("all", "penalties", "penFDevs", "components", "priors"),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}

@@ -4,10 +4,14 @@
 \alias{getMDFR.Fits.FleetData}
 \title{Get model fits to biomass for fleet data components}
 \usage{
-getMDFR.Fits.FleetData(objs, fleet.type = c("survey", "fishery"),
+getMDFR.Fits.FleetData(
+  objs,
+  fleet.type = c("survey", "fishery"),
   data.type = c("abundance", "biomass", "n.at.z"),
-  catch.type = c("index", "total", "discard", "retained"), ci = 0.8,
-  verbose = FALSE)
+  catch.type = c("index", "total", "discard", "retained"),
+  ci = 0.8,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{objs}{- single model report list object, or named list of them}

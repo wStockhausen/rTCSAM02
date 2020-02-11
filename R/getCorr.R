@@ -16,10 +16,13 @@
 #'
 #' @export
 #'
-getCorr<-function(dfr=NULL,folder=NULL,model="tcsam02",minLevel=0.95){
+getCorr<-function(dfr=NULL,
+                  folder=NULL,
+                  model="tcsam02",
+                  minLevel=0.95){
   if (is.null(dfr)) dfr <- readCorFile(folder=folder,model=model);
 
-  dfr.cor <- dfr[(dfr1$p_i!=dfr1$p_j)&(abs(dfr$val)>=minLevel),c("p_i","p_j","val")];
+  dfr.cor <- dfr[(dfr$p_i!=dfr$p_j)&(abs(dfr$val)>=minLevel),c("p_i","p_j","val")];
 
   return(dfr.cor);
 }

@@ -43,7 +43,7 @@ mcmc.CalcABC<-function(mcmc=NULL,
             if (verbose) cat(str,"\n");
             eval(parse(text=str));
         }
-        ABC.pstar<-quantile(xOFL,probs=pstar);
+        ABC.pstar<-stats::quantile(xOFL,probs=pstar);
         b.y<-1-ABC.pstar/OFL;
         ABC.buff<-(1-buffer)*OFL;
         plotABC(xOFL,OFL,ABC.pstar,ABC.buff,buffer=buffer,title=case,xlims=xlims,save=FALSE);

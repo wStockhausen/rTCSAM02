@@ -4,9 +4,12 @@
 \alias{getMDFR.OFCs.DataComponents}
 \title{Get data-related components from the objective function for a (list of) TCSAM02 model(s) as a dataframe}
 \usage{
-getMDFR.OFCs.DataComponents(obj, categories = c("all", "surveys",
-  "fisheries", "growthdata", "maturityogivedata", "effortdata"),
-  verbose = FALSE)
+getMDFR.OFCs.DataComponents(
+  obj,
+  categories = c("all", "surveys", "fisheries", "growthdata", "maturityogivedata",
+    "effortdata"),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}

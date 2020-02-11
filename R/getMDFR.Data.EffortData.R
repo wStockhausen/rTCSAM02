@@ -62,7 +62,7 @@ getMDFR.Data.EffortData<-function(objs,
         if (!is.null(mdfr)) mdfr$case<-"tcsam02";
     }
 
-    if (!is.null(mdfr)) mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
     if (verbose) cat("--Finished getMDFR.Data.FleetData().\n");
     return(mdfr);
 }

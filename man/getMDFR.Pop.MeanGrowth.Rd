@@ -4,8 +4,7 @@
 \alias{getMDFR.Pop.MeanGrowth}
 \title{Get mean growth increments from model results from TCSAM2015 and rsimTCSAM model runs as a dataframe}
 \usage{
-getMDFR.Pop.MeanGrowth(tcsams, path = "mp/T_list/mnZAM_cz",
-  verbose = FALSE)
+getMDFR.Pop.MeanGrowth(tcsams, path = "mp/T_list/mnZAM_cz", verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single TCSAM2015 model report object, or named list of such}

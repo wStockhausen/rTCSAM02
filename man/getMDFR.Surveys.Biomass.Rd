@@ -4,8 +4,12 @@
 \alias{getMDFR.Surveys.Biomass}
 \title{Get survey biomass time series from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Surveys.Biomass(tcsams, category = "index", cast = "x",
-  verbose = FALSE)
+getMDFR.Surveys.Biomass(
+  tcsams,
+  category = "index",
+  cast = "x",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}

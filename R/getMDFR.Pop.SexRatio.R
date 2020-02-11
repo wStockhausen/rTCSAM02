@@ -36,7 +36,7 @@ getMDFR.Pop.SexRatio<-function(tcsams,rsims,verbose=FALSE){
     }
     mdfr<-mdfr[,c('case','pc','y','val')];
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    mdfr<-getMDFR.CanonicalFormat(mdfr);
     mdfr$type<-"population";
     mdfr$m<-"immature";
     mdfr$s<-"new shell";

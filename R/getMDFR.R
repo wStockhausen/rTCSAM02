@@ -61,6 +61,6 @@ getMDFR<-function(path,tcsams,verbose=FALSE){
     #     }
     # }
 
-    if (!is.null(mdfr)) mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
     return(mdfr);
 }

@@ -4,8 +4,11 @@
 \alias{getMDFR.OFCs.FleetData}
 \title{Get objective function components for growth data from a tcsam02.resLst or tcsam02.rep object}
 \usage{
-getMDFR.OFCs.FleetData(obj, category = c("surveys", "fisheries"),
-  verbose = FALSE)
+getMDFR.OFCs.FleetData(
+  obj,
+  category = c("surveys", "fisheries"),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{obj}{- a tcsam02.resLst or tcsam02.rep object}

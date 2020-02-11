@@ -2,7 +2,7 @@
 #'@title Function to run TCSAM02 multiple times using jittered initial parameter values.
 #'
 #'@description This functions runs a TCSAM02 model multiple times, jittering the
-#'initial staarting values to assess model convergence.
+#'initial starting values to assess model convergence.
 #'
 #'@details
 #'For each model run, this function creates a shell script ('./tmp.sh') in the
@@ -94,7 +94,7 @@ runJitter<-function(os='osx',
                             hess=FALSE,
                             mcmc=FALSE,
                             jitter=TRUE,
-                            jit.seed=NULL,
+                            iSeed=NULL,
                             cleanup=cleanup,
                             saveResults=FALSE);
             if (!is.null(par)){
@@ -115,10 +115,10 @@ runJitter<-function(os='osx',
                     tbl<-data.frame(idx=r,objFun=objFun,maxGrad=maxgrad,seed=seed,MMB=MMB);
                 }
                 if (file.exists(out.csv)) {
-                    write.table(tbl,file=out.csv,sep=",",col.names=FALSE,row.names=FALSE,append=TRUE)
+                    utils::write.table(tbl,file=out.csv,sep=",",col.names=FALSE,row.names=FALSE,append=TRUE)
                 } else {
                     #create out.csv file
-                    write.table(tbl,file=out.csv,sep=",",col.names=TRUE,row.names=FALSE,append=FALSE)
+                    utils::write.table(tbl,file=out.csv,sep=",",col.names=TRUE,row.names=FALSE,append=FALSE)
                 }
             }#par not NULL
             parList[[fldr]]<-par;
@@ -134,7 +134,7 @@ runJitter<-function(os='osx',
     #determine row index associated w/ minimum obj fun value
     #read jitter results from file
     if (file.exists(out.csv)){
-        tbl<-read.csv(out.csv);
+        tbl<-utils::read.csv(out.csv);
         idx<-order(tbl$objFun,abs(tbl$maxGrad));
         best<-tbl$idx[idx[1]];
         seed<-tbl$seed[idx[1]];
@@ -161,7 +161,7 @@ runJitter<-function(os='osx',
                         mc.save=mc.save,
                         mc.scale=mc.scale,
                         jitter=TRUE,
-                        jit.seed=seed,
+                        iSeed=seed,
                         cleanup=FALSE,
                         saveResults=saveResults);
 

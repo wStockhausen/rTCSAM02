@@ -4,9 +4,12 @@
 \alias{getMDFR.ZScores.Biomass}
 \title{Get model fits to biomass time series as z-scores for fleet data components}
 \usage{
-getMDFR.ZScores.Biomass(objs, fleet.type = c("survey", "fishery"),
+getMDFR.ZScores.Biomass(
+  objs,
+  fleet.type = c("survey", "fishery"),
   catch.type = c("index", "retained", "discarded", "total"),
-  verbose = FALSE)
+  verbose = FALSE
+)
 }
 \arguments{
 \item{objs}{- single model report list object, or named list of them}

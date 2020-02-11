@@ -43,7 +43,7 @@ getMDFR.Pop.CohortProgression<-function(tcsams,
     if (verbose) cat("casting formula = '",castform,"'\n",sep='')
     ddfr<-reshape2::dcast(mdfr,castform,fun.aggregate=sum,na.rm=TRUE,value.var='val',drop=TRUE)
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(ddfr);
+    mdfr<-getMDFR.CanonicalFormat(ddfr);
 
     if (verbose) cat("--finished rTCSAM02::getMDFR.Pop.CohortProgression(). \n");
     return(mdfr);

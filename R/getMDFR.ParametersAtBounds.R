@@ -26,7 +26,7 @@ getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
         nl<-length(tcsams);
         nms<-names(tcsams);
         for (l in 1:nl){
-            if (verobse) cat("Processing",nms[l],"\n")
+            if (verbose) cat("Processing",nms[l],"\n")
             tcsam1<-tcsams[[l]];
             mdfrp<-getMDFR.ParametersAtBounds(tcsams=tcsam1,verbose=verbose);
             if (!is.null(mdfrp)){

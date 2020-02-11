@@ -34,7 +34,7 @@ getMDFR.Surveys.Abundance<-function(tcsams,category='index',cast="x",verbose=FAL
     ddfr[['.']]<-ifelse(ddfr[['.']]==0,NA,ddfr[['.']]);
     ddfr<-ddfr[!is.na(ddfr[['.']]),];#remove NA's
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(ddfr);
+    mdfr<-getMDFR.CanonicalFormat(ddfr);
 
     if (verbose) cat("--finished rTCSAM02::getMDFR.Surveys.Abundance(). \n");
     return(mdfr);

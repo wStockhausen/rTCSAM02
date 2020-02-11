@@ -22,7 +22,7 @@ getMDFR.Pop.MaturityOgives<-function(tcsams,verbose=FALSE){
     mdfr$type<-'predicted';
     mdfr<-removeImmOS(mdfr);
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    mdfr<-getMDFR.CanonicalFormat(mdfr);
 
     if (verbose) cat("--finished rTCSAM02::getMDFR.Pop.MaturityOgives(). \n");
     return(mdfr);

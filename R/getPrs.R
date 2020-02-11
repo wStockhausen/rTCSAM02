@@ -5,6 +5,7 @@
 #'
 #'@param type - 'all' or 'active'
 #'@param inp.dir - folder for files
+#'@param verbose - flag to print information
 #'
 #'@return A prs model object (a dataframe). The returned object will be a list of class 'tcsam02.prs'.
 #'

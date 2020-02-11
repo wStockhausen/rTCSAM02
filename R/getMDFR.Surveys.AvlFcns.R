@@ -28,7 +28,7 @@ getMDFR.Surveys.AvlFcns<-function(tcsams,verbose=FALSE,cast="y+x"){
     ddfr[['.']]<-ifelse(ddfr[['.']]==0,NA,ddfr[['.']]);
     ddfr<-ddfr[!is.na(ddfr[['.']]),];#remove NA's
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(ddfr);
+    mdfr<-getMDFR.CanonicalFormat(ddfr);
 
     if (verbose) cat("--Done. \n");
     return(mdfr);

@@ -4,8 +4,12 @@
 \alias{getMDFR.ZScores.PrNatZ1}
 \title{Get residuals from size frequency fits as dataframe}
 \usage{
-getMDFR.ZScores.PrNatZ1(fits, mc, type = c("pearsons", "nlls"),
-  verbose = FALSE)
+getMDFR.ZScores.PrNatZ1(
+  fits,
+  mc,
+  type = c("pearsons", "nlls"),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{fits}{- list of fits}

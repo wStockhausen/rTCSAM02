@@ -26,7 +26,7 @@ getMDFR.Surveys.MaturityOgives<-function(tcsams,category='index',verbose=FALSE){
     mdfr$type<-'predicted';
     mdfr<-removeImmOS(mdfr);
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    mdfr<-getMDFR.CanonicalFormat(mdfr);
 
     if (verbose) cat("--finished rTCSAM02::getMDFR.Surveys.MaturityOgives(). \n");
     return(mdfr);

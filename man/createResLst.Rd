@@ -4,7 +4,7 @@
 \alias{createResLst}
 \title{Create a tcsam02.rep object from components}
 \usage{
-createResLst(rep = NULL, prs = NULL, std = NULL, ofc = NULL)
+createResLst(rep = NULL, prs = NULL, std = NULL, ofc = NULL, verbose = FALSE)
 }
 \arguments{
 \item{rep}{- tcsam02 rep object}
@@ -14,6 +14,8 @@ createResLst(rep = NULL, prs = NULL, std = NULL, ofc = NULL)
 \item{std}{- tcsam02 std object}
 
 \item{ofc}{- tcsam02 ofc object}
+
+\item{verbose}{- flag (T/F) to print debugging info}
 }
 \value{
 a tcsam02.resLst object

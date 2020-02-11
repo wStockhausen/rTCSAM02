@@ -4,8 +4,15 @@
 \alias{compareModels.PopQuants}
 \title{Compare population quantities from TCSAM2015 and rsimTCSAM model runs.}
 \usage{
-compareModels.PopQuants(tcsams = NULL, rsims = NULL, showPlot = TRUE,
-  pdf = NULL, width = 8, height = 6, verbose = FALSE)
+compareModels.PopQuants(
+  tcsams = NULL,
+  rsims = NULL,
+  showPlot = TRUE,
+  pdf = NULL,
+  width = 8,
+  height = 6,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{tcsams}{- single TCSAM2015 model report object, or named list of such}

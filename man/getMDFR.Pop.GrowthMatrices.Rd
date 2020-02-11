@@ -4,8 +4,7 @@
 \alias{getMDFR.Pop.GrowthMatrices}
 \title{Get growth transition matrices from model results from TCSAM02 model runs as a dataframe}
 \usage{
-getMDFR.Pop.GrowthMatrices(tcsams, path = "mp/T_list/T_czz",
-  verbose = FALSE)
+getMDFR.Pop.GrowthMatrices(tcsams, path = "mp/T_list/T_czz", verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{- single tcsam02.rep, tcsam02.resLst, named list of the latter, or general list}

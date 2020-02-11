@@ -22,7 +22,7 @@ getStd<-function(stdFile=NULL,verbose=FALSE){
     }
     stdObj<-NULL;
     if (!is.null(stdFile)&&file.exists(stdFile)) {
-        stdObj = read.table(stdFile,as.is=T,header=F,skip=1);
+        stdObj <- utils::read.table(stdFile,as.is=T,header=F,skip=1);
         colnames(stdObj)<-c("row id","name","est","std.dev")
         class(stdObj)<-c('tcsam02.std',class(stdObj));#set class attribute to 'tcsam02.std' for identification
     } else {

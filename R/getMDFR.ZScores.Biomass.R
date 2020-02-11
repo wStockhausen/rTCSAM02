@@ -94,7 +94,7 @@ getMDFR.ZScores.Biomass<-function(objs,
         #throw an error
     }
 
-    if (!is.null(mdfr)) mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
 
     if (verbose) cat("--Finished rTCSAM02::getMDFR.ZScores.Biomass().\n");
     return(mdfr);

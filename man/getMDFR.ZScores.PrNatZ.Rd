@@ -4,11 +4,17 @@
 \alias{getMDFR.ZScores.PrNatZ}
 \title{Get model fits to size frequencies as z-scores for fleet data components}
 \usage{
-getMDFR.ZScores.PrNatZ(objs, fleet.type = c("survey", "fishery"),
+getMDFR.ZScores.PrNatZ(
+  objs,
+  fleet.type = c("survey", "fishery"),
   catch.type = c("index", "retained", "discarded", "total"),
-  residuals.type = c("pearsons", "nlls"), verbose = FALSE)
+  residuals.type = c("pearsons", "nlls"),
+  verbose = FALSE
+)
 }
 \arguments{
+\item{objs}{- single model report list object, or named list of them}
+
 \item{fleet.type}{- fleet type ('fishery' or 'survey')}
 
 \item{catch.type}{- catch type ('index','retained','discarded',or 'total')}
@@ -16,8 +22,6 @@ getMDFR.ZScores.PrNatZ(objs, fleet.type = c("survey", "fishery"),
 \item{residuals.type}{- residual type ('pearsons' or 'nlls')}
 
 \item{verbose}{- flag (T/F) to print diagnostic info}
-
-\item{repObjs}{- single model report list object, or named list of them}
 }
 \value{
 dataframe

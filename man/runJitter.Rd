@@ -4,14 +4,28 @@
 \alias{runJitter}
 \title{Function to run TCSAM02 multiple times using jittered initial parameter values.}
 \usage{
-runJitter(os = "osx", path = ".", model = "tcsam02",
-  path2model = "", configFile = "", numRuns = 3, minPhase = 1,
-  onlyEvalJitter = FALSE, in.csv = "jitterInfo.csv",
-  out.csv = "jitterResults.csv", calcOFL = FALSE,
-  calcOFLJitter = FALSE, mcmc = FALSE, mc.N = 1e+06,
-  mc.save = 1000, mc.scale = 1000, saveResults = FALSE,
-  cleanup = TRUE, keepFiles = c("tmp.sh", "tcsam02.par"),
-  cleanupAll = FALSE)
+runJitter(
+  os = "osx",
+  path = ".",
+  model = "tcsam02",
+  path2model = "",
+  configFile = "",
+  numRuns = 3,
+  minPhase = 1,
+  onlyEvalJitter = FALSE,
+  in.csv = "jitterInfo.csv",
+  out.csv = "jitterResults.csv",
+  calcOFL = FALSE,
+  calcOFLJitter = FALSE,
+  mcmc = FALSE,
+  mc.N = 1e+06,
+  mc.save = 1000,
+  mc.scale = 1000,
+  saveResults = FALSE,
+  cleanup = TRUE,
+  keepFiles = c("tmp.sh", "tcsam02.par"),
+  cleanupAll = FALSE
+)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -64,7 +78,7 @@ runJitter(os = "osx", path = ".", model = "tcsam02",
 }
 \description{
 This functions runs a TCSAM02 model multiple times, jittering the
-initial staarting values to assess model convergence.
+initial starting values to assess model convergence.
 }
 \details{
 For each model run, this function creates a shell script ('./tmp.sh') in the

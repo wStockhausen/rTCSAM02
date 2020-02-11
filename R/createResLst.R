@@ -7,6 +7,7 @@
 #' @param prs - tcsam02 prs object
 #' @param std - tcsam02 std object
 #' @param ofc - tcsam02 ofc object
+#' @param verbose - flag (T/F) to print debugging info
 #'
 #' @return a tcsam02.resLst object
 #'
@@ -17,7 +18,8 @@
 createResLst<-function(rep=NULL,
                        prs=NULL,
                        std=NULL,
-                       ofc=NULL){
+                       ofc=NULL,
+                       verbose=FALSE){
 
     if (is.null(ofc)&!is.null(rep)) ofc<-getOFCs(rep,verbose=verbose);
 

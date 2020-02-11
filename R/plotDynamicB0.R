@@ -11,9 +11,12 @@
 #' @details Extracts the dynamic B0 results from a TCSAM02 model run and plots
 #' time series of dynamic B0 and MMB for comparison.
 #'
+#' @import ggplot2
+#'
 #' @export
 #'
-plotDynamicB0<-function(obj,B100=NULL){
+plotDynamicB0<-function(obj,
+                        B100=NULL){
   if (inherits(obj,what="tcsam02.resLst")){
     res<-obj$rep$res;
     if (!is.null(obj$rep$ptrOFLResults)) B100<-obj$rep$ptrOFLResults$B100;
@@ -35,7 +38,6 @@ plotDynamicB0<-function(obj,B100=NULL){
   dfr1$year<-row.names(dfr1);
   dfr1$type<-"dynamic B0";
   dfr<-rbind(dfr0,dfr1);
-  require(ggplot2);
   row.names(dfr)<-NULL;
   dfr$year<-as.numeric(dfr$year);
   p <- ggplot(data=dfr,mapping=aes_string(y="male",x="year",colour="type"))+geom_line();

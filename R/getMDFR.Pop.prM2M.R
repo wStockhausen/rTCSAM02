@@ -25,7 +25,7 @@ getMDFR.Pop.PrM2M<-function(tcsams,
         if (!is.null(obj)){
             mdfr<-reshape2::melt(obj,value.name='val',as.is=TRUE);
             mdfr$case<-'tcsam';
-            mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+            mdfr<-getMDFR.CanonicalFormat(mdfr);
             mdfr$process<-"population";
             mdfr$m<-"immature";
             mdfr$s<-"all";
@@ -55,7 +55,7 @@ getMDFR.Pop.PrM2M<-function(tcsams,
       }
       mdfr<-mdfr[,c('case','pc','y','x','z','val')];
 
-      mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+      mdfr<-getMDFR.CanonicalFormat(mdfr);
       mdfr$process<-"population";
       mdfr$m<-"immature";
       mdfr$s<-"all";

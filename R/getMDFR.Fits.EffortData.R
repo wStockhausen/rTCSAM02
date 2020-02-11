@@ -87,7 +87,7 @@ getMDFR.Fits.EffortData<-function(objs,
         }
     }
 
-    if (!is.null(mdfr)) mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
     if (verbose) cat("--Finished rTCSAM02::getMDFR.Fits.EffortData().\n");
     return(mdfr);
 }

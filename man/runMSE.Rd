@@ -4,20 +4,32 @@
 \alias{runMSE}
 \title{Function to run the TCSAM02 MSE for one harvest strategy}
 \usage{
-runMSE(os = "osx", topLevelFolder = ".", model = "tcsam02",
-  path2model = "", HCR = 1, numRuns = 3, minRunID = 1,
-  firstYr = 2018, numYrs = 10, iSeeds = NULL, runBaseModel = TRUE,
-  baseModelInfo = list(path = ".", configFile = "ModelConfig.inp",
-  datasets = list(file = "Datasets.inp", components = list(Bio = "Info",
-  Fishery = c("TCF", "SCF", "GTF", "RKF"), Survey = "NMFS", Growth = "EBS",
-  ChelaHeights = NULL)), pin = TRUE, pinFile = "tcsam02.pin", minPhase = 1,
-  jitter = FALSE, iSeed = NULL, calcTAC = TRUE, HCR = 1),
-  opModInfo = list(path = ".", configFile = "OpMod.Configuration.inp",
-  optsFile = "OpMod.Options.inp", mpiFile = "OpMod.ParametersInfo,inp",
-  pinFile = "opMod.pin", minPhase = 5, maxPhase = 6),
-  estModInfo = list(path = ".", configFile = "EstMod.Configuration.inp",
-  optsFile = "EstMod.Options.inp", minPhase = 5), keepFiles = c("tmp.sh",
-  "tcsam02.par"), cleanupAll = FALSE, test = TRUE, verbose = TRUE)
+runMSE(
+  os = "osx",
+  topLevelFolder = ".",
+  model = "tcsam02",
+  path2model = "",
+  HCR = 1,
+  numRuns = 3,
+  minRunID = 1,
+  firstYr = 2018,
+  numYrs = 10,
+  iSeeds = NULL,
+  runBaseModel = TRUE,
+  baseModelInfo = list(path = ".", configFile = "ModelConfig.inp", datasets = list(file
+    = "Datasets.inp", components = list(Bio = "Info", Fishery = c("TCF", "SCF", "GTF",
+    "RKF"), Survey = "NMFS", Growth = "EBS", ChelaHeights = NULL)), pin = TRUE, pinFile =
+    "tcsam02.pin", minPhase = 1, jitter = FALSE, iSeed = NULL, calcTAC = TRUE, HCR = 1),
+  opModInfo = list(path = ".", configFile = "OpMod.Configuration.inp", optsFile =
+    "OpMod.Options.inp", mpiFile = "OpMod.ParametersInfo,inp", pinFile = "opMod.pin",
+    minPhase = 5, maxPhase = 6),
+  estModInfo = list(path = ".", configFile = "EstMod.Configuration.inp", optsFile =
+    "EstMod.Options.inp", minPhase = 5),
+  keepFiles = c("tmp.sh", "tcsam02.par"),
+  cleanupAll = FALSE,
+  test = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}

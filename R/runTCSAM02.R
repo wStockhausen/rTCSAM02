@@ -16,6 +16,8 @@
 #'@param path2model - path to model executable
 #'@param configFile - filename (including path) to model configuration file
 #'@param pin  - T/F to use a pin file
+#'@param pinFile - name of pin file to use (if pin=TRUE)
+#'@param mseMode - flag to run model in MSE mode (see \code{getRunComands})
 #'@param minPhase - phase to start minimization (or NULL)
 #'@param maxPhase - final minimization phase (or NULL)
 #'@param calcOFL - flag (T/F) to perform OFL calculations
@@ -135,7 +137,7 @@ runTCSAM02<-function(os='osx',
     #get jitter info
     if (!test){
         if (jitter&(!is.null(dfr))) {
-            tbl<-read.csv('jitterInfo.csv',header=TRUE);
+            tbl<-utils::read.csv('jitterInfo.csv',header=TRUE);
             if ("B0" %in% colnames(tbl)){
                 dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
                            data.frame(name='MMB', value=tbl$MMB[1]),

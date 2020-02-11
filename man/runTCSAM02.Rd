@@ -4,13 +4,33 @@
 \alias{runTCSAM02}
 \title{Function to run TCSAM02.}
 \usage{
-runTCSAM02(os = "osx", path = ".", model = "tcsam02",
-  path2model = "", configFile = "", pin = FALSE, pinFile = NULL,
-  mseMode = NULL, minPhase = 1, maxPhase = NULL, calcOFL = FALSE,
-  calcTAC = FALSE, HCR = 1, calcDynB0 = FALSE, hess = FALSE,
-  mcmc = FALSE, mc.N = 1e+06, mc.save = 1000, mc.scale = 1000,
-  jitter = FALSE, iSeed = NULL, saveResults = hess, test = FALSE,
-  cleanup = TRUE, verbose = FALSE)
+runTCSAM02(
+  os = "osx",
+  path = ".",
+  model = "tcsam02",
+  path2model = "",
+  configFile = "",
+  pin = FALSE,
+  pinFile = NULL,
+  mseMode = NULL,
+  minPhase = 1,
+  maxPhase = NULL,
+  calcOFL = FALSE,
+  calcTAC = FALSE,
+  HCR = 1,
+  calcDynB0 = FALSE,
+  hess = FALSE,
+  mcmc = FALSE,
+  mc.N = 1e+06,
+  mc.save = 1000,
+  mc.scale = 1000,
+  jitter = FALSE,
+  iSeed = NULL,
+  saveResults = hess,
+  test = FALSE,
+  cleanup = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{os}{- 'win', 'mac', 'osx', or 'linux'}
@@ -24,6 +44,10 @@ runTCSAM02(os = "osx", path = ".", model = "tcsam02",
 \item{configFile}{- filename (including path) to model configuration file}
 
 \item{pin}{- T/F to use a pin file}
+
+\item{pinFile}{- name of pin file to use (if pin=TRUE)}
+
+\item{mseMode}{- flag to run model in MSE mode (see \code{getRunComands})}
 
 \item{minPhase}{- phase to start minimization (or NULL)}
 
@@ -72,7 +96,6 @@ working directory and uses it to run a version of the TCSAM02 model.\cr
 Initial model parameters can be jittered based on the system clock time or using iSeed
 to set the random number generator. The iSeed and final objective function value are
 saved for each model run in a csv file (the value of out.csv).
-
 
 If the path associated with \code{configFile} is a relative one, it should
 be relative to the \code{path} variable. If saveResults=TRUE, getResLSt() is used to read in

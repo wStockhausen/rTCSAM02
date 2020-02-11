@@ -4,8 +4,12 @@
 \alias{calcTCSAM02Params}
 \title{Calculate parameter values from a TCSAM2013 model for TCSAM02}
 \usage{
-calcTCSAM02Params(obj, template, out = "Model.ParametersInfo.dat",
-  verbose = TRUE)
+calcTCSAM02Params(
+  obj,
+  template,
+  out = "Model.ParametersInfo.dat",
+  verbose = TRUE
+)
 }
 \arguments{
 \item{obj}{- tcsam2013.resLst object or tcsam2103.prs object}

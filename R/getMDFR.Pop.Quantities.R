@@ -4,7 +4,6 @@
 #'@description Function to extracte population quantities from TCSAM02 model runs.
 #'
 #'@param tcsams - single TCSAM02 model report object, or named list of such
-#'@param rsims - single rsimTCSAM results object, or named list of such
 #'@param type - quantity to extract ("R_y","B_yxms","MB_yx","N_yxmsz","N_yxmz","N_yxz","N_yxms","N_yxm","N_yx","iN_xmsz","fN_xmsz")
 #'@param verbose - flag (T/F) to print debug info
 #'
@@ -143,7 +142,7 @@ getMDFR.Pop.Quantities<-function(tcsams=NULL,
         }
     }
 
-    mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    mdfr<-getMDFR.CanonicalFormat(mdfr);
     mdfr$process<-"population";
 
     if (verbose) cat("--rTCSAM02::getMDFR.Pop.Quantities: Done. \n");

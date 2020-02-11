@@ -4,8 +4,12 @@
 \alias{getResLsts}
 \title{Create a list of tcsam02.resLst objects, from a set of model runs}
 \usage{
-getResLsts(inp.dirs = NULL, rep = "tcsam02.rep", model = "tcsam02",
-  prsType = c("all", "active"))
+getResLsts(
+  inp.dirs = NULL,
+  rep = "tcsam02.rep",
+  model = "tcsam02",
+  prsType = c("all", "active")
+)
 }
 \arguments{
 \item{inp.dirs}{- a dataframe with columns "case" and "path"}

@@ -4,8 +4,15 @@
 \alias{mcmc.CalcABC}
 \title{Function to calculate ABC and OFL from an MCMC dataframe}
 \usage{
-mcmc.CalcABC(mcmc = NULL, dfr = NULL, pstar = 0.49, buffer = 0.2,
-  xlims = NULL, title = NULL, verbose = FALSE)
+mcmc.CalcABC(
+  mcmc = NULL,
+  dfr = NULL,
+  pstar = 0.49,
+  buffer = 0.2,
+  xlims = NULL,
+  title = NULL,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{mcmc}{- mcmc object}

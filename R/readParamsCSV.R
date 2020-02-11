@@ -23,7 +23,7 @@ readParamsCSV<-function(csvFile=NULL){
     }
     prs<-NULL;
     if (!is.null(in.prs)&&file.exists(in.prs)){
-        prs<-read.csv(in.prs,stringsAsFactors=FALSE);
+        prs<-utils::read.csv(in.prs,stringsAsFactors=FALSE);
     } else {
         cat('No parameters csv file specified, or file does not exist.\n',
             'Returning NULL...\n');

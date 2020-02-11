@@ -4,9 +4,14 @@
 \alias{getMDFR.Data.FleetTimeSeries}
 \title{Get fleet data components by model scenario}
 \usage{
-getMDFR.Data.FleetTimeSeries(objs, fleet.type = c("survey", "fishery"),
-  data.type = c("abundance", "biomass"), catch.type = c("index",
-  "total", "discard", "retained"), ci = 0.8, verbose = FALSE)
+getMDFR.Data.FleetTimeSeries(
+  objs,
+  fleet.type = c("survey", "fishery"),
+  data.type = c("abundance", "biomass"),
+  catch.type = c("index", "total", "discard", "retained"),
+  ci = 0.8,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{objs}{- single model report list object, or named list of them}

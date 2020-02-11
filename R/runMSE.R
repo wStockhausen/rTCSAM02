@@ -131,7 +131,7 @@ runMSE<-function(os='osx',
         #--copy input files from model config folder to baseFilesFolder
         modelConfigFolder<-normalizePath(file.path(currDir,baseModelInfo$path));
         cat("--base model config folder is '",modelConfigFolder,"'\n",sep="");
-        fs<-list.files(path=modelConfigFolder,pattern=glob2rx("*.inp"),full.names=FALSE);
+        fs<-list.files(path=modelConfigFolder,pattern=utils::glob2rx("*.inp"),full.names=FALSE);
         for (f in fs) file.copy(from=file.path(modelConfigFolder,f),
                                 to=file.path(baseFilesFolder,f),overwrite=TRUE);
         #--copy pin file to baseFilesFolder
@@ -142,7 +142,7 @@ runMSE<-function(os='osx',
         if (!dir.exists(baseRunFolder)) dir.create(baseRunFolder,recursive=FALSE);
         cat("#--Base model run folder is \n\t'",baseRunFolder,"'\n",sep="");
         #--copy all files from baseFilesFolder to baseRunFolder
-        fs<-list.files(path=baseFilesFolder,pattern=glob2rx("*.*"),full.names=FALSE);
+        fs<-list.files(path=baseFilesFolder,pattern=utils::glob2rx("*.*"),full.names=FALSE);
         for (f in fs) file.copy(from=file.path(baseFilesFolder,f),
                                 to=file.path(baseRunFolder,f),overwrite=TRUE);
 
@@ -186,8 +186,8 @@ runMSE<-function(os='osx',
         cat("#--Created OpMod files folder:",opModFilesFolder,sep="\n\t");
         #--copy required files to OpModFilesFolder
         #----TAC and OpModState files from base files folder
-        baseTACFile<-list.files(baseRunFolder,pattern=glob2rx("TAC*.txt"),full.names=TRUE);
-        baseOMSFile<-list.files(baseRunFolder,pattern=glob2rx("OpModStateFile*.txt"),full.names=TRUE);
+        baseTACFile<-list.files(baseRunFolder,pattern=utils::glob2rx("TAC*.txt"),full.names=TRUE);
+        baseOMSFile<-list.files(baseRunFolder,pattern=utils::glob2rx("OpModStateFile*.txt"),full.names=TRUE);
         cat("#--Copying base TAC file:\n\t",baseTACFile,"\n");
         cat("#--Copying base OMS file:\n\t",baseOMSFile,"\n");
         if (!test){

@@ -85,19 +85,19 @@ getMDFR.Data.FleetTimeSeries<-function(objs,
                                 #normal, sdv on arithmetic scale
                                 if (verbose) cat('----using err type = normal\n')
                                 sdv<-cvs$value*dts$value;
-                                lci<-qnorm(ci[1],mean=obs,sd=sdv);
-                                uci<-qnorm(ci[2],mean=obs,sd=sdv);
+                                lci<-stats::qnorm(ci[1],mean=obs,sd=sdv);
+                                uci<-stats::qnorm(ci[2],mean=obs,sd=sdv);
                             } else if (tolower(pdfType)=='lognormal'){
                                 #lognormal, sdv on ln-scale
                                 if (verbose) cat('----using err type = lognormal\n')
                                 sdv<-sqrt(log(1.0+cvs$value^2));
-                                lci<-qlnorm(ci[1],meanlog=log(obs),sdlog=sdv);
-                                uci<-qlnorm(ci[2],meanlog=log(obs),sdlog=sdv);
+                                lci<-stats::qlnorm(ci[1],meanlog=log(obs),sdlog=sdv);
+                                uci<-stats::qlnorm(ci[2],meanlog=log(obs),sdlog=sdv);
                             } else if (tolower(pdfType)=='norm2'){
                                 #normal, sdv on arithmetic scale
                                 if (verbose) cat('----using err type = normal, but fit uses norm2\n')
-                                lci<-qnorm(ci[1],mean=obs,sd=sqrt(0.5));
-                                uci<-qnorm(ci[2],mean=obs,sd=sqrt(0.5));
+                                lci<-stats::qnorm(ci[1],mean=obs,sd=sqrt(0.5));
+                                uci<-stats::qnorm(ci[2],mean=obs,sd=sqrt(0.5));
                             } else if (tolower(pdfType)=='none'){
                                 if (verbose) cat('---using err type = none\n')
                                 lci<-NA;
@@ -128,7 +128,7 @@ getMDFR.Data.FleetTimeSeries<-function(objs,
     }
 
 
-    if (!is.null(mdfr)) mdfr<-rCompTCMs::getMDFR.CanonicalFormat(mdfr);
+    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
     if (verbose) cat("--Finished rTCSAM02::getMDFR.Data.FleetTimeSeries().\n");
     return(mdfr);
 }
