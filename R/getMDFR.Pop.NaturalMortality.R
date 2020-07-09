@@ -21,7 +21,7 @@ getMDFR.Pop.NaturalMortality<-function(tcsams=NULL,
 
     mdfr<-NULL;
     if (type[1]=='M_cxm'){
-        mdfr<-getMDFR('mp/M_cxm',tcsams,verbose=verbose);
+        mdfr<-rTCSAM02::getMDFR('mp/M_c',tcsams,verbose=verbose);
         mdfr$y<-'';
         if (inherits(tcsams,'tcsam02.rep')){tcsams<-list(tcsam=tcsams);}
         if (inherits(tcsams,'tcsam02.resLst')){tcsams<-list(tcsam=tcsams);}
@@ -35,19 +35,21 @@ getMDFR.Pop.NaturalMortality<-function(tcsams=NULL,
                 idx<-(mdfr$pc==pc)&(mdfr$case==um);
                 mdfr$y[idx]<-pgi$pcs[[pc]]$YEAR_BLOCK;
                 mdfr$y[idx]<-reformatTimeBlocks(mdfr$y[idx],tcsam$mc$dims)
+                mdfr$x[idx]<-pgi$pcs[[pc]]$SEX;
+                mdfr$m[idx]<-pgi$pcs[[pc]]$MATURITY_STATE;
             }
         }
         mdfr<-mdfr[,c("case","pc","y","x","m","val")];
     } else if (type[1]=='M_yxm'){
-        mdfr<-getMDFR('mp/M_yxmsz',tcsams,verbose=verbose);
+        mdfr<-rTCSAM02::getMDFR('mp/M_yxmsz',tcsams,verbose=verbose);
         mdfr<-reshape2::dcast(mdfr,formula='case+y+x+m~.',fun.aggregate=mean,value.var='val');
         names(mdfr)<-c("case","y","x","m","val");
     } else if (type[1]=='M_yxmsz'){
-        mdfr<-getMDFR('mp/M_yxmsz',tcsams,verbose=verbose);
+        mdfr<-rTCSAM02::getMDFR('mp/M_yxmsz',tcsams,verbose=verbose);
         mdfr<-mdfr[,c("case","y","x","m","s","z","val")];
     }
 
-    mdfr<-getMDFR.CanonicalFormat(mdfr);
+    mdfr<-rTCSAM02::getMDFR.CanonicalFormat(mdfr);
     mdfr$process<-"population";
 
     if (verbose) cat("--rTCSAM02::getMDFR.Pop.NaturalMortality: Done. \n");

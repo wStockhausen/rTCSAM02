@@ -21,7 +21,7 @@ getMDFR.ZScores.PrNatZ<-function(objs,
                                  catch.type=c('index','retained','discarded','total'),
                                  residuals.type=c('pearsons','nlls'),
                                  verbose=FALSE){
-    if (verbose) cat("--Starting rTCSAM02::getMDFR.ZScore.PrNatZ.\n");
+    if (verbose) cat("--Starting rTCSAM02::getMDFR.ZScores.PrNatZ.\n");
     options(stringsAsFactors=FALSE);
 
     fleet.type<-fleet.type[1];
@@ -104,6 +104,6 @@ getMDFR.ZScores.PrNatZ<-function(objs,
 
     if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
 
-    if (verbose) cat("--Finished rTCSAM02::getMDFR.ZScores.NatZ().\n");
+    if (verbose) cat("--Finished rTCSAM02::getMDFR.ZScores.PrNatZ().\n");
     return(mdfr);
 }

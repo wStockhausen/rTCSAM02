@@ -68,14 +68,19 @@ getRunCommands<-function(os='osx',
             del &&model.b0*
             del &&model.p0*
             del &&model.r0*
+            del *.rept
             del variance
+            del ModelData.Sim.init.dat
+            del MPI.init.dat
             del EchoData.dat
             del CheckFile.dat
             del fmin.log";
         if (fullClean){
             fullcln<-"del *.rep
                       del &&model.ModelFits.?-1.R
-                      del &&model.SimData.init.dat";
+                      del ModelData.Sim*.dat
+                      del MPI*.dat
+                      del ModelParametersInfo*.R";
             cln<-paste0(cln,"\n",fullcln);
         }
     }

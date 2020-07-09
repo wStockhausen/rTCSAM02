@@ -27,7 +27,7 @@ getMDFR.ZScoresForABData<-function(afits,
             pdfType<-nll$nll.type;
             if (tolower(pdfType)!='none'){
                 dfrp<-data.frame(x=afit$x,m=afit$m,s=afit$s,
-                                 y=as.numeric(names(nll$mod)),
+                                 y=as.numeric(names(nll$zscrs)),
                                  val=nll$zscrs,var='zscr');
                 mdfr<-rbind(mdfr,dfrp);
             }
