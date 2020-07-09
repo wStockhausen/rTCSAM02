@@ -1,17 +1,17 @@
 #'
-#'@title Get molt-to-maturity ogives from model results from TCSAM02 model runs as a dataframe
+#' @title Get molt-to-maturity ogives from model results from TCSAM02 model runs as a dataframe
 #'
-#'@description Function to get molt-to-maturity ogives from model results from TCSAM02 model runs as a dataframe.
+#' @description Function to get molt-to-maturity ogives from model results from TCSAM02 model runs as a dataframe.
 #'
-#'@param tcsams - single tcsam02.rep object, tcsam02.resLst object, named list of the latter, or general list
-#'@param path - path into tcsams object at which to find the prM2M array
-#'@param verbose - flag (T/F) to print debug info
+#' @param tcsams - single tcsam02.rep object, tcsam02.resLst object, named list of the latter, or general list
+#' @param path - path into tcsams object at which to find the prM2M array
+#' @param verbose - flag (T/F) to print debug info
 #'
-#'@return dataframe in canonical format
+#' @return dataframe in canonical format
 #'
-#'@details Extracts molt-to-maturity ogives.
+#' @details Extracts molt-to-maturity ogives.
 #'
-#'@export
+#' @export
 #'
 getMDFR.Pop.PrM2M<-function(tcsams,
                             path='mp/prM2M_cz',
