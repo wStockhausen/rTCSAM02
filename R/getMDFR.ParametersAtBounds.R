@@ -1,7 +1,7 @@
 #'
-#' @title Get parameters at one of their bounds from a set of TCSAM02 model runs as a dataframe
+#' @title Get active parameters estimated at one of their bounds from a set of TCSAM02 model runs as a dataframe
 #'
-#' @description Function to get parameters at one of their bounds from a set of TCSAM02 model runs as a dataframe.
+#' @description Function to get active parameters estimated at one of their bounds from a set of TCSAM02 model runs as a dataframe.
 #'
 #' @param tcsams - a tcsam02.resLst object or named list of such
 #' @param delta - relative fraction of range which defines being at a boundary
@@ -9,7 +9,9 @@
 #'
 #' @return - a dataframe
 #'
-#' @details Returns a dataframe with parameters at one of their bounds.
+#' @details Returns a dataframe with active parameters estimated at one of their bounds.
+#'
+#' @import magrittr
 #'
 #' @export
 #'
@@ -46,6 +48,7 @@ getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
     #tcsams is a single tcsam02.resLst object
     if (verbose) cat("\nProcessing resLst object")
     dfr<-getMDFR.ParameterValues(tcsams,verbose);
+    dfr <- dfr %>% subset(phase>0);
     testLower<-(dfr$final_param_value-dfr$min_param)<delta*(dfr$max_param-dfr$min_param);
     testUpper<-(dfr$max_param-dfr$final_param_value)<delta*(dfr$max_param-dfr$min_param);
     dfr$test<-"ok";

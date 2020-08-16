@@ -2,7 +2,7 @@
 % Please edit documentation in R/getMDFR.ParametersAtBounds.R
 \name{getMDFR.ParametersAtBounds}
 \alias{getMDFR.ParametersAtBounds}
-\title{Get parameters at one of their bounds from a set of TCSAM02 model runs as a dataframe}
+\title{Get active parameters estimated at one of their bounds from a set of TCSAM02 model runs as a dataframe}
 \usage{
 getMDFR.ParametersAtBounds(tcsams, delta = 0.01, verbose = FALSE)
 }
@@ -17,8 +17,8 @@ getMDFR.ParametersAtBounds(tcsams, delta = 0.01, verbose = FALSE)
 - a dataframe
 }
 \description{
-Function to get parameters at one of their bounds from a set of TCSAM02 model runs as a dataframe.
+Function to get active parameters estimated at one of their bounds from a set of TCSAM02 model runs as a dataframe.
 }
 \details{
-Returns a dataframe with parameters at one of their bounds.
+Returns a dataframe with active parameters estimated at one of their bounds.
 }
