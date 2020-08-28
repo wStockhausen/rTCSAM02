@@ -9,8 +9,8 @@ mcmc.CalcABC(
   dfr = NULL,
   pstar = 0.49,
   buffer = 0.2,
+  doPlot = TRUE,
   xlims = NULL,
-  title = NULL,
   verbose = FALSE
 )
 }
@@ -23,14 +23,21 @@ mcmc.CalcABC(
 
 \item{buffer}{- buffer for ABC as fraction (i.e., 0.20 = 20 \% yields ABC = 0.8*OFL)}
 
+\item{doPlot}{- flag (T/F) to create plot}
+
 \item{xlims}{- range for x-axis in plot}
 
-\item{title}{- title for plot}
-
 \item{verbose}{flag to rpint diagnostic info}
+
+\item{title}{- title for plot}
 }
 \value{
-dataframe with median results, ABC.pstar and ABC.buffer for each case
+list with elements
+\itemize{
+  \item{dfrABCs - dataframe with median results, ABC.pstar and ABC.buffer for each case}
+  \item{dfrOFLs - dataframe with empirical cdf of OFL for each case}
+  \item{plot - ggplot2 object}
+}
 }
 \description{
 This function calculates ABC and OFL from TCSAM02 MCMC output.
