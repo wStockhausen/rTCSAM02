@@ -49,13 +49,19 @@ getMDFR.ParameterValues<-function(tcsams,verbose=FALSE){
     mdfrp$name<-gsub(" ","",mdfrp$name,fixed=TRUE);
     mdfrp$stdv<-NA;
     if (!is.null(std)){
-        uPNs<-unique(mdfrp$name);
-        for (uPN in uPNs){
-            idp<-which(mdfrp$name==uPN);
-            ids<-which(std$name==uPN);
-            if (length(ids)>0) {
-                mdfrp$stdv[idp]<-std$std.dev[ids];
-            }
+        npar<-nrow(mdfrp);       #--number of parameters
+        nact<-sum(mdfrp$phase>0);#--number of active parameters
+        s<-0;
+        for (p in 1:npar){
+          if (mdfrp$phase[p]>0){
+            s<-s+1; mdfrp[p,"stdv"]<-std[s,"std.dev"];
+          }
+        }
+        if (s!=nact) {
+            cat("Error in getMDFR.ParameterValues(tcsams).\n")
+            cat("Did not match up std file with active parameters!")
+            cat("Returning NULL.\n")
+            return(NULL);
         }
     }
 

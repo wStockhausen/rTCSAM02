@@ -11,7 +11,7 @@ getMDFR.FitsForSizeComps(fits, mc, verbose = FALSE)
 
 \item{mc}{- model configuration list}
 
-\item{verbose}{- flag (T/F) to print dagnostic info}
+\item{verbose}{- flag (T/F) to print diagnostic info}
 }
 \value{
 dataframe

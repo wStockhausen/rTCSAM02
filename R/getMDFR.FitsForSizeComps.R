@@ -5,7 +5,7 @@
 #'
 #' @param fits - list of fits for size compositions
 #' @param mc - model configuration list
-#' @param verbose - flag (T/F) to print dagnostic info
+#' @param verbose - flag (T/F) to print diagnostic info
 #'
 #' @return dataframe
 #'
