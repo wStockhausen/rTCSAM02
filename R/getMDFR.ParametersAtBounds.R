@@ -46,6 +46,7 @@ getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
     }
 
     #tcsams is a single tcsam02.resLst object
+    mdfr<-NULL; #--need to define here in case mdfrp below is empty
     if (verbose) cat("\nProcessing resLst object")
     dfr<-getMDFR.ParameterValues(tcsams,verbose);
     dfr <- dfr %>% subset(phase>0);
@@ -60,7 +61,7 @@ getMDFR.ParametersAtBounds<-function(tcsams,delta=0.01,verbose=FALSE){
             "min_param","max_param","final_param_value",
             "test","label")
     mdfrp<-dfr[testUpper|testLower,cols];
-    mdfr<-cbind(case="tcsam",mdfrp)
+    if (nrow(mdfrp)>0) mdfr<-cbind(case="tcsam",mdfrp);
     if (verbose) cat("--finished rTCSAM02::ParametersAtBounds().\n");
     return(mdfr);
 }

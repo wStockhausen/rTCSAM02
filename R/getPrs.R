@@ -47,8 +47,8 @@ getPrs<-function(type='all',inp.dir='.',verbose=FALSE){
         fparamvals<-fPRS[["value_param"]];
     } else {
         cat("rTCSAM02::getPrs(): \n\t'",fCSV,"'\ndoes not exist.\n",sep='');
-        farithvals<-NULL;
-        fparamvals<-NULL;
+        farithvals<-NA;
+        fparamvals<-NA;
     }
 
     ##combine initial and final values
