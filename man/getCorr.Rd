@@ -4,7 +4,13 @@
 \alias{getCorr}
 \title{Find substantially-correlated model parameters, based on the model "cor" file}
 \usage{
-getCorr(dfr = NULL, folder = NULL, model = "tcsam02", minLevel = 0.95)
+getCorr(
+  dfr = NULL,
+  folder = NULL,
+  model = "tcsam02",
+  minLevel = 0.95,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{dfr}{- dataframe from a call to readCorFile, or NULL}
@@ -14,6 +20,8 @@ getCorr(dfr = NULL, folder = NULL, model = "tcsam02", minLevel = 0.95)
 \item{model}{- model name (default is "tcsam02")}
 
 \item{minLevel}{- minimum correlation level to use to report parameters}
+
+\item{verbose}{- flag to print debugging info}
 }
 \value{
 a dataframe

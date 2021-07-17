@@ -5,6 +5,7 @@
 #'
 #' @param folder - folder containing the model run
 #' @param model - model name (default is "tcsam02")
+#' @param verbose - flag to print debugging info
 #'
 #' @return a dataframe
 #'
@@ -15,7 +16,8 @@
 #' @export
 #'
 readCorFile<-function(folder=NULL,
-                      model="tcsam02"){
+                      model="tcsam02",
+                      verbose=FALSE){
     options(stringsAsFactors=FALSE);
     if (is.null(folder)){
         folder<-tcltk::tk_choose.dir(default=getwd(),
@@ -64,7 +66,7 @@ readCorFile<-function(folder=NULL,
       p.next<-params[p+1];
       if (p.curr!=p.next){
         #params[p] is not a vector , so no change to params[p]
-        cat(p,"=",params[p],"\n")
+        if (verbose) cat(p,"=",params[p],"\n")
         p<-p+1;
       } else {
         #params[p] is a vector , so need to add index to params[p]
@@ -72,7 +74,7 @@ readCorFile<-function(folder=NULL,
         p.old <- p.curr;
         while (p.next==p.old){
           params[p]<-paste0(params[p],"[",k,"]");
-          cat(p,"=",params[p],"\n")
+          if (verbose) cat(p,"=",params[p],"\n")
           k <- k+1;#increment counter
           p <- p+1;#increment parameter index
           if (p<=np){
@@ -85,7 +87,7 @@ readCorFile<-function(folder=NULL,
     }
     if (p==np) {
       #last parameter
-      cat(p,"=",params[p],"\n")
+      if (verbose) cat(p,"=",params[p],"\n")
     }
 
     #replace parameter names

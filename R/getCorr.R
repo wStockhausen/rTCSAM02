@@ -7,6 +7,7 @@
 #' @param folder - folder containing the model run (if dfr is NULL)
 #' @param model - model name (default is "tcsam02")
 #' @param minLevel - minimum correlation level to use to report parameters
+#' @param verbose - flag to print debugging info
 #'
 #' @return a dataframe
 #'
@@ -19,8 +20,9 @@
 getCorr<-function(dfr=NULL,
                   folder=NULL,
                   model="tcsam02",
-                  minLevel=0.95){
-  if (is.null(dfr)) dfr <- readCorFile(folder=folder,model=model);
+                  minLevel=0.95,
+                  verbose=FALSE){
+  if (is.null(dfr)) dfr <- readCorFile(folder=folder,model=model,verbose=verbose);
 
   dfr.cor <- dfr[(dfr$p_i!=dfr$p_j)&(abs(dfr$val)>=minLevel),c("p_i","p_j","val")];
 

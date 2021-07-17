@@ -4,12 +4,14 @@
 \alias{readCorFile}
 \title{Read the model cor (correlation) file}
 \usage{
-readCorFile(folder = NULL, model = "tcsam02")
+readCorFile(folder = NULL, model = "tcsam02", verbose = FALSE)
 }
 \arguments{
 \item{folder}{- folder containing the model run}
 
 \item{model}{- model name (default is "tcsam02")}
+
+\item{verbose}{- flag to print debugging info}
 }
 \value{
 a dataframe
