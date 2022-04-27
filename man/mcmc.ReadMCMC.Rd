@@ -7,9 +7,13 @@
 mcmc.ReadMCMC(fn, verbose = FALSE)
 }
 \arguments{
-\item{fn}{- the filename of te MCMC.R file to parse}
+\item{fn}{\itemize{
+\item the filename of te MCMC.R file to parse
+}}
 
-\item{verbose}{- flag to print extra information}
+\item{verbose}{\itemize{
+\item flag to print extra information
+}}
 }
 \value{
 list of individual mcmc results lists

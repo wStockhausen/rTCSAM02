@@ -7,11 +7,17 @@
 mcmc.InvertVectorElement(mcmc, el, verbose = FALSE)
 }
 \arguments{
-\item{mcmc}{- list of mcmc results}
+\item{mcmc}{\itemize{
+\item list of mcmc results
+}}
 
-\item{el}{- name of an element that is a numeric vector with length >1 to extract, as character string}
+\item{el}{\itemize{
+\item name of an element that is a numeric vector with length >1 to extract, as character string
+}}
 
-\item{verbose}{- flag (T/F) to print diagositc info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagositc info
+}}
 }
 \value{
 a dataframe

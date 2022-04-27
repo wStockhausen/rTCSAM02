@@ -11,11 +11,17 @@ getMDFR.OFCs.FleetData(
 )
 }
 \arguments{
-\item{obj}{- a tcsam02.resLst or tcsam02.rep object}
+\item{obj}{\itemize{
+\item a tcsam02.resLst or tcsam02.rep object
+}}
 
-\item{category}{- fleet category ("surveys" or "fisheries")}
+\item{category}{\itemize{
+\item fleet category ("surveys" or "fisheries")
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 a dataframe
@@ -26,20 +32,20 @@ Function to get objective function components for growth data from a tcsam02.res
 \details{
 Returned dataframe has columns:
 \itemize{
-  \item{case - model case (blank, to be filled in by caller)}
-  \item{category - fleet category}
-  \item{fleet - fleet name}
-  \item{catch.type - catch type}
-  \item{data.type - data type}
-  \item{fit.type - fit type}
-  \item{nll.type - likelihood type}
-  \item{y - year}
-  \item{x - sex}
-  \item{m - maturity state}
-  \item{s  - shell condition}
-  \item{ rmse - root mean squared error}
-  \item{ wgt - likelihood weight}
-  \item{nll - (unweighted) negative log-likelihood}
-  \item{objfun - objective function value}
+\item{case - model case (blank, to be filled in by caller)}
+\item{category - fleet category}
+\item{fleet - fleet name}
+\item{catch.type - catch type}
+\item{data.type - data type}
+\item{fit.type - fit type}
+\item{nll.type - likelihood type}
+\item{y - year}
+\item{x - sex}
+\item{m - maturity state}
+\item{s  - shell condition}
+\item{ rmse - root mean squared error}
+\item{ wgt - likelihood weight}
+\item{nll - (unweighted) negative log-likelihood}
+\item{objfun - objective function value}
 }
 }

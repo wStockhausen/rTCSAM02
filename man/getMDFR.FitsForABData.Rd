@@ -7,11 +7,17 @@
 getMDFR.FitsForABData(afits, ci = 0.95, verbose = FALSE)
 }
 \arguments{
-\item{afits}{-}
+\item{afits}{\itemize{
+\item 
+}}
 
-\item{ci}{- confidence intervals}
+\item{ci}{\itemize{
+\item confidence intervals
+}}
 
-\item{verbose}{- flag (T/F) to print dagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print dagnostic info
+}}
 }
 \value{
 dataframe (not in "canonical" format)

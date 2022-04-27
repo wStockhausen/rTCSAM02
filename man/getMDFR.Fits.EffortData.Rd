@@ -7,9 +7,13 @@
 getMDFR.Fits.EffortData(objs, verbose = FALSE)
 }
 \arguments{
-\item{objs}{- single tcsam02 resLst object, or named list of them}
+\item{objs}{\itemize{
+\item single tcsam02 resLst object, or named list of them
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe

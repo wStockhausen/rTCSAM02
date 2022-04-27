@@ -13,15 +13,25 @@ getCorr(
 )
 }
 \arguments{
-\item{dfr}{- dataframe from a call to readCorFile, or NULL}
+\item{dfr}{\itemize{
+\item dataframe from a call to readCorFile, or NULL
+}}
 
-\item{folder}{- folder containing the model run (if dfr is NULL)}
+\item{folder}{\itemize{
+\item folder containing the model run (if dfr is NULL)
+}}
 
-\item{model}{- model name (default is "tcsam02")}
+\item{model}{\itemize{
+\item model name (default is "tcsam02")
+}}
 
-\item{minLevel}{- minimum correlation level to use to report parameters}
+\item{minLevel}{\itemize{
+\item minimum correlation level to use to report parameters
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
 a dataframe

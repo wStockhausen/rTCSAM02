@@ -14,17 +14,29 @@ getMDFR.Fits.FleetData(
 )
 }
 \arguments{
-\item{objs}{- single model report list object, or named list of them}
+\item{objs}{\itemize{
+\item single model report list object, or named list of them
+}}
 
-\item{fleet.type}{- fleet type ('fishery' or 'survey')}
+\item{fleet.type}{\itemize{
+\item fleet type ('fishery' or 'survey')
+}}
 
-\item{data.type}{- data type ('abundance', 'biomass', or 'n.at.z')}
+\item{data.type}{\itemize{
+\item data type ('abundance', 'biomass', or 'n.at.z')
+}}
 
-\item{catch.type}{- cath type ('index','total','discard', or 'retained')}
+\item{catch.type}{\itemize{
+\item catch type ('index','total','discard', or 'retained')
+}}
 
-\item{ci}{- confidence intervals for observations}
+\item{ci}{\itemize{
+\item confidence intervals for observations
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe
@@ -33,6 +45,6 @@ dataframe
 Function to get model fits to biomass data for fleet data components.
 }
 \details{
-Uses \code{getMDFR.FitsForABData()} and \code{getMDFR.FitsForSizeComps()}.
+Uses \code{\link[=getMDFR.FitsForABData]{getMDFR.FitsForABData()}} and \code{\link[=getMDFR.FitsForSizeComps]{getMDFR.FitsForSizeComps()}}.
 Returned dataframe is in canonical format
 }

@@ -7,11 +7,17 @@
 getMDFR.Pop.PrM2M(tcsams, path = "mp/prM2M_cz", verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, named list of the latter, or general list}
+\item{tcsams}{\itemize{
+\item single tcsam02.rep object, tcsam02.resLst object, named list of the latter, or general list
+}}
 
-\item{path}{- path into tcsams object at which to find the prM2M array}
+\item{path}{\itemize{
+\item path into tcsams object at which to find the prM2M array
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format

@@ -11,11 +11,17 @@ getMDFR.Pop.NaturalMortality(
 )
 }
 \arguments{
-\item{tcsams}{- single TCSAM02 model report object, or named list of such}
+\item{tcsams}{\itemize{
+\item single TCSAM02 model report object, or named list of such
+}}
 
-\item{type}{- flag indicating which M's to extract ('M_cxm', 'M_yxm' or 'M_yxmsz')}
+\item{type}{\itemize{
+\item flag indicating which M's to extract ('M_cxm', 'M_yxm' or 'M_yxmsz')
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format

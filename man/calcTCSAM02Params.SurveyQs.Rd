@@ -7,11 +7,17 @@
 calcTCSAM02Params.SurveyQs(obj, tpl, verbose = FALSE)
 }
 \arguments{
-\item{obj}{- tcsam2013.resLst object or tcsam2103.prs object}
+\item{obj}{\itemize{
+\item tcsam2013.resLst object or tcsam2103.prs object
+}}
 
-\item{tpl}{- character vector with file template}
+\item{tpl}{\itemize{
+\item character vector with file template
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
 file template with survey Q parameter values filled in

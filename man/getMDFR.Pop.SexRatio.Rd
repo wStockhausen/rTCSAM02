@@ -7,11 +7,17 @@
 getMDFR.Pop.SexRatio(tcsams, rsims, verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- single TCSAM2015 model report object, or named list of such}
+\item{tcsams}{\itemize{
+\item single TCSAM2015 model report object, or named list of such
+}}
 
-\item{rsims}{- single rsimTCSAM results object, or named list of such}
+\item{rsims}{\itemize{
+\item single rsimTCSAM results object, or named list of such
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format.

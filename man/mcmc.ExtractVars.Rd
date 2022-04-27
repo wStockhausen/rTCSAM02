@@ -7,7 +7,9 @@
 mcmc.ExtractVars(mcmc)
 }
 \arguments{
-\item{mcmc}{- an MCMC results list from a TCSAM02 model}
+\item{mcmc}{\itemize{
+\item an MCMC results list from a TCSAM02 model
+}}
 }
 \value{
 a list, with elements named for each variable

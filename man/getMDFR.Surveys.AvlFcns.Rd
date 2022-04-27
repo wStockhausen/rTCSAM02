@@ -7,11 +7,17 @@
 getMDFR.Surveys.AvlFcns(tcsams, verbose = FALSE, cast = "y+x")
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
+\item{tcsams}{\itemize{
+\item single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 
-\item{cast}{- casting formula for excluding y,x,m,s factor levels from an average-at-size across unspecified factors}
+\item{cast}{\itemize{
+\item casting formula for excluding y,x,m,s factor levels from an average-at-size across unspecified factors
+}}
 }
 \value{
 dataframe in canonical format

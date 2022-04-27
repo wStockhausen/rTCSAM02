@@ -7,11 +7,17 @@
 readCorFile(folder = NULL, model = "tcsam02", verbose = FALSE)
 }
 \arguments{
-\item{folder}{- folder containing the model run}
+\item{folder}{\itemize{
+\item folder containing the model run
+}}
 
-\item{model}{- model name (default is "tcsam02")}
+\item{model}{\itemize{
+\item model name (default is "tcsam02")
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
 a dataframe

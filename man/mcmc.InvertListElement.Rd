@@ -7,11 +7,17 @@
 mcmc.InvertListElement(mcmc, element = "", verbose = FALSE)
 }
 \arguments{
-\item{mcmc}{- an mcmc results list from a TCSAM02 model run}
+\item{mcmc}{\itemize{
+\item an mcmc results list from a TCSAM02 model run
+}}
 
-\item{element}{- name of a list element to extract}
+\item{element}{\itemize{
+\item name of a list element to extract
+}}
 
-\item{verbose}{- T/F to print diagnostic info}
+\item{verbose}{\itemize{
+\item T/F to print diagnostic info
+}}
 }
 \value{
 a list

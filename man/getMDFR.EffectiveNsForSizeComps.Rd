@@ -7,11 +7,17 @@
 getMDFR.EffectiveNsForSizeComps(fits, mc, verbose = FALSE)
 }
 \arguments{
-\item{fits}{- list of fits for size compositions}
+\item{fits}{\itemize{
+\item list of fits for size compositions
+}}
 
-\item{mc}{- model configuration list}
+\item{mc}{\itemize{
+\item model configuration list
+}}
 
-\item{verbose}{- flag (T/F) to print dagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print dagnostic info
+}}
 }
 \value{
 dataframe
@@ -23,11 +29,11 @@ Get get effective Ns for size comps as a dataframe.
 Uses \code{reshape2::melt(...)}.
 Returned dataframe has columns:
 \itemize{
- \item{x - sex}
- \item{m - maturity}
- \item{s - shell condition}
- \item{y - year}
- \item{val - value}
- \item{var - variable type ('input ss' or 'effective N')}
+\item{x - sex}
+\item{m - maturity}
+\item{s - shell condition}
+\item{y - year}
+\item{val - value}
+\item{var - variable type ('input ss' or 'effective N')}
 }
 }

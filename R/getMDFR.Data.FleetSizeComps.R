@@ -6,7 +6,7 @@
 #'@param objs - single model report list object, or named list of them
 #'@param fleet.type - fleet type ('fishery' or 'survey')
 #'@param catch.type - catch type ('index','total','discard', or 'retained')
-#'@param ci - confidence intervals for time series observations
+#'@param data.type - "input" or "aggregated"
 #'@param verbose - flag (T/F) to print diagnostic info
 #'
 #'@return dataframe in canonical format
@@ -19,10 +19,17 @@
 getMDFR.Data.FleetSizeComps<-function(objs,
                                        fleet.type=c('survey','fishery'),
                                        catch.type=c('index','total','discard','retained'),
+                                       data.type=c("input","aggregated"),
                                        verbose=FALSE){
-    fleet.type<-fleet.type[1];
-    catch.type<-catch.type[1];
-    data.type<-"nAtZ";
+    fleet.type<-tolower(fleet.type[1]);
+    catch.type<-tolower(catch.type[1]);
+    data.type<-tolower(data.type[1]);
+    dtType = "data";
+    ssType = "inpSS";
+    if (data.type=="aggregated") {
+      dtType = "aggdata";
+      ssType = "aggSS";
+    }
 
     options(stringsAsFactors=FALSE);
 
@@ -33,6 +40,7 @@ getMDFR.Data.FleetSizeComps<-function(objs,
             mdfrp<-getMDFR.Data.FleetSizeComps(objs[[nm]],
                                                fleet.type=fleet.type,
                                                catch.type=catch.type,
+                                               data.type=data.type,
                                                verbose=verbose);
             if (!is.null(mdfrp)) mdfrp$case<-nm;
             mdfr<-rbind(mdfr,mdfrp);
@@ -40,7 +48,7 @@ getMDFR.Data.FleetSizeComps<-function(objs,
     } else if (inherits(objs,'tcsam02.resLst')){
         if (verbose) {
             cat("--Starting rTCSAM02::getMDFR.Data.FleetSizeComps().\n");
-            cat("---Extracting fleet.type = ",fleet.type,", catch.type = ",catch.type,"\n");
+            cat("---Extracting fleet.type = ",fleet.type,", catch.type = ",catch.type,", data.type = ",data.type,"\n");
         }
         #objs is a single tcsam02 resLst object
         if (fleet.type=='fishery'){
@@ -64,15 +72,15 @@ getMDFR.Data.FleetSizeComps<-function(objs,
                     if (!is.null(ct)){
                         if (verbose) cat("----Getting '",ctNm,"' for ",fltNm,"\n",sep='');
                         cat("names(ct):",paste(names(ct),collapse=" "),"\n");
-                        dt<-ct[[data.type]];
+                        dt<-ct[["nAtZ"]];
                         if (!is.null(dt)){
                             if (verbose){
                                 cat("----names(dt):",paste(names(dt),collapse=" "),"\n");
                                 cat("----units:",dt$units,"\n");
                                 cat("----lltype:",dt$llType,"\n")
                             }
-                            dts<-reshape2::melt(dt$data);
-                            sss<-reshape2::melt(dt$sample.sizes);
+                            dts<-reshape2::melt(dt[[dtType]]);
+                            sss<-reshape2::melt(dt[[ssType]]);
                             dfrp1<-data.frame(x=dts$x,
                                               m=dts$m,
                                               s=dts$s,
@@ -83,7 +91,7 @@ getMDFR.Data.FleetSizeComps<-function(objs,
                                               uci=NA_real_,
                                               type="observed",
                                               stringsAsFactors=FALSE);
-                            dfrp1$category<-"n.at.z";#--this is correct: category and data.type are slightly different
+                            dfrp1$category<-"n.at.z";#--this is correct
                             dfrp1$process<-fleet.type;
                             dfrp1$fleet<-fleet;
                             if(!is.null(dfrp1)) mdfr<-rbind(mdfr,dfrp1);

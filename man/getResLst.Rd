@@ -13,15 +13,25 @@ getResLst(
 )
 }
 \arguments{
-\item{inp.dir}{- a folder with model output}
+\item{inp.dir}{\itemize{
+\item a folder with model output
+}}
 
-\item{rep}{- filename to read for rep object}
+\item{rep}{\itemize{
+\item filename to read for rep object
+}}
 
-\item{model}{- name of model executable}
+\item{model}{\itemize{
+\item name of model executable
+}}
 
-\item{prsType}{-  type ('all' or 'active') of parameters to read}
+\item{prsType}{\itemize{
+\item type ('all' or 'active') of parameters to read
+}}
 
-\item{verbose}{- flag (T/F) to prnt diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to prnt diagnostic info
+}}
 }
 \value{
 a tcsam02.resLst object.
@@ -33,9 +43,9 @@ Function to create a tcsam02.resLst object from a model run.
 Uses \code{tcltk::tk_chose.dir} to open a file dialog to select model directory
 if inp.dir is NULL. A tcsam02.resLst object is a list with elements
 \itemize{
- \item{rep - a tcsam02.rep object, or NULL}
- \item{prs - a tcsam02.prs object, or NULL}
- \item{std - a tcsam02.std object, or NULL}
- \item{ofc - a tcsam02.ofc object, or NULL}
+\item{rep - a tcsam02.rep object, or NULL}
+\item{prs - a tcsam02.prs object, or NULL}
+\item{std - a tcsam02.std object, or NULL}
+\item{ofc - a tcsam02.ofc object, or NULL}
 }
 }

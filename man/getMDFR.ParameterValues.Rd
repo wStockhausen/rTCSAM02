@@ -7,12 +7,18 @@
 getMDFR.ParameterValues(tcsams, verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- a tcsam02.resLst object or named list of such}
+\item{tcsams}{\itemize{
+\item a tcsam02.resLst object or named list of such
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
-- a dataframe
+\itemize{
+\item a dataframe
+}
 }
 \description{
 Function to get parameter values from a set of TCSAM02 model runs as a dataframe.

@@ -7,11 +7,17 @@
 getMDFR.Surveys.MaturityOgives(tcsams, category = "index", verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
+\item{tcsams}{\itemize{
+\item single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
+}}
 
-\item{category}{- 'index' is only choice}
+\item{category}{\itemize{
+\item 'index' is only choice
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format

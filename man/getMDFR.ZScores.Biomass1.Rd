@@ -7,13 +7,21 @@
 getMDFR.ZScores.Biomass1(rep, fleet.type, catch.type, verbose)
 }
 \arguments{
-\item{rep}{- single model report list object}
+\item{rep}{\itemize{
+\item single model report list object
+}}
 
-\item{fleet.type}{- fleet type ('fishery' or 'survey')}
+\item{fleet.type}{\itemize{
+\item fleet type ('fishery' or 'survey')
+}}
 
-\item{catch.type}{- catch type ('index','retained','discarded',or 'total')}
+\item{catch.type}{\itemize{
+\item catch type ('index','retained','discarded',or 'total')
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe

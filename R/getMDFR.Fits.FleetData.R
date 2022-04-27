@@ -6,13 +6,13 @@
 #'@param objs - single model report list object, or named list of them
 #'@param fleet.type - fleet type ('fishery' or 'survey')
 #'@param data.type - data type ('abundance', 'biomass', or 'n.at.z')
-#'@param catch.type - cath type ('index','total','discard', or 'retained')
+#'@param catch.type - catch type ('index','total','discard', or 'retained')
 #'@param ci - confidence intervals for observations
 #'@param verbose - flag (T/F) to print diagnostic info
 #'
 #'@return dataframe
 #'
-#'@details Uses \code{getMDFR.FitsForABData()} and \code{getMDFR.FitsForSizeComps()}.
+#'@details Uses [getMDFR.FitsForABData()] and [getMDFR.FitsForSizeComps()].
 #' Returned dataframe is in canonical format
 #'
 #'@export
@@ -35,7 +35,7 @@ getMDFR.Fits.FleetData<-function(objs,
 
     mdfr<-NULL;
     if (class(objs)[1]=='list'){
-        #repObjs should be a list of tcsam02 resLst objects
+        #--objs should be a list of tcsam02 resLst objects
         for (nm in names(objs)){
             mdfrp<-getMDFR.Fits.FleetData(objs[[nm]],
                                           fleet.type=fleet.type,

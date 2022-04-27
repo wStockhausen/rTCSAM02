@@ -7,11 +7,17 @@
 getMDFR(path, tcsams, verbose = FALSE)
 }
 \arguments{
-\item{path}{- path in models to requested array (using '/' as separator for list levels)}
+\item{path}{\itemize{
+\item path in models to requested array (using '/' as separator for list levels)
+}}
 
-\item{tcsams}{- single tcsam02.resLst object, or named list of such}
+\item{tcsams}{\itemize{
+\item single tcsam02.resLst object, or named list of such
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostics}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostics
+}}
 }
 \value{
 Melted dataframe (ala package reshape2).

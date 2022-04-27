@@ -7,11 +7,17 @@
 getMDFR.Pop.GrowthMatrices(tcsams, path = "mp/T_list/T_czz", verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep, tcsam02.resLst, named list of the latter, or general list}
+\item{tcsams}{\itemize{
+\item single tcsam02.rep, tcsam02.resLst, named list of the latter, or general list
+}}
 
-\item{path}{- path into tcsams object at which to find the transition arrays}
+\item{path}{\itemize{
+\item path into tcsams object at which to find the transition arrays
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format.

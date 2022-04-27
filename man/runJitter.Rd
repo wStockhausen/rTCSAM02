@@ -28,53 +28,95 @@ runJitter(
 )
 }
 \arguments{
-\item{os}{- 'win', 'mac', 'osx', or 'linux'}
+\item{os}{\itemize{
+\item 'win', 'mac', 'osx', or 'linux'
+}}
 
-\item{path}{- path for model output}
+\item{path}{\itemize{
+\item path for model output
+}}
 
-\item{model}{- TCSAM02 model executable name}
+\item{model}{\itemize{
+\item TCSAM02 model executable name
+}}
 
-\item{path2model}{- path to model executable}
+\item{path2model}{\itemize{
+\item path to model executable
+}}
 
-\item{configFile}{- path to model configuration file}
+\item{configFile}{\itemize{
+\item path to model configuration file
+}}
 
-\item{numRuns}{- number of jitter runs to make}
+\item{numRuns}{\itemize{
+\item number of jitter runs to make
+}}
 
-\item{minPhase}{- phase in which to start optimization}
+\item{minPhase}{\itemize{
+\item phase in which to start optimization
+}}
 
-\item{onlyEvalJitter}{- flag (T/F) to only evaluate a (previous) set of jitter runs, not make new runs}
+\item{onlyEvalJitter}{\itemize{
+\item flag (T/F) to only evaluate a (previous) set of jitter runs, not make new runs
+}}
 
-\item{in.csv}{- filename for jitter info (seed, obj fun value) from ADMB model run}
+\item{in.csv}{\itemize{
+\item filename for jitter info (seed, obj fun value) from ADMB model run
+}}
 
-\item{out.csv}{- filename for jittered results}
+\item{out.csv}{\itemize{
+\item filename for jittered results
+}}
 
-\item{calcOFL}{- flag (T/F) to perform OFL calculations for "best" model}
+\item{calcOFL}{\itemize{
+\item flag (T/F) to perform OFL calculations for "best" model
+}}
 
-\item{calcOFLJitter}{- flag (T/F) to perform OFL calculations while jittering}
+\item{calcOFLJitter}{\itemize{
+\item flag (T/F) to perform OFL calculations while jittering
+}}
 
-\item{mcmc}{- flag (T/F) to run mcmc on "best" model}
+\item{mcmc}{\itemize{
+\item flag (T/F) to run mcmc on "best" model
+}}
 
-\item{mc.N}{- number of mcmc iterations to make}
+\item{mc.N}{\itemize{
+\item number of mcmc iterations to make
+}}
 
-\item{mc.save}{- number of iterations to skip when saving mcmc calculations}
+\item{mc.save}{\itemize{
+\item number of iterations to skip when saving mcmc calculations
+}}
 
-\item{mc.scale}{- number of iterations to adjust scale for mcmc calculations}
+\item{mc.scale}{\itemize{
+\item number of iterations to adjust scale for mcmc calculations
+}}
 
-\item{saveResults}{- T/F to save final results to best/ModelResults.RData}
+\item{saveResults}{\itemize{
+\item T/F to save final results to best/ModelResults.RData
+}}
 
-\item{cleanup}{- T/F to clean up SOME model output files after each run}
+\item{cleanup}{\itemize{
+\item T/F to clean up SOME model output files after each run
+}}
 
-\item{keepFiles}{- vector of file names to keep, not clean up, after model run}
+\item{keepFiles}{\itemize{
+\item vector of file names to keep, not clean up, after model run
+}}
 
-\item{cleanupAll}{- T/F to clean up ALMOST ALL model output files after each run}
+\item{cleanupAll}{\itemize{
+\item T/F to clean up ALMOST ALL model output files after each run
+}}
 }
 \value{
-- list w/ 4 elements:
- imx  - index of (1st) smallest value for the objective function
- seed - seed resulting in the smallest objective function
- par  - dataframe with par results from run w/ smallest objective function
- objFuns - vector of objective function values from all model runs
- parList - list of par dataframes for each model run
+\itemize{
+\item list w/ 4 elements:
+imx  - index of (1st) smallest value for the objective function
+seed - seed resulting in the smallest objective function
+par  - dataframe with par results from run w/ smallest objective function
+objFuns - vector of objective function values from all model runs
+parList - list of par dataframes for each model run
+}
 }
 \description{
 This functions runs a TCSAM02 model multiple times, jittering the

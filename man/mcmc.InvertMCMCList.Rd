@@ -7,9 +7,13 @@
 mcmc.InvertMCMCList(mcmc, verbose = FALSE)
 }
 \arguments{
-\item{mcmc}{- mcmc list}
+\item{mcmc}{\itemize{
+\item mcmc list
+}}
 
-\item{verbose}{- T/F to print diagnostic info}
+\item{verbose}{\itemize{
+\item T/F to print diagnostic info
+}}
 }
 \value{
 a dataframe

@@ -7,11 +7,17 @@
 getObj(path, lst, verbose = FALSE)
 }
 \arguments{
-\item{path}{- path in the list to the desired object (using '/' as separator for list levels)}
+\item{path}{\itemize{
+\item path in the list to the desired object (using '/' as separator for list levels)
+}}
 
-\item{lst}{- the list to extract the object from}
+\item{lst}{\itemize{
+\item the list to extract the object from
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostics}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostics
+}}
 }
 \value{
 the specified object, or NULL if not found

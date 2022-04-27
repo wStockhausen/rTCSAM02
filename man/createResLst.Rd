@@ -7,15 +7,25 @@
 createResLst(rep = NULL, prs = NULL, std = NULL, ofc = NULL, verbose = FALSE)
 }
 \arguments{
-\item{rep}{- tcsam02 rep object}
+\item{rep}{\itemize{
+\item tcsam02 rep object
+}}
 
-\item{prs}{- tcsam02 prs object}
+\item{prs}{\itemize{
+\item tcsam02 prs object
+}}
 
-\item{std}{- tcsam02 std object}
+\item{std}{\itemize{
+\item tcsam02 std object
+}}
 
-\item{ofc}{- tcsam02 ofc object}
+\item{ofc}{\itemize{
+\item tcsam02 ofc object
+}}
 
-\item{verbose}{- flag (T/F) to print debugging info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debugging info
+}}
 }
 \value{
 a tcsam02.resLst object

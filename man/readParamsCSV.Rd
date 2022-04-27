@@ -7,7 +7,9 @@
 readParamsCSV(csvFile = NULL)
 }
 \arguments{
-\item{csvFile}{- parameters csv file from a TCSAM02 model run. can be NULL.}
+\item{csvFile}{\itemize{
+\item parameters csv file from a TCSAM02 model run. can be NULL.
+}}
 }
 \value{
 a dataframe (or NULL).
@@ -19,6 +21,6 @@ Function to read a TCSAM02 parameters csv file and return a dataframe.
 If csvFile is NULL, the user will be prompted to identify a
 TCSAM02 model parameters csv file to read. Uses functions
 \itemize{
- \item \code{wtsUtilities::selectFile(...)}
+\item \code{wtsUtilities::selectFile(...)}
 }
 }

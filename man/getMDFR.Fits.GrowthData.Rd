@@ -7,9 +7,13 @@
 getMDFR.Fits.GrowthData(objs, verbose = FALSE)
 }
 \arguments{
-\item{objs}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
+\item{objs}{\itemize{
+\item a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe (or NULL)

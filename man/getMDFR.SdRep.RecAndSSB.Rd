@@ -7,9 +7,13 @@
 getMDFR.SdRep.RecAndSSB(tcsams, verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- a tcsam02.resLst object or named list of such}
+\item{tcsams}{\itemize{
+\item a tcsam02.resLst object or named list of such
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
 a dataframe

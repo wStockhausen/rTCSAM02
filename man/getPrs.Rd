@@ -7,11 +7,17 @@
 getPrs(type = "all", inp.dir = ".", verbose = FALSE)
 }
 \arguments{
-\item{type}{- 'all' or 'active'}
+\item{type}{\itemize{
+\item 'all' or 'active'
+}}
 
-\item{inp.dir}{- folder for files}
+\item{inp.dir}{\itemize{
+\item folder for files
+}}
 
-\item{verbose}{- flag to print information}
+\item{verbose}{\itemize{
+\item flag to print information
+}}
 }
 \value{
 A prs model object (a dataframe). The returned object will be a list of class 'tcsam02.prs'.

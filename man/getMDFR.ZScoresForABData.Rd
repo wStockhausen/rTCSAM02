@@ -2,20 +2,24 @@
 % Please edit documentation in R/getMDFR.ZScoresForABData.R
 \name{getMDFR.ZScoresForABData}
 \alias{getMDFR.ZScoresForABData}
-\title{Get z-scores for abundance, biomass data from fits to data as dataframe}
+\title{Get z-scores and other model fits info for abundance, biomass data from fits to data as dataframe}
 \usage{
 getMDFR.ZScoresForABData(afits, verbose = FALSE)
 }
 \arguments{
-\item{afits}{-}
+\item{afits}{\itemize{
+\item 
+}}
 
-\item{verbose}{- flag (T/F) to print dagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe
 }
 \description{
-Function to get z-scores for abundance, biomass data from fits to data as dataframe.
+Function to get z-scores and other model fits info for abundance, biomass data from fits to data as dataframe.
 }
 \details{
 None.

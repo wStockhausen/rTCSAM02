@@ -15,28 +15,42 @@ mcmc.CalcABC(
 )
 }
 \arguments{
-\item{mcmc}{- mcmc object}
+\item{mcmc}{\itemize{
+\item mcmc object
+}}
 
-\item{dfr}{- dataframe with OFL as column (and possibly 'case')}
+\item{dfr}{\itemize{
+\item dataframe with OFL as column (and possibly 'case')
+}}
 
-\item{pstar}{- pstar value for ABC calculation}
+\item{pstar}{\itemize{
+\item pstar value for ABC calculation
+}}
 
-\item{buffer}{- buffer for ABC as fraction (i.e., 0.20 = 20 \% yields ABC = 0.8*OFL)}
+\item{buffer}{\itemize{
+\item buffer for ABC as fraction (i.e., 0.20 = 20 \\% yields ABC = 0.8*OFL)
+}}
 
-\item{doPlot}{- flag (T/F) to create plot}
+\item{doPlot}{\itemize{
+\item flag (T/F) to create plot
+}}
 
-\item{xlims}{- range for x-axis in plot}
+\item{xlims}{\itemize{
+\item range for x-axis in plot
+}}
 
 \item{verbose}{flag to rpint diagnostic info}
 
-\item{title}{- title for plot}
+\item{title}{\itemize{
+\item title for plot
+}}
 }
 \value{
 list with elements
 \itemize{
-  \item{dfrABCs - dataframe with median results, ABC.pstar and ABC.buffer for each case}
-  \item{dfrOFLs - dataframe with empirical cdf of OFL for each case}
-  \item{plot - ggplot2 object}
+\item{dfrABCs - dataframe with median results, ABC.pstar and ABC.buffer for each case}
+\item{dfrOFLs - dataframe with empirical cdf of OFL for each case}
+\item{plot - ggplot2 object}
 }
 }
 \description{

@@ -7,9 +7,13 @@
 getMDFR.Pop.RecSizeDistribution(tcsams, verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
+\item{tcsams}{\itemize{
+\item single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format.

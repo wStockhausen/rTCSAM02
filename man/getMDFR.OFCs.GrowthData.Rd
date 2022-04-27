@@ -7,9 +7,13 @@
 getMDFR.OFCs.GrowthData(obj, verbose = FALSE)
 }
 \arguments{
-\item{obj}{- a tcsam02.resLst or tcsam02.rep object}
+\item{obj}{\itemize{
+\item a tcsam02.resLst or tcsam02.rep object
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 a dataframe
@@ -20,20 +24,20 @@ Function to get objective function components for growth data from a tcsam02.rep
 \details{
 Returned dataframe has columns:
 \itemize{
-  \item{case - model case (blank, to be filled in by caller)}
-  \item{category - "growth data"}
-  \item{fleet - dummy value ("")}
-  \item{catch.type - dummy value ("")}
-  \item{data.type - data type ("growth data")}
-  \item{fit.type - dummy value ("")}
-  \item{nll.type - likelihood type}
-  \item{y - year (dummy = 'all)}
-  \item{x - sex}
-  \item{m - maturity state ("immature")}
-  \item{s  - shell condition ("new shell")}
-  \item{ rmse - root mean squared error}
-  \item{ wgt - likelihood weight}
-  \item{nll - (unweighted) negative log-likelihood}
-  \item{objfun - objective function value}
+\item{case - model case (blank, to be filled in by caller)}
+\item{category - "growth data"}
+\item{fleet - dummy value ("")}
+\item{catch.type - dummy value ("")}
+\item{data.type - data type ("growth data")}
+\item{fit.type - dummy value ("")}
+\item{nll.type - likelihood type}
+\item{y - year (dummy = 'all)}
+\item{x - sex}
+\item{m - maturity state ("immature")}
+\item{s  - shell condition ("new shell")}
+\item{ rmse - root mean squared error}
+\item{ wgt - likelihood weight}
+\item{nll - (unweighted) negative log-likelihood}
+\item{objfun - objective function value}
 }
 }

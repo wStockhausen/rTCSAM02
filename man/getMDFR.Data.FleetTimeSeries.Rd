@@ -14,17 +14,29 @@ getMDFR.Data.FleetTimeSeries(
 )
 }
 \arguments{
-\item{objs}{- single model report list object, or named list of them}
+\item{objs}{\itemize{
+\item single model report list object, or named list of them
+}}
 
-\item{fleet.type}{- fleet type ('fishery' or 'survey')}
+\item{fleet.type}{\itemize{
+\item fleet type ('fishery' or 'survey')
+}}
 
-\item{data.type}{- data type ('abundance' or 'biomass')}
+\item{data.type}{\itemize{
+\item data type ('abundance' or 'biomass')
+}}
 
-\item{catch.type}{- cath type ('index','total','discard', or 'retained')}
+\item{catch.type}{\itemize{
+\item cath type ('index','total','discard', or 'retained')
+}}
 
-\item{ci}{- confidence intervals for time series observations}
+\item{ci}{\itemize{
+\item confidence intervals for time series observations
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe

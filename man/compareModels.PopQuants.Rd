@@ -15,19 +15,33 @@ compareModels.PopQuants(
 )
 }
 \arguments{
-\item{tcsams}{- single TCSAM2015 model report object, or named list of such}
+\item{tcsams}{\itemize{
+\item single TCSAM2015 model report object, or named list of such
+}}
 
-\item{rsims}{- single rsimTCSAM results object, or named list of such}
+\item{rsims}{\itemize{
+\item single rsimTCSAM results object, or named list of such
+}}
 
-\item{showPlot}{- flag to show/print plots immediately}
+\item{showPlot}{\itemize{
+\item flag to show/print plots immediately
+}}
 
-\item{pdf}{- name of pdf file to record plot output to}
+\item{pdf}{\itemize{
+\item name of pdf file to record plot output to
+}}
 
-\item{width}{- pdf page width (in inches)}
+\item{width}{\itemize{
+\item pdf page width (in inches)
+}}
 
-\item{height}{- pdf page width (in inches)}
+\item{height}{\itemize{
+\item pdf page width (in inches)
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 list of ggplot2 objects

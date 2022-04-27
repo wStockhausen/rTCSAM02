@@ -7,11 +7,17 @@
 getMDFR.Pop.MeanGrowth(tcsams, path = "mp/T_list/mnZAM_cz", verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- single TCSAM2015 model report object, or named list of such}
+\item{tcsams}{\itemize{
+\item single TCSAM2015 model report object, or named list of such
+}}
 
-\item{path}{- path into tcsams object at which to find the prM2M array}
+\item{path}{\itemize{
+\item path into tcsams object at which to find the prM2M array
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format

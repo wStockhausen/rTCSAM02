@@ -12,13 +12,21 @@ getResLsts(
 )
 }
 \arguments{
-\item{inp.dirs}{- a dataframe with columns "case" and "path"}
+\item{inp.dirs}{\itemize{
+\item a dataframe with columns "case" and "path"
+}}
 
-\item{rep}{- filename to read for rep object}
+\item{rep}{\itemize{
+\item filename to read for rep object
+}}
 
-\item{model}{- name of model executable}
+\item{model}{\itemize{
+\item name of model executable
+}}
 
-\item{prsType}{-  type ('all' or 'active') of parameters to read}
+\item{prsType}{\itemize{
+\item type ('all' or 'active') of parameters to read
+}}
 }
 \value{
 a list of tcsam02.resLst objects.

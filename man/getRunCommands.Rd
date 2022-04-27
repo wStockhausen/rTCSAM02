@@ -31,51 +31,97 @@ getRunCommands(
 )
 }
 \arguments{
-\item{os}{- 'win', 'mac', 'osx', or 'linux'}
+\item{os}{\itemize{
+\item 'win', 'mac', 'osx', or 'linux'
+}}
 
-\item{model}{- admb model name}
+\item{model}{\itemize{
+\item admb model name
+}}
 
-\item{path2model}{- path to model}
+\item{path2model}{\itemize{
+\item path to model
+}}
 
-\item{configFile}{- filename (including path) to model configuration file}
+\item{configFile}{\itemize{
+\item filename (including path) to model configuration file
+}}
 
-\item{pin}{- flag (T/F) to use a pin file}
+\item{pin}{\itemize{
+\item flag (T/F) to use a pin file
+}}
 
-\item{pinFile}{- name of pin file (if different from default)}
+\item{pinFile}{\itemize{
+\item name of pin file (if different from default)
+}}
 
-\item{mseMode}{- mse mode for model run (NULL [off: default], "opModMode", "estModMode")}
+\item{mseMode}{\itemize{
+\item mse mode for model run (NULL \link{off: default}, "opModMode", "estModMode")
+}}
 
-\item{hess}{- flag (T/F) to calculate the hessian}
+\item{hess}{\itemize{
+\item flag (T/F) to calculate the hessian
+}}
 
-\item{minPhase}{- start phase (or NULL) for minimization calculations}
+\item{minPhase}{\itemize{
+\item start phase (or NULL) for minimization calculations
+}}
 
-\item{maxPhase}{- last phase (or NULL) for minimization calculations}
+\item{maxPhase}{\itemize{
+\item last phase (or NULL) for minimization calculations
+}}
 
-\item{mcmc}{- flag (T/F) to do mcmc calculations}
+\item{mcmc}{\itemize{
+\item flag (T/F) to do mcmc calculations
+}}
 
-\item{mc.N}{- number of mcmc iterations to do}
+\item{mc.N}{\itemize{
+\item number of mcmc iterations to do
+}}
 
-\item{mc.save}{- number of iterations to skip when saving mcmc calculations}
+\item{mc.save}{\itemize{
+\item number of iterations to skip when saving mcmc calculations
+}}
 
-\item{mc.scale}{- number of iterations to adjust scale for mcmc calculations}
+\item{mc.scale}{\itemize{
+\item number of iterations to adjust scale for mcmc calculations
+}}
 
-\item{jitter}{- flag (T/F) to use jitter initial values}
+\item{jitter}{\itemize{
+\item flag (T/F) to use jitter initial values
+}}
 
-\item{iSeed}{- value for random number seed}
+\item{iSeed}{\itemize{
+\item value for random number seed
+}}
 
-\item{calcOFL}{- flag (T/F) to do OFL calculations}
+\item{calcOFL}{\itemize{
+\item flag (T/F) to do OFL calculations
+}}
 
-\item{calcTAC}{- flag (T/F) to calculate the TAC for the next fishing year}
+\item{calcTAC}{\itemize{
+\item flag (T/F) to calculate the TAC for the next fishing year
+}}
 
-\item{HCR}{- integer indicating the Harvest Control Rule used to calculate the TAC}
+\item{HCR}{\itemize{
+\item integer indicating the Harvest Control Rule used to calculate the TAC
+}}
 
-\item{calcDynB0}{- flag (T/F) to do dynamic B0 calculations}
+\item{calcDynB0}{\itemize{
+\item flag (T/F) to do dynamic B0 calculations
+}}
 
-\item{fullClean}{- flag to clean up almost all files (use when making multiple jitter runs)}
+\item{fullClean}{\itemize{
+\item flag to clean up almost all files (use when making multiple jitter runs)
+}}
 
-\item{cleanup}{- flag (T/F) to clean up unnecessary files}
+\item{cleanup}{\itemize{
+\item flag (T/F) to clean up unnecessary files
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \description{
 Function to generate a script to make a tcsam02 model run

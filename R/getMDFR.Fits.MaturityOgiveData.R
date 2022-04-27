@@ -10,6 +10,8 @@
 #'
 #'@details Returned dataframe is in canonical format
 #'
+#'@importFrom dplyr bind_rows
+#'
 #'@export
 #'
 getMDFR.Fits.MaturityOgiveData<-function(objs,
@@ -46,14 +48,17 @@ getMDFR.Fits.MaturityOgiveData<-function(objs,
                                       category=ctg,type="predicted",
                                       y=mdn$y,z=mdn$z,val=mdn$modPM);
                     dfrp3<-data.frame(fleet=f,x=x,m="",s="new shell",
+                                      category=ctg,type="n",
+                                      y=mdn$y,z=mdn$z,val=mdn$n);
+                    dfrp4<-data.frame(fleet=f,x=x,m="",s="new shell",
                                       category=ctg,type="nlls",
                                       y=mdn$y,z=mdn$z,val=mdn$nlls);
-                    dfrp4<-data.frame(fleet=f,x=x,m="",s="new shell",
+                    dfrp5<-data.frame(fleet=f,x=x,m="",s="new shell",
                                       category=ctg,type="zscores",
                                       y=mdn$y,z=mdn$z,val=mdn$zscrs);
-                    mdfrp<-rbind(dfrp1,dfrp2,dfrp3,dfrp4);
+                    mdfrp<-dplyr::bind_rows(dfrp1,dfrp2,dfrp3,dfrp4,dfrp5);
                     idx<-order(mdfrp$type,mdfrp$y,mdfrp$z,mdfrp$val);
-                    mdfr<-rbind(mdfr,mdfrp[idx,]);
+                    mdfr<-dplyr::bind_rows(mdfr,mdfrp[idx,]);
                 }
             }#n
         } else {

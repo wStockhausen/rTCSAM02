@@ -7,11 +7,17 @@
 mcmc.PlotABC(dfrABCs, dfrOFLs, xlims = NULL)
 }
 \arguments{
-\item{xlims}{- range for x-axis in plot}
+\item{xlims}{\itemize{
+\item range for x-axis in plot
+}}
 
-\item{dfrABC}{- dataframe with selected values for ABC.buff, ABC.pstar, and OFL by case}
+\item{dfrABC}{\itemize{
+\item dataframe with selected values for ABC.buff, ABC.pstar, and OFL by case
+}}
 
-\item{dfrOFL}{- empirical cdfs for OFL, by case}
+\item{dfrOFL}{\itemize{
+\item empirical cdfs for OFL, by case
+}}
 }
 \value{
 ggplot object

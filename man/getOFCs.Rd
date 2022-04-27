@@ -7,11 +7,17 @@
 getOFCs(obj, mdl = NULL, verbose = FALSE)
 }
 \arguments{
-\item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
+\item{obj}{\itemize{
+\item a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such
+}}
 
-\item{mdl}{- name to associate with model results object}
+\item{mdl}{\itemize{
+\item name to associate with model results object
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 a melted dataframe with class tcsam02.ofc

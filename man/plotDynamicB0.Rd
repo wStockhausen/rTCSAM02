@@ -7,9 +7,13 @@
 plotDynamicB0(obj, B100 = NULL)
 }
 \arguments{
-\item{obj}{- tcsam.resLst, tcsam.rep, or list object}
+\item{obj}{\itemize{
+\item tcsam.resLst, tcsam.rep, or list object
+}}
 
-\item{B100}{- B100 from OFL calculation}
+\item{B100}{\itemize{
+\item B100 from OFL calculation
+}}
 }
 \value{
 ggplot object

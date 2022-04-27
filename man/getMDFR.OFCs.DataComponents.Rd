@@ -12,11 +12,17 @@ getMDFR.OFCs.DataComponents(
 )
 }
 \arguments{
-\item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
+\item{obj}{\itemize{
+\item a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such
+}}
 
-\item{categories}{- data-related objective function components to get ("all","surveys","fisheries","growthdata","maturitydata","effortdata")}
+\item{categories}{\itemize{
+\item data-related objective function components to get ("all","surveys","fisheries","growthdata","maturitydata","effortdata")
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe
@@ -27,20 +33,20 @@ Function to get data-related components from the objective function for a (list 
 \details{
 Returned dataframe has columns:
 \itemize{
-  \item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
-  \item{category - fleet category}
-  \item{fleet - fleet name}
-  \item{catch.type - catch type}
-  \item{data.type - data type}
-  \item{fit.type - fit type}
-  \item{nll.type - likelihood type}
-  \item{y - year}
-  \item{x - sex}
-  \item{m - maturity state}
-  \item{s  - shell condition}
-  \item{ rmse - root mean squared error}
-  \item{wgt - likelihood weight}
-  \item{nll - (unweighted) negative log-likelihood}
-  \item{objfun - objective function value}
+\item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
+\item{category - fleet category}
+\item{fleet - fleet name}
+\item{catch.type - catch type}
+\item{data.type - data type}
+\item{fit.type - fit type}
+\item{nll.type - likelihood type}
+\item{y - year}
+\item{x - sex}
+\item{m - maturity state}
+\item{s  - shell condition}
+\item{ rmse - root mean squared error}
+\item{wgt - likelihood weight}
+\item{nll - (unweighted) negative log-likelihood}
+\item{objfun - objective function value}
 }
 }

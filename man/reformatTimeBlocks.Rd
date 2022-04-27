@@ -7,9 +7,13 @@
 reformatTimeBlocks(tb0, dims)
 }
 \arguments{
-\item{tb0}{- time block string to reformat}
+\item{tb0}{\itemize{
+\item time block string to reformat
+}}
 
-\item{dims}{- model 'dims' list from tscam or rsim object}
+\item{dims}{\itemize{
+\item model 'dims' list from tscam or rsim object
+}}
 }
 \value{
 time block string in "standardized" format
@@ -18,6 +22,6 @@ time block string in "standardized" format
 Reformat rsim, tcsam notation for time blocks to a standard format.
 }
 \details{
-For 2 time periods and a single year, the standardized format 
+For 2 time periods and a single year, the standardized format
 looks like 'yyy1-yyy2;yyy3-yyy4;yyy5'.
 }

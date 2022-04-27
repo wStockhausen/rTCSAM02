@@ -12,13 +12,21 @@ getMDFR.ZScores.PrNatZ1(
 )
 }
 \arguments{
-\item{fits}{- list of fits}
+\item{fits}{\itemize{
+\item list of fits
+}}
 
-\item{mc}{- model configuration list}
+\item{mc}{\itemize{
+\item model configuration list
+}}
 
-\item{type}{- type of residuals ('pearsons' or 'nlls')}
+\item{type}{\itemize{
+\item type of residuals ('pearsons' or 'nlls')
+}}
 
-\item{verbose}{- flag (T/F) to print dagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print dagnostic info
+}}
 }
 \value{
 dataframe
@@ -31,12 +39,12 @@ from size frequency fits as dataframe.
 Uses \code{reshape2::melt(...)}.
 Returned dataframe has columns:
 \itemize{
- \item{x - sex}
- \item{m - maturity}
- \item{s - shell condition}
- \item{y - year}
- \item{z - size bin}
- \item{val - value}
- \item{var - variable type}
+\item{x - sex}
+\item{m - maturity}
+\item{s - shell condition}
+\item{y - year}
+\item{z - size bin}
+\item{val - value}
+\item{var - variable type}
 }
 }

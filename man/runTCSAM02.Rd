@@ -33,59 +33,111 @@ runTCSAM02(
 )
 }
 \arguments{
-\item{os}{- 'win', 'mac', 'osx', or 'linux'}
+\item{os}{\itemize{
+\item 'win', 'mac', 'osx', or 'linux'
+}}
 
-\item{path}{- path for model output}
+\item{path}{\itemize{
+\item path for model output
+}}
 
-\item{model}{- TCSAM02 model executable name}
+\item{model}{\itemize{
+\item TCSAM02 model executable name
+}}
 
-\item{path2model}{- path to model executable}
+\item{path2model}{\itemize{
+\item path to model executable
+}}
 
-\item{configFile}{- filename (including path) to model configuration file}
+\item{configFile}{\itemize{
+\item filename (including path) to model configuration file
+}}
 
-\item{pin}{- T/F to use a pin file}
+\item{pin}{\itemize{
+\item T/F to use a pin file
+}}
 
-\item{pinFile}{- name of pin file to use (if pin=TRUE)}
+\item{pinFile}{\itemize{
+\item name of pin file to use (if pin=TRUE)
+}}
 
-\item{mseMode}{- flag to run model in MSE mode (see \code{getRunComands})}
+\item{mseMode}{\itemize{
+\item flag to run model in MSE mode (see \code{getRunComands})
+}}
 
-\item{minPhase}{- phase to start minimization (or NULL)}
+\item{minPhase}{\itemize{
+\item phase to start minimization (or NULL)
+}}
 
-\item{maxPhase}{- final minimization phase (or NULL)}
+\item{maxPhase}{\itemize{
+\item final minimization phase (or NULL)
+}}
 
-\item{calcOFL}{- flag (T/F) to perform OFL calculations}
+\item{calcOFL}{\itemize{
+\item flag (T/F) to perform OFL calculations
+}}
 
-\item{calcTAC}{- flag (T/F) to calculate the TAC for the next fishing year}
+\item{calcTAC}{\itemize{
+\item flag (T/F) to calculate the TAC for the next fishing year
+}}
 
-\item{HCR}{- integer indicating the Harvest Control Rule used to calculate the TAC}
+\item{HCR}{\itemize{
+\item integer indicating the Harvest Control Rule used to calculate the TAC
+}}
 
-\item{calcDynB0}{- flag to calculate dynamic B0}
+\item{calcDynB0}{\itemize{
+\item flag to calculate dynamic B0
+}}
 
-\item{hess}{- T/F to compute hessian (and .std file)}
+\item{hess}{\itemize{
+\item T/F to compute hessian (and .std file)
+}}
 
-\item{mcmc}{- T/F to run mcmc}
+\item{mcmc}{\itemize{
+\item T/F to run mcmc
+}}
 
-\item{mc.N}{- number of mcmc iterations to do}
+\item{mc.N}{\itemize{
+\item number of mcmc iterations to do
+}}
 
-\item{mc.save}{- number of iterations to skip when saving mcmc calculations}
+\item{mc.save}{\itemize{
+\item number of iterations to skip when saving mcmc calculations
+}}
 
-\item{mc.scale}{- number of iterations to adjust scale for mcmc calculations}
+\item{mc.scale}{\itemize{
+\item number of iterations to adjust scale for mcmc calculations
+}}
 
-\item{jitter}{- T/F to jitter parameters}
+\item{jitter}{\itemize{
+\item T/F to jitter parameters
+}}
 
-\item{iSeed}{- seed for random number generator (or NULL)}
+\item{iSeed}{\itemize{
+\item seed for random number generator (or NULL)
+}}
 
-\item{saveResults}{- T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}}
+\item{saveResults}{\itemize{
+\item T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}
+}}
 
-\item{test}{- flag (T/F) to run function in "test" mode}
+\item{test}{\itemize{
+\item flag (T/F) to run function in "test" mode
+}}
 
-\item{cleanup}{- flag (T/F) to clean up some output files}
+\item{cleanup}{\itemize{
+\item flag (T/F) to clean up some output files
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
-- dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter iSeed (if jittered)
+\itemize{
+\item dataframe of class 'tcam02.par', with 2 columns (name, value) with jitter iSeed (if jittered)
 and par file info, or NULL if par file does not exist.
+}
 }
 \description{
 This function runs a TCSAM02 model once.

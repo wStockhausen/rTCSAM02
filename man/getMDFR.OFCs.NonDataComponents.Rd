@@ -11,11 +11,17 @@ getMDFR.OFCs.NonDataComponents(
 )
 }
 \arguments{
-\item{obj}{- a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such}
+\item{obj}{\itemize{
+\item a single tcsam02 rep object, a single tcsam02 resLst object, or a named list of such
+}}
 
-\item{categories}{- non-data-related objective function components to get ("all","penalties","penFDevs","components","priors")}
+\item{categories}{\itemize{
+\item non-data-related objective function components to get ("all","penalties","penFDevs","components","priors")
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe
@@ -26,13 +32,13 @@ Function to get non-data components from the objective function for a (list of) 
 \details{
 Returned dataframe has columns
 \itemize{
-  \item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
-  \item{category - objective function component category}
-  \item{type - type name}
-  \item{element - element name}
-  \item{level - level name}
-  \item{wgt - likelihood weight}
-  \item{nll - negative log-likelihood (unweighted)}
-  \item{objfun - objective function value}
+\item{case - model case (blank, to be filled in by caller if obj is not a list of tcsam02.resLst objects)}
+\item{category - objective function component category}
+\item{type - type name}
+\item{element - element name}
+\item{level - level name}
+\item{wgt - likelihood weight}
+\item{nll - negative log-likelihood (unweighted)}
+\item{objfun - objective function value}
 }
 }

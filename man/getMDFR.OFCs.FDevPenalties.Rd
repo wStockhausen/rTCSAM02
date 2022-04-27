@@ -7,9 +7,13 @@
 getMDFR.OFCs.FDevPenalties(fits, verbose = FALSE)
 }
 \arguments{
-\item{fits}{- model.fits list element from a tcsam02.rep object}
+\item{fits}{\itemize{
+\item model.fits list element from a tcsam02.rep object
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe
@@ -20,13 +24,13 @@ Function to get F-devs penalties  from the objective function for a TCSAM02 mode
 \details{
 Called by \code{getMDFR.OFCs.NonDataComponents()}. Returned dataframe has columns
 \itemize{
-  \item{case - model case [blank, to be filled in by calling function]}
-  \item{category - objective function component category}
-  \item{type - type name}
-  \item{element - element name}
-  \item{level - level name}
-  \item{wgt - likelihood weight}
-  \item{nll - negative log-likelihood (unweighted)}
-  \item{objfun - objective function value}
+\item{case - model case \link{blank, to be filled in by calling function}}
+\item{category - objective function component category}
+\item{type - type name}
+\item{element - element name}
+\item{level - level name}
+\item{wgt - likelihood weight}
+\item{nll - negative log-likelihood (unweighted)}
+\item{objfun - objective function value}
 }
 }

@@ -8,19 +8,30 @@ getMDFR.Data.FleetSizeComps(
   objs,
   fleet.type = c("survey", "fishery"),
   catch.type = c("index", "total", "discard", "retained"),
+  data.type = c("input", "aggregated"),
   verbose = FALSE
 )
 }
 \arguments{
-\item{objs}{- single model report list object, or named list of them}
+\item{objs}{\itemize{
+\item single model report list object, or named list of them
+}}
 
-\item{fleet.type}{- fleet type ('fishery' or 'survey')}
+\item{fleet.type}{\itemize{
+\item fleet type ('fishery' or 'survey')
+}}
 
-\item{catch.type}{- catch type ('index','total','discard', or 'retained')}
+\item{catch.type}{\itemize{
+\item catch type ('index','total','discard', or 'retained')
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{data.type}{\itemize{
+\item "input" or "aggregated"
+}}
 
-\item{ci}{- confidence intervals for time series observations}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe in canonical format

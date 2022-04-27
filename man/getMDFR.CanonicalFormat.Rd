@@ -7,7 +7,9 @@
 getMDFR.CanonicalFormat(mdfr)
 }
 \arguments{
-\item{mdfr}{- dataframe to convert}
+\item{mdfr}{\itemize{
+\item dataframe to convert
+}}
 }
 \value{
 dataframe in canonical format, or NULL if input was not a dataframe
@@ -18,20 +20,20 @@ Function to convert dataframe to canonical format.
 \details{
 returns a dataframe in canonical format
 \itemize{
- \item{case - model case name (scenario)}
- \item{process - 'population','fisheries',or 'surveys'}
- \item{fleet - fishery or survey "fleet" name}
- \item{category - data category (e.g., "index", "captured", etc.)}
- \item{type - 'observed' or 'predicted',or ''}
- \item{pc - parameter combination index, or ''}
- \item{y - year or 'all'}
- \item{x - sex or 'all'}
- \item{m - maturity state or 'all'}
- \item{s - shell condition or 'all'}
- \item{z - size or 'all'}
- \item{zp - size, [only for growth increments and growth transition matrices]}
- \item{val - value}
- \item{lci - lower ci}
- \item{uci - upper ci}
+\item{case - model case name (scenario)}
+\item{process - 'population','fisheries',or 'surveys'}
+\item{fleet - fishery or survey "fleet" name}
+\item{category - data category (e.g., "index", "captured", etc.)}
+\item{type - 'observed' or 'predicted',or ''}
+\item{pc - parameter combination index, or ''}
+\item{y - year or 'all'}
+\item{x - sex or 'all'}
+\item{m - maturity state or 'all'}
+\item{s - shell condition or 'all'}
+\item{z - size or 'all'}
+\item{zp - size, \link{only for growth increments and growth transition matrices}}
+\item{val - value}
+\item{lci - lower ci}
+\item{uci - upper ci}
 }
 }

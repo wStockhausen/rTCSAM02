@@ -12,13 +12,21 @@ getMDFR.Fisheries.CatchAbundance(
 )
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
+\item{tcsams}{\itemize{
+\item single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
+}}
 
-\item{category}{- 'captured','discarded','retained', 'discard mortality', or 'index'}
+\item{category}{\itemize{
+\item 'captured','discarded','retained', 'discard mortality', or 'index'
+}}
 
-\item{cast}{- casting formula (or NULL) for excluding x,m,s,z factor levels from an average-at-size across unspecified factors}
+\item{cast}{\itemize{
+\item casting formula (or NULL) for excluding x,m,s,z factor levels from an average-at-size across unspecified factors
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format

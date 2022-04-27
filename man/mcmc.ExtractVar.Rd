@@ -7,9 +7,13 @@
 mcmc.ExtractVar(mcmc, vr)
 }
 \arguments{
-\item{mcmc}{- an MCMC results list from a TCSAM02 model}
+\item{mcmc}{\itemize{
+\item an MCMC results list from a TCSAM02 model
+}}
 
-\item{vr}{- variable name to extract}
+\item{vr}{\itemize{
+\item variable name to extract
+}}
 }
 \value{
 a vector or an array, depending on the variable

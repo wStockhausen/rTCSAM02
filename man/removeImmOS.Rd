@@ -7,11 +7,17 @@
 removeImmOS(mdfr, maturity = "m", shell_condition = "s")
 }
 \arguments{
-\item{mdfr}{- datarame from which to remove the immature, old shell factor combination}
+\item{mdfr}{\itemize{
+\item datarame from which to remove the immature, old shell factor combination
+}}
 
-\item{maturity}{- name of column specifying maturity state}
+\item{maturity}{\itemize{
+\item name of column specifying maturity state
+}}
 
-\item{shell_condition}{- name of column specifying shell condition}
+\item{shell_condition}{\itemize{
+\item name of column specifying shell condition
+}}
 }
 \value{
 dataframe with immature, old shell factor combination removed

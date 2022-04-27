@@ -12,13 +12,21 @@ calcTCSAM02Params(
 )
 }
 \arguments{
-\item{obj}{- tcsam2013.resLst object or tcsam2103.prs object}
+\item{obj}{\itemize{
+\item tcsam2013.resLst object or tcsam2103.prs object
+}}
 
-\item{template}{- file name of TCSAM02 parameters info template}
+\item{template}{\itemize{
+\item file name of TCSAM02 parameters info template
+}}
 
-\item{out}{- file name for output file}
+\item{out}{\itemize{
+\item file name for output file
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
 character string written to a file

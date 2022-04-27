@@ -7,7 +7,9 @@
 mcmc.ExtractOFLResults(mcmc)
 }
 \arguments{
-\item{mcmc}{- mcmc list from TCSAM02 mdoel run}
+\item{mcmc}{\itemize{
+\item mcmc list from TCSAM02 mdoel run
+}}
 }
 \value{
 dataframe with

@@ -7,9 +7,13 @@
 getMDFR.Data.GrowthData(objs, verbose = FALSE)
 }
 \arguments{
-\item{objs}{- single model report list object, or named list of them}
+\item{objs}{\itemize{
+\item single model report list object, or named list of them
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe (or NULL)

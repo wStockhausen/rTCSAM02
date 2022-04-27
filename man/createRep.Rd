@@ -7,11 +7,17 @@
 createRep(mc = NULL, mr = NULL, model.fits = NULL)
 }
 \arguments{
-\item{mc}{- model configuration list}
+\item{mc}{\itemize{
+\item model configuration list
+}}
 
-\item{mr}{- model results list}
+\item{mr}{\itemize{
+\item model results list
+}}
 
-\item{model.fits}{- model fits list}
+\item{model.fits}{\itemize{
+\item model fits list
+}}
 }
 \value{
 a tcsam02.rep object

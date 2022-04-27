@@ -12,13 +12,21 @@ getMDFR.Fits.EffectiveNs(
 )
 }
 \arguments{
-\item{objs}{- single model report list object, or named list of them}
+\item{objs}{\itemize{
+\item single model report list object, or named list of them
+}}
 
-\item{fleet.type}{- fleet type ('fishery' or 'survey')}
+\item{fleet.type}{\itemize{
+\item fleet type ('fishery' or 'survey')
+}}
 
-\item{catch.type}{- cath type ('index','total','discard', or 'retained')}
+\item{catch.type}{\itemize{
+\item cath type ('index','total','discard', or 'retained')
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic info
+}}
 }
 \value{
 dataframe

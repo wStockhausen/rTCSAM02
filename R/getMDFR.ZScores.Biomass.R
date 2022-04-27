@@ -10,7 +10,7 @@
 #'
 #'@return dataframe
 #'
-#'@details Uses \code{getMDFR.ZScoresForABData()}.
+#'@details Uses [getMDFR.ZScoresForABData()].
 #'Returned dataframe is in canonical format.
 #'
 #'@export
@@ -112,7 +112,7 @@ getMDFR.ZScores.Biomass1<-function(rep,
                                 mdfrp$process<-fleet.type;
                                 mdfrp$fleet<-fleet;
                                 mdfrp$category<-catch.type;
-                                mdfrp$type<-'z-score';
+                                mdfrp$type<-mdfrp$var;
                                 mdfr<-rbind(mdfr,mdfrp);
                             }
                         }

@@ -32,58 +32,98 @@ runMSE(
 )
 }
 \arguments{
-\item{os}{- 'win', 'mac', 'osx', or 'linux'}
+\item{os}{\itemize{
+\item 'win', 'mac', 'osx', or 'linux'
+}}
 
-\item{topLevelFolder}{- path to top-level folder for MSE model runs}
+\item{topLevelFolder}{\itemize{
+\item path to top-level folder for MSE model runs
+}}
 
-\item{model}{- TCSAM02 model executable name}
+\item{model}{\itemize{
+\item TCSAM02 model executable name
+}}
 
-\item{path2model}{- path to model executable}
+\item{path2model}{\itemize{
+\item path to model executable
+}}
 
-\item{HCR}{- integer identifying harvest control rule to use}
+\item{HCR}{\itemize{
+\item integer identifying harvest control rule to use
+}}
 
-\item{numRuns}{- number of complete MSE runs to make}
+\item{numRuns}{\itemize{
+\item number of complete MSE runs to make
+}}
 
-\item{minRunID}{- integer identifying first run label for the series of runs (default=1)}
+\item{minRunID}{\itemize{
+\item integer identifying first run label for the series of runs (default=1)
+}}
 
-\item{firstYr}{- first year for projection (i.e., the assessment year, or max year + 1, of base model)}
+\item{firstYr}{\itemize{
+\item first year for projection (i.e., the assessment year, or max year + 1, of base model)
+}}
 
-\item{numYrs}{- number of years to run model forward}
+\item{numYrs}{\itemize{
+\item number of years to run model forward
+}}
 
-\item{iSeeds}{- matrix [(number of total possible runs) x (number of years)] of random number seed values (or NULL)}
+\item{iSeeds}{\itemize{
+\item matrix \link{(number of total possible runs) x (number of years)} of random number seed values (or NULL)
+}}
 
-\item{runBaseModel}{- flag to run base model to calculate TAC and create operating model state for first projection year}
+\item{runBaseModel}{\itemize{
+\item flag to run base model to calculate TAC and create operating model state for first projection year
+}}
 
-\item{baseModelInfo}{- list of parameters to run base model (if necessary)}
+\item{baseModelInfo}{\itemize{
+\item list of parameters to run base model (if necessary)
+}}
 
-\item{opModInfo}{- list of parameters to run operating model}
+\item{opModInfo}{\itemize{
+\item list of parameters to run operating model
+}}
 
-\item{estModInfo}{- list of parameters to run estimation model}
+\item{estModInfo}{\itemize{
+\item list of parameters to run estimation model
+}}
 
-\item{keepFiles}{- vector of file names to keep after model run, if cleanupAll is true}
+\item{keepFiles}{\itemize{
+\item vector of file names to keep after model run, if cleanupAll is true
+}}
 
-\item{cleanupAll}{- T/F to clean up ALMOST ALL model output files after each run}
+\item{cleanupAll}{\itemize{
+\item T/F to clean up ALMOST ALL model output files after each run
+}}
 
-\item{test}{- flag (T/F) to run in "test" mode}
+\item{test}{\itemize{
+\item flag (T/F) to run in "test" mode
+}}
 
-\item{verbose}{- flag (T/F) to print diagnostic messages}
+\item{verbose}{\itemize{
+\item flag (T/F) to print diagnostic messages
+}}
 
-\item{configFile}{- path to model configuration file}
+\item{configFile}{\itemize{
+\item path to model configuration file
+}}
 }
 \value{
-- NULL
+\itemize{
+\item NULL
+}
 }
 \description{
 This functions runs the TCSAM02 MSE for one harvest strategy.
 }
 \details{
-\code{numRuns} is the number of *successful* iterations the MSE is to complete before stopping.
+\code{numRuns} is the number of \emph{successful} iterations the MSE is to complete before stopping.
 If a model run fails for some reason during an iteration in the MSE, the iteration is restarted from the
-\code{firstYr} with a *new* seed for the random number generator (RNG). If the input matrix \code{iSeeds}
+\code{firstYr} with a \emph{new} seed for the random number generator (RNG). If the input matrix \code{iSeeds}
 is NULL, then the new RNG seed is based on the system clock. However, if the matrix is supplied,
 the seed is taken from the first element in the "next" row of the matrix (a counter for the
-*total* number of MSE iterations is used to track this; a separate counter tracks the number of
-*successful* iterations). Thus, if \code{iSeeds} is supplied, the number of rows in the matrix needs to be
-larger than (or equal to) the *total* number of MSE iterations actually undergone to achieve \code{numRuns}
-*successful* iterations.
+\emph{total} number of MSE iterations is used to track this; a separate counter tracks the number of
+\emph{successful} iterations). Thus, if \code{iSeeds} is supplied, the number of rows in the matrix needs to be
+larger than (or equal to) the \emph{total} number of MSE iterations actually undergone to achieve \code{numRuns}
+\emph{successful} iterations.
 }

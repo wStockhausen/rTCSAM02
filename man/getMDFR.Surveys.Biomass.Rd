@@ -12,13 +12,21 @@ getMDFR.Surveys.Biomass(
 )
 }
 \arguments{
-\item{tcsams}{- single tcsam02.rep object, tcsam02.resLst object, or named list of the latter}
+\item{tcsams}{\itemize{
+\item single tcsam02.rep object, tcsam02.resLst object, or named list of the latter
+}}
 
-\item{category}{- 'index' is only choice}
+\item{category}{\itemize{
+\item 'index' is only choice
+}}
 
-\item{cast}{- casting formula for excluding x,m,s,z factor levels from an average-at-size across unspecified factors}
+\item{cast}{\itemize{
+\item casting formula for excluding x,m,s,z factor levels from an average-at-size across unspecified factors
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format

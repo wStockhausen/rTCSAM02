@@ -12,11 +12,17 @@ getMDFR.Pop.Quantities(
 )
 }
 \arguments{
-\item{tcsams}{- single TCSAM02 model report object, or named list of such}
+\item{tcsams}{\itemize{
+\item single TCSAM02 model report object, or named list of such
+}}
 
-\item{type}{- quantity to extract ("R_y","B_yxms","MB_yx","N_yxmsz","N_yxmz","N_yxz","N_yxms","N_yxm","N_yx","iN_xmsz","fN_xmsz")}
+\item{type}{\itemize{
+\item quantity to extract ("R_y","B_yxms","MB_yx","N_yxmsz","N_yxmz","N_yxz","N_yxms","N_yxm","N_yx","iN_xmsz","fN_xmsz")
+}}
 
-\item{verbose}{- flag (T/F) to print debug info}
+\item{verbose}{\itemize{
+\item flag (T/F) to print debug info
+}}
 }
 \value{
 dataframe in canonical format

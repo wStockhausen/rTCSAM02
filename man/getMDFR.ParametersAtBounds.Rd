@@ -7,14 +7,22 @@
 getMDFR.ParametersAtBounds(tcsams, delta = 0.01, verbose = FALSE)
 }
 \arguments{
-\item{tcsams}{- a tcsam02.resLst object or named list of such}
+\item{tcsams}{\itemize{
+\item a tcsam02.resLst object or named list of such
+}}
 
-\item{delta}{- relative fraction of range which defines being at a boundary}
+\item{delta}{\itemize{
+\item relative fraction of range which defines being at a boundary
+}}
 
-\item{verbose}{- flag to print debugging info}
+\item{verbose}{\itemize{
+\item flag to print debugging info
+}}
 }
 \value{
-- a dataframe
+\itemize{
+\item a dataframe
+}
 }
 \description{
 Function to get active parameters estimated at one of their bounds from a set of TCSAM02 model runs as a dataframe.

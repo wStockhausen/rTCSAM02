@@ -7,9 +7,13 @@
 getStd(stdFile = NULL, verbose = FALSE)
 }
 \arguments{
-\item{stdFile}{- std file from a TCSAM02 model run. can be NULL.}
+\item{stdFile}{\itemize{
+\item std file from a TCSAM02 model run. can be NULL.
+}}
 
-\item{verbose}{- flag (T/F) to prnt diagnostic info}
+\item{verbose}{\itemize{
+\item flag (T/F) to prnt diagnostic info
+}}
 }
 \value{
 std model object (a list). The returned object will be a list of class 'tcsam02.std'.
