@@ -39,7 +39,7 @@ getMDFR.Data.FleetTimeSeries(
 }}
 }
 \value{
-dataframe
+dataframe in canonical format (see \link{getMDFR.CanonicalFormat})
 }
 \description{
 Function to get fleet data components by model scenario

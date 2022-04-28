@@ -11,7 +11,7 @@
 #'@details Returned dataframe is in canonical format
 #'
 #'@importFrom dplyr inner_join mutate
-#'@importFrom tibble tribble as.tibble
+#'@importFrom tibble tribble as_tibble
 #'@importFrom tidyr pivot_longer
 #'
 #'@export
@@ -41,9 +41,9 @@ getMDFR.ManagementQuantities<-function(objs,
                               "curB","biomass",
                               "B100","biomass",
                               "avgRec","recruitment");
-        lstMQs = obj$rep$ptrOFLResults;
+        lstMQs = objs$rep$ptrOFLResults;
         if (!is.null(lstMQs)){
-          mdfr = tibble::as.tibble(lstMQs[1:9]) %>%
+          mdfr = tibble::as_tibble(lstMQs[1:9]) %>%
                       tidyr::pivot_longer(cols=1:9,names_to="type",values_to="val") %>%
                       dplyr::inner_join(tmp,by="type") %>%
                       getMDFR.CanonicalFormat() %>%

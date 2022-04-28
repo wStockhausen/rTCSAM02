@@ -10,9 +10,11 @@
 #'@param ci - confidence intervals for time series observations
 #'@param verbose - flag (T/F) to print diagnostic info
 #'
-#'@return dataframe
+#'@return dataframe in canonical format (see [getMDFR.CanonicalFormat])
 #'
 #'@details Returned dataframe is in canonical format
+#'
+#'@md
 #'
 #'@export
 #'
@@ -44,9 +46,9 @@ getMDFR.Data.FleetTimeSeries<-function(objs,
     } else if (inherits(objs,'tcsam02.resLst')){
         ci<-c((1-ci)/2,1-(1-ci)/2);
         if (verbose) {
-            cat("--Starting rTCSAM02::getMDFR.Data.FleetTimeSeries().\n");
-            cat("---Extracting fleet.type = ",fleet.type,", data.type = ",data.type,", catch.type = ",catch.type,"\n");
-            cat("---ci: ",paste(ci,collapse=" "),"\n")
+            message("--Starting rTCSAM02::getMDFR.Data.FleetTimeSeries().\n");
+            message("---Extracting fleet.type = ",fleet.type,", data.type = ",data.type,", catch.type = ",catch.type,"\n");
+            message("---ci: ",paste(ci,collapse=" "),"\n")
         }
         #objs is a single tcsam02 resLst object
         if (fleet.type=='fishery'){
@@ -68,14 +70,16 @@ getMDFR.Data.FleetTimeSeries<-function(objs,
                 for (ctNm in ctNms){
                     ct<-flt[[ctNm]];
                     if (!is.null(ct)){
-                        if (verbose) cat("----Getting '",ctNm,"' for ",fltNm,"\n",sep='');
-                        cat("names(ct):",paste(names(ct),collapse=" "),"\n");
+                        if (verbose) {
+                          message("----Getting '",ctNm,"' for ",fltNm,"\n",sep='');
+                          message("names(ct):",paste(names(ct),collapse=" "),"\n");
+                        }
                         dt<-ct[[data.type]];
                         if (!is.null(dt)){
                             if (verbose){
-                                cat("----names(dt):",paste(names(dt),collapse=" "),"\n");
-                                cat("----units:",dt$units,"\n");
-                                cat("----lltype:",dt$llType,"\n")
+                                message("----names(dt):",paste(names(dt),collapse=" "),"\n");
+                                message("----units:",dt$units,"\n");
+                                message("----lltype:",dt$llType,"\n")
                             }
                             dts<-reshape2::melt(dt$data);
                             cvs<-reshape2::melt(dt$cvs);
@@ -83,31 +87,31 @@ getMDFR.Data.FleetTimeSeries<-function(objs,
                             obs<-dts$value;
                             if (tolower(pdfType)=='normal'){
                                 #normal, sdv on arithmetic scale
-                                if (verbose) cat('----using err type = normal\n')
+                                if (verbose) message('----using err type = normal\n')
                                 sdv<-cvs$value*dts$value;
                                 lci<-stats::qnorm(ci[1],mean=obs,sd=sdv);
                                 uci<-stats::qnorm(ci[2],mean=obs,sd=sdv);
                             } else if (tolower(pdfType)=='lognormal'){
                                 #lognormal, sdv on ln-scale
-                                if (verbose) cat('----using err type = lognormal\n')
+                                if (verbose) message('----using err type = lognormal\n')
                                 sdv<-sqrt(log(1.0+cvs$value^2));
                                 lci<-stats::qlnorm(ci[1],meanlog=log(obs),sdlog=sdv);
                                 uci<-stats::qlnorm(ci[2],meanlog=log(obs),sdlog=sdv);
                             } else if (tolower(pdfType)=='norm2'){
                                 #normal, sdv on arithmetic scale
-                                if (verbose) cat('----using err type = normal, but fit uses norm2\n')
+                                if (verbose) message('----using err type = normal, but fit uses norm2\n')
                                 lci<-stats::qnorm(ci[1],mean=obs,sd=sqrt(0.5));
                                 uci<-stats::qnorm(ci[2],mean=obs,sd=sqrt(0.5));
                             } else if (tolower(pdfType)=='none'){
-                                if (verbose) cat('---using err type = none\n')
+                                if (verbose) message('---using err type = none\n')
                                 lci<-NA;
                                 uci<-NA;
                             } else {
-                                cat('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
-                                cat('Error in getMDFR.Data.FleetData.\n')
-                                cat("pdfType '",pdfType,"' not recognized!!\n")
-                                cat("Exiting function.\n")
-                                cat('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+                                message('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+                                message('Error in getMDFR.Data.FleetData.\n')
+                                message("pdfType '",pdfType,"' not recognized!!\n")
+                                message("Exiting function.\n")
+                                message('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
                                 return(NULL)
                             }
                             dfrp1<-data.frame(x=dts$x,m=dts$m,s=dts$s,
@@ -119,7 +123,7 @@ getMDFR.Data.FleetTimeSeries<-function(objs,
                             if(!is.null(dfrp1)) mdfr<-rbind(mdfr,dfrp1);
                         }
                     } else {
-                        cat("No '",ctNm,"' for ",fltNm,"\n",sep='')
+                        if (verbose) message("No '",ctNm,"' for ",fltNm,"\n",sep='')
                     }
                 }##ctNms
             }
@@ -129,6 +133,6 @@ getMDFR.Data.FleetTimeSeries<-function(objs,
 
 
     if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
-    if (verbose) cat("--Finished rTCSAM02::getMDFR.Data.FleetTimeSeries().\n");
+    if (verbose) message("--Finished rTCSAM02::getMDFR.Data.FleetTimeSeries().\n");
     return(mdfr);
 }
