@@ -13,13 +13,18 @@
 #'@details Uses [getMDFR.ZScoresForABData()].
 #'Returned dataframe is in canonical format.
 #'
+#'@import dplyr
+#'@import magrittr
+#'
+#'@md
+#'
 #'@export
 #'
 getMDFR.ZScores.Biomass<-function(objs,
                                     fleet.type=c('survey','fishery'),
                                     catch.type=c('index','retained','discarded','total'),
                                     verbose=FALSE){
-    if (verbose) cat("--Starting rTCSAM02::getMDFR.ZScores.Biomass().\n");
+    if (verbose) message("--Starting rTCSAM02::getMDFR.ZScores.Biomass().\n");
     options(stringsAsFactors=FALSE);
 
     fleet.type<-fleet.type[1];
@@ -57,7 +62,7 @@ getMDFR.ZScores.Biomass<-function(objs,
 
     if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
 
-    if (verbose) cat("--Finished rTCSAM02::getMDFR.ZScores.Biomass().\n");
+    if (verbose) message("--Finished rTCSAM02::getMDFR.ZScores.Biomass().\n");
     return(mdfr);
 }
 
@@ -71,10 +76,13 @@ getMDFR.ZScores.Biomass<-function(objs,
 #'@param catch.type - catch type ('index','retained','discarded',or 'total')
 #'@param verbose - flag (T/F) to print diagnostic info
 #'
-#'@return dataframe
+#'@return dataframe (not in canonical format)
 #'
-#'@details Uses \code{getMDFR.ZScoresForABData()}.
-#'Returned dataframe is in canonical format.
+#'@details Uses [getMDFR.ZScoresForABData()].
+#'Returned dataframe is mot in canonical format.
+#'
+#'@import dplyr
+#'@import magrittr
 #'
 getMDFR.ZScores.Biomass1<-function(rep,
                                     fleet.type,
@@ -101,23 +109,24 @@ getMDFR.ZScores.Biomass1<-function(rep,
                     ctNm<-paste0(ctNm,".catch");
                     ct<-flt[[ctNm]];
                     if (!is.null(ct)){
-                        if (verbose) cat("---Getting '",ctNm,"' for ",fltNm,"\n",sep='');
+                        if (verbose) message("---Getting '",ctNm,"' for ",fltNm,"\n",sep='');
                         mdfrp<-NULL;
                         if (!is.null(ct$biomass)){
-                            if (verbose) cat("---Getting biomass zscores\n")
+                            if (verbose) message("---Getting biomass zscores\n")
                             mdfrp<-getMDFR.ZScoresForABData(ct$biomass$fits,verbose=verbose);
                             if (!is.null(mdfrp)){
-                                if (verbose) cat("--created dataframe w/",nrow(mdfrp),"rows\n")
+                                if (verbose) message("--created dataframe w/",nrow(mdfrp),"rows\n")
                                 mdfrp$case<-"tcsam02";
                                 mdfrp$process<-fleet.type;
                                 mdfrp$fleet<-fleet;
                                 mdfrp$category<-catch.type;
+                                #--need to keep only var=="z-score" type
+                                mdfr<-rbind(mdfr,mdfrp %>% dplyr::filter(var=='z-score'));
                                 mdfrp$type<-mdfrp$var;
-                                mdfr<-rbind(mdfr,mdfrp);
                             }
                         }
                     } else {
-                        if (verbose) cat(ctNm,"not found for",fltNm,"\n");
+                        if (verbose) message(ctNm,"not found for",fltNm,"\n");
                     }
                 }##ctNms
             }##--fltNm!=''

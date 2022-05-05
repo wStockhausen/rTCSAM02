@@ -8,7 +8,9 @@
 #'
 #'@return dataframe
 #'
-#'@details None.
+#'@details The returned dataframe is **NOT** in canonical format and has columns
+#'x,m,s,y,val,var,process,fleet,category,case. Column \code{var} gives the type
+#'of value, which is one of "z-score","observed","predicted","sdobs","xcv","stdv", and "useFlg".
 #'
 #'@import dplyr
 #'
@@ -16,10 +18,10 @@
 #'
 getMDFR.ZScoresForABData<-function(afits,
                                    verbose=FALSE){
-    if (verbose) cat("---Running rTCSAM02::getMDFR.ZScoresForABData(...).\n");
+    if (verbose) message("---Running rTCSAM02::getMDFR.ZScoresForABData(...).\n");
 
     nf<-length(afits);
-    if (verbose) cat("----number of fits =",nf,"\n");
+    if (verbose) message("----number of fits =",nf,"\n");
 
     mdfr<-NULL;
     ctr = 0;
@@ -72,6 +74,6 @@ getMDFR.ZScoresForABData<-function(afits,
     mdfr$m<-gsub("_"," ",tolower(mdfr$m),fixed=TRUE);
     mdfr$s<-gsub("_"," ",tolower(mdfr$s),fixed=TRUE);
 
-    if (verbose) cat("---Done running rTCSAM02::getMDFR.ZScoresForABData(...).\n");
+    if (verbose) message("---Done running rTCSAM02::getMDFR.ZScoresForABData(...).\n");
     return(mdfr);
 }

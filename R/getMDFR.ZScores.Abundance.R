@@ -10,8 +10,13 @@
 #'
 #'@return dataframe
 #'
-#'@details Uses \code{getMDFR.ZScoresForABData()}.
+#'@details Uses [getMDFR.ZScoresForABData()].
 #'Returned dataframe is in canonical format.
+#'
+#'@import dplyr
+#'@import magrittr
+#'
+#'@md
 #'
 #'@export
 #'
@@ -19,7 +24,7 @@ getMDFR.ZScores.Abundance<-function(objs,
                                     fleet.type=c('survey','fishery'),
                                     catch.type=c('index','retained','discarded','total'),
                                     verbose=FALSE){
-    if (verbose) cat("--Starting rTCSAM02::getMDFR.ZScores.Abundance().\n");
+    if (verbose) message("--Starting rTCSAM02::getMDFR.ZScores.Abundance().\n");
     options(stringsAsFactors=FALSE);
 
     fleet.type<-fleet.type[1];
@@ -29,6 +34,7 @@ getMDFR.ZScores.Abundance<-function(objs,
     mdfr<-NULL;
     if (inherits(objs,'tcsam02.resLst')){
         #objs is a tcsam02 resLst object
+        if (verbose) message("\tStarting at 1")
         mdfrp<-getMDFR.ZScores.Abundance(objs$rep,
                                          fleet.type=fleet.type,
                                          catch.type=catch.type,
@@ -38,7 +44,8 @@ getMDFR.ZScores.Abundance<-function(objs,
             mdfr<-rbind(mdfr,mdfrp);
         }
     } else if (inherits(objs,'tcsam02.rep')){
-        #objs is a single tcsam2015 model report object
+        #objs is a single tcsam02 model report object
+      if (verbose) message("\tStarting at 2")
         if (fleet.type=='fishery'){
             flts<-objs$model.fits$fisheries;
             fltNms<-names(flts);
@@ -58,21 +65,23 @@ getMDFR.ZScores.Abundance<-function(objs,
                     ctNm<-paste0(ctNm,".catch");
                     ct<-flt[[ctNm]];
                     if (!is.null(ct)){
-                        if (verbose) cat("---Getting '",ctNm,"' for ",fltNm,"\n",sep='');
+                        if (verbose) message("---Getting '",ctNm,"' for ",fltNm,"\n",sep='');
                         mdfrp<-NULL;
                         if ((data.type=="abundance")&&!is.null(ct$abundance)){
-                            if (verbose) cat("---Getting abundance zscores\n")
-                            mdfrp<-getMDFR.ZScoresForABData(ct$abundance$fits,verbose=verbose);
+                            if (verbose) message("---Getting abundance zscores\n")
+                            mdfrp<-rTCSAM02::getMDFR.ZScoresForABData(ct$abundance$fits,verbose=verbose);
                         }
                         if (!is.null(mdfrp)){
-                            if (verbose) cat("--created dataframe w/",nrow(mdfrp),"rows\n")
+                            if (verbose) message("--created dataframe w/ ",nrow(mdfrp),"rows\n")
                             mdfrp$process<-fleet.type;
                             mdfrp$fleet<-fleet;
                             mdfrp$category<-catch.type;
-                            mdfr<-rbind(mdfr,mdfrp);
+                            #--need to keep only var=="z-score" type
+                            mdfr<-rbind(mdfr,mdfrp %>% dplyr::filter(var=='z-score'));
+                            mdfrp$type<-mdfrp$var;
                         }
                     } else {
-                        if (verbose) cat(ctNm,"not found for",fltNm,"\n");
+                        if (verbose) message(ctNm,"not found for",fltNm,"\n");
                     }
                 }##ctNms
             }
@@ -80,6 +89,7 @@ getMDFR.ZScores.Abundance<-function(objs,
         if (!is.null(mdfr)) mdfr$case<-"tcsam02";
     } else if (inherits(objs,'list')){
         #objs should be a list of tcsam02.resLst objects
+        if (verbose) message("\tStarting at 3")
         for (nm in names(objs)){
             mdfrp<-getMDFR.ZScores.Abundance(objs[[nm]],
                                             fleet.type=fleet.type,
@@ -92,8 +102,10 @@ getMDFR.ZScores.Abundance<-function(objs,
         #throw an error
     }
 
-    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
+    if (!is.null(mdfr)) {
+      mdfr<-getMDFR.CanonicalFormat(mdfr);
+    }
 
-    if (verbose) cat("--Finished rTCSAM02::getMDFR.ZScores.Abundance().\n");
+    if (verbose) message("--Finished rTCSAM02::getMDFR.ZScores.Abundance().\n");
     return(mdfr);
 }

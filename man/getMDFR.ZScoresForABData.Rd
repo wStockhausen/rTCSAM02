@@ -22,5 +22,7 @@ dataframe
 Function to get z-scores and other model fits info for abundance, biomass data from fits to data as dataframe.
 }
 \details{
-None.
+The returned dataframe is \strong{NOT} in canonical format and has columns
+x,m,s,y,val,var,process,fleet,category,case. Column \code{var} gives the type
+of value, which is one of "z-score","observed","predicted","sdobs","xcv","stdv", and "useFlg".
 }

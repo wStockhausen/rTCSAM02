@@ -24,12 +24,12 @@ getMDFR.ZScores.Biomass1(rep, fleet.type, catch.type, verbose)
 }}
 }
 \value{
-dataframe
+dataframe (not in canonical format)
 }
 \description{
 Function to get model fits to biomass time series as z-scores for fleet data components.
 }
 \details{
-Uses \code{getMDFR.ZScoresForABData()}.
-Returned dataframe is in canonical format.
+Uses \code{\link[=getMDFR.ZScoresForABData]{getMDFR.ZScoresForABData()}}.
+Returned dataframe is mot in canonical format.
 }

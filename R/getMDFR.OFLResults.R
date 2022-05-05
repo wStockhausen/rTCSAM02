@@ -1,5 +1,5 @@
 #'
-#'@title Get OFL results as a datframe
+#'@title Get OFL results as a dataframe
 #'
 #'@description Function to get a dataframe of OFL results.
 #'
@@ -9,6 +9,9 @@
 #'@return dataframe
 #'
 #'@details Returned dataframe is NOT in canonical format.
+#'
+#'@import dplyr
+#'@import magrittr
 #'
 #'@export
 #'
@@ -30,11 +33,13 @@ getMDFR.OFLResults<-function(objs,
         }
     } else if (inherits(objs,'tcsam02.resLst')){
         #objs is a single tcsam02 resLst object
-        objFun<-objs$rep$objFun;
-        maxGrd<-objs$rep$maxGrad;
+        numPars = nrow(getMDFR.ParameterValues(objs) %>% dplyr::filter(phase>0));
+        objFun  = objs$rep$objFun;
+        maxGrd  = objs$rep$maxGrad;
+        hasSEs  = !is.null(objs$std);
         ofl<-objs$rep$ptrOFLResults;
         if (!is.null(ofl)){
-            mdfr<-as.data.frame(list(case="",objFun=objFun,maxGrad=maxGrd,ofl[cols]));
+            mdfr<-as.data.frame(list(case="",numPars=numPars,objFun=objFun,maxGrad=maxGrd,hasSEs=hasSEs,ofl[cols]));
         }
     } else if ((class(objs)[1]=='list')&&inherits(objs[[1]],"tcsam02.rep")){
         #objs should be a list of tcsam02 repLst objects
@@ -46,11 +51,13 @@ getMDFR.OFLResults<-function(objs,
         }
     } else if (inherits(objs,'tcsam02.rep')){
         #objs is a single tcsam02 rep object
-        objFun<-objs$objFun;
-        maxGrd<-objs$maxGrad;
+        numPars = nrow(getMDFR.ParameterValues(objs) %>% dplyr::filter(phase>0));
+        objFun  = objs$objFun;
+        maxGrd  = objs$maxGrad;
+        hasSEs  = NA;
         ofl<-objs$ptrOFLResults;
         if (!is.null(ofl)){
-            mdfr<-as.data.frame(list(case="",objFun=objFun,maxGrad=maxGrd,ofl[cols]));
+            mdfr<-as.data.frame(list(case="",numPars=numPars,objFun=objFun,maxGrad=maxGrd,hasSEs=hasSEs,ofl[cols]));
         }
     } else {
         cat("---getMDFR.OFLResults: ERROR!\n");

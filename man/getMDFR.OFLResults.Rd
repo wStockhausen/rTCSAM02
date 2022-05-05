@@ -2,7 +2,7 @@
 % Please edit documentation in R/getMDFR.OFLResults.R
 \name{getMDFR.OFLResults}
 \alias{getMDFR.OFLResults}
-\title{Get OFL results as a datframe}
+\title{Get OFL results as a dataframe}
 \usage{
 getMDFR.OFLResults(objs, verbose = FALSE)
 }
