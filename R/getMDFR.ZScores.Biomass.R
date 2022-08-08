@@ -10,7 +10,7 @@
 #'
 #'@return dataframe
 #'
-#'@details Uses [getMDFR.ZScoresForABData()].
+#'@details Uses [getMDFR.AllScores.Biomass()] but  keeps only z-scores.
 #'Returned dataframe is in canonical format.
 #'
 #'@import dplyr
@@ -42,10 +42,11 @@ getMDFR.ZScores.Biomass<-function(objs,
             mdfr<-rbind(mdfr,mdfrp);
         }
     } else if (inherits(objs,'tcsam02.rep')){
-        mdfr<-getMDFR.ZScores.Biomass1(objs,
-                                       fleet.type,
-                                       catch.type,
-                                       verbose);
+        mdfr<-getMDFR.AllScores.Biomass(objs,
+                                        fleet.type,
+                                        catch.type,
+                                        verbose);
+        mdfr %<>% dplyr::filter(type=="z-score");    #--SAVE ONLY **z-scores**
     } else if (inherits(objs,'list')){
         #objs should be a list of tcsam02.resLst objects
         for (nm in names(objs)){
@@ -66,70 +67,3 @@ getMDFR.ZScores.Biomass<-function(objs,
     return(mdfr);
 }
 
-#'
-#'@title Get model fits to biomass time series as z-scores for fleet data components
-#'
-#'@description Function to get model fits to biomass time series as z-scores for fleet data components.
-#'
-#'@param rep - single model report list object
-#'@param fleet.type - fleet type ('fishery' or 'survey')
-#'@param catch.type - catch type ('index','retained','discarded',or 'total')
-#'@param verbose - flag (T/F) to print diagnostic info
-#'
-#'@return dataframe (not in canonical format)
-#'
-#'@details Uses [getMDFR.ZScoresForABData()].
-#'Returned dataframe is mot in canonical format.
-#'
-#'@import dplyr
-#'@import magrittr
-#'
-getMDFR.ZScores.Biomass1<-function(rep,
-                                    fleet.type,
-                                    catch.type,
-                                    verbose){
-        #rep is a single tcsam02 model report object
-        if (fleet.type=='fishery'){
-            flts<-rep$model.fits$fisheries;
-            fltNms<-names(flts);
-        } else if (fleet.type=='survey'){
-            flts<-rep$model.fits$surveys;
-            fltNms<-names(flts);
-        } else {
-            ##throw error
-        }
-        mdfr<-NULL;
-        ctNms<-catch.type;
-        for (fltNm in fltNms){
-            if (fltNm!=''){
-                fleet<-gsub("_"," ",fltNm,fixed=TRUE);
-                flt<-flts[[fltNm]];
-                for (ctNm in ctNms){
-                    #catch.type<-gsub("."," ",ctNm,fixed=TRUE);
-                    ctNm<-paste0(ctNm,".catch");
-                    ct<-flt[[ctNm]];
-                    if (!is.null(ct)){
-                        if (verbose) message("---Getting '",ctNm,"' for ",fltNm,"\n",sep='');
-                        mdfrp<-NULL;
-                        if (!is.null(ct$biomass)){
-                            if (verbose) message("---Getting biomass zscores\n")
-                            mdfrp<-getMDFR.ZScoresForABData(ct$biomass$fits,verbose=verbose);
-                            if (!is.null(mdfrp)){
-                                if (verbose) message("--created dataframe w/",nrow(mdfrp),"rows\n")
-                                mdfrp$case<-"tcsam02";
-                                mdfrp$process<-fleet.type;
-                                mdfrp$fleet<-fleet;
-                                mdfrp$category<-catch.type;
-                                #--need to keep only var=="z-score" type
-                                mdfr<-rbind(mdfr,mdfrp %>% dplyr::filter(var=='z-score'));
-                                mdfrp$type<-mdfrp$var;
-                            }
-                        }
-                    } else {
-                        if (verbose) message(ctNm,"not found for",fltNm,"\n");
-                    }
-                }##ctNms
-            }##--fltNm!=''
-        }##fltNms
-        return(mdfr);
-}

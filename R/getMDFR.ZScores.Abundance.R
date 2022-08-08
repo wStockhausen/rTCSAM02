@@ -10,7 +10,7 @@
 #'
 #'@return dataframe
 #'
-#'@details Uses [getMDFR.ZScoresForABData()].
+#'@details Uses [getMDFR.AllScores.Abundance()] but keeps only z-scores.
 #'Returned dataframe is in canonical format.
 #'
 #'@import dplyr
@@ -29,12 +29,10 @@ getMDFR.ZScores.Abundance<-function(objs,
 
     fleet.type<-fleet.type[1];
     catch.type<-catch.type[1];
-    data.type<-"abundance";
 
     mdfr<-NULL;
     if (inherits(objs,'tcsam02.resLst')){
         #objs is a tcsam02 resLst object
-        if (verbose) message("\tStarting at 1")
         mdfrp<-getMDFR.ZScores.Abundance(objs$rep,
                                          fleet.type=fleet.type,
                                          catch.type=catch.type,
@@ -44,52 +42,13 @@ getMDFR.ZScores.Abundance<-function(objs,
             mdfr<-rbind(mdfr,mdfrp);
         }
     } else if (inherits(objs,'tcsam02.rep')){
-        #objs is a single tcsam02 model report object
-      if (verbose) message("\tStarting at 2")
-        if (fleet.type=='fishery'){
-            flts<-objs$model.fits$fisheries;
-            fltNms<-names(flts);
-        } else if (fleet.type=='survey'){
-            flts<-objs$model.fits$surveys;
-            fltNms<-names(flts);
-        } else {
-            ##throw error
-        }
-        ctNms<-catch.type;
-        for (fltNm in fltNms){
-            if (fltNm!=''){
-                fleet<-gsub("_"," ",fltNm,fixed=TRUE);
-                flt<-flts[[fltNm]];
-                for (ctNm in ctNms){
-                    #catch.type<-gsub("."," ",ctNm,fixed=TRUE);
-                    ctNm<-paste0(ctNm,".catch");
-                    ct<-flt[[ctNm]];
-                    if (!is.null(ct)){
-                        if (verbose) message("---Getting '",ctNm,"' for ",fltNm,"\n",sep='');
-                        mdfrp<-NULL;
-                        if ((data.type=="abundance")&&!is.null(ct$abundance)){
-                            if (verbose) message("---Getting abundance zscores\n")
-                            mdfrp<-rTCSAM02::getMDFR.ZScoresForABData(ct$abundance$fits,verbose=verbose);
-                        }
-                        if (!is.null(mdfrp)){
-                            if (verbose) message("--created dataframe w/ ",nrow(mdfrp),"rows\n")
-                            mdfrp$process<-fleet.type;
-                            mdfrp$fleet<-fleet;
-                            mdfrp$category<-catch.type;
-                            #--need to keep only var=="z-score" type
-                            mdfr<-rbind(mdfr,mdfrp %>% dplyr::filter(var=='z-score'));
-                            mdfrp$type<-mdfrp$var;
-                        }
-                    } else {
-                        if (verbose) message(ctNm,"not found for",fltNm,"\n");
-                    }
-                }##ctNms
-            }
-        }##fltNms
-        if (!is.null(mdfr)) mdfr$case<-"tcsam02";
+        mdfr<-getMDFR.AllScores.Abundance(objs,
+                                        fleet.type,
+                                        catch.type,
+                                        verbose);
+        mdfr %<>% dplyr::filter(type=="z-score");    #--SAVE ONLY **z-scores**
     } else if (inherits(objs,'list')){
         #objs should be a list of tcsam02.resLst objects
-        if (verbose) message("\tStarting at 3")
         for (nm in names(objs)){
             mdfrp<-getMDFR.ZScores.Abundance(objs[[nm]],
                                             fleet.type=fleet.type,
@@ -102,10 +61,9 @@ getMDFR.ZScores.Abundance<-function(objs,
         #throw an error
     }
 
-    if (!is.null(mdfr)) {
-      mdfr<-getMDFR.CanonicalFormat(mdfr);
-    }
+    if (!is.null(mdfr)) mdfr<-getMDFR.CanonicalFormat(mdfr);
 
     if (verbose) message("--Finished rTCSAM02::getMDFR.ZScores.Abundance().\n");
     return(mdfr);
 }
+

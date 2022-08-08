@@ -1,5 +1,5 @@
 #'
-#'@title Get z-scores and other model fits info for abundance, biomass data from fits to data as dataframe
+#'@title Get z-scores and other model fits info for abundance or biomass data from fits to data as dataframe
 #'
 #'@description Function to get z-scores and other model fits info for abundance, biomass data from fits to data as dataframe.
 #'
@@ -16,9 +16,9 @@
 #'
 #'@export
 #'
-getMDFR.ZScoresForABData<-function(afits,
+getMDFR.AllScoresForABData<-function(afits,
                                    verbose=FALSE){
-    if (verbose) message("---Running rTCSAM02::getMDFR.ZScoresForABData(...).\n");
+    if (verbose) message("---Running rTCSAM02::getMDFR.AllScoresForABData(...).\n");
 
     nf<-length(afits);
     if (verbose) message("----number of fits =",nf,"\n");
@@ -74,6 +74,6 @@ getMDFR.ZScoresForABData<-function(afits,
     mdfr$m<-gsub("_"," ",tolower(mdfr$m),fixed=TRUE);
     mdfr$s<-gsub("_"," ",tolower(mdfr$s),fixed=TRUE);
 
-    if (verbose) message("---Done running rTCSAM02::getMDFR.ZScoresForABData(...).\n");
+    if (verbose) message("---Done running rTCSAM02::getMDFR.AllScoresForABData(...).\n");
     return(mdfr);
 }
