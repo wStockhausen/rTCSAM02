@@ -4,11 +4,15 @@
 \alias{getMDFR.SdRep.RecAndSSB}
 \title{Get sd_report info on recruitment and SSB time series estimates as a dataframe}
 \usage{
-getMDFR.SdRep.RecAndSSB(tcsams, verbose = FALSE)
+getMDFR.SdRep.RecAndSSB(tcsams, ci = 0.95, verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{\itemize{
 \item a tcsam02.resLst object or named list of such
+}}
+
+\item{ci}{\itemize{
+\item confidence interval
 }}
 
 \item{verbose}{\itemize{
@@ -22,5 +26,5 @@ a dataframe
 Function to get sd_report info on recruitment and SSB time series estimates as a dataframe.
 }
 \details{
-Recruitment values are converted to arithmetic scale from ln-scale information.
+Recruitment values are on ln-scale.
 }
