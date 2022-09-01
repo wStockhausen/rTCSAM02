@@ -1,8 +1,8 @@
 Package: rTCSAM02
 Type: Package
 Title: A set of tools to set up input for, and interact with output from, TCSAM02 model runs
-Version: 2022-08-29
-Date: 2022-08-29
+Version: 2022.09.01
+Date: 2022-09-201
 Author: William T. Stockhausen
 Maintainer: William T. Stockhausen <ywilliam.stockhausen@noaa.gov>
 Description: This package provides a set of tools to set up input for,
@@ -11,6 +11,7 @@ License: MIT + file LICENSE
 Depends:
     R (>= 3.1.2)
 Imports:
+    cowplot,
     dplyr,
     ggplot2 (>= 1.0.0),
     graphics (>= 3.1.2),

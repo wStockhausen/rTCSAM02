@@ -9,8 +9,9 @@
 #'
 #' @return a dataframe
 #'
-#' @details Derived variables are 
-#' "sdrAvgRec","sdrBmsy","sdrFmsy","sdrMSY","sdrCurB","sdrPrjB","sdrOFL"
+#' @details Derived variables are
+#' "sdrAvgRec","sdrBmsy","sdrFmsy","sdrMSY","sdrCurB","sdrFofl","sdrOFL","sdrPrjB".
+#' The column names in the output dataframe have the "sdr" prefix dropped.
 #'
 #' @import magrittr
 #' @importFrom dplyr mutate
@@ -48,12 +49,12 @@ getMDFR.SdRep.DerivedVars<-function(tcsams,
   }
 
   #--extract variables info
-  vars = c("sdrAvgRec","sdrBmsy","sdrFmsy","sdrMSY","sdrCurB","sdrPrjB","sdrOFL");
+  vars = c("sdrAvgRec","sdrBmsy","sdrFmsy","sdrMSY","sdrCurB","sdrFofl","sdrOFL","sdrPrjB");
   #----extract std info
   dfrStd = tcsams$std;
   dfr    = dfrStd %>% subset(name %in% vars) %>% dplyr::select(!one_of("row id")) %>%
                       dplyr::mutate(variable=stringr::str_sub(name,4,-1),
-                                    y="all",x="all") %>% 
+                                    y="all",x="all") %>%
                       dplyr::select(variable,y,x,name,est,`std.dev`) %>%
                       dplyr::mutate(lci=qnorm(  (1-ci)/2,mean=est,sd=`std.dev`),
                                     uci=qnorm(1-(1-ci)/2,mean=est,sd=`std.dev`));

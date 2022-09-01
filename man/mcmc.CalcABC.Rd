@@ -39,7 +39,7 @@ mcmc.CalcABC(
 \item range for x-axis in plot
 }}
 
-\item{verbose}{flag to rpint diagnostic info}
+\item{verbose}{flag to print diagnostic info}
 
 \item{title}{\itemize{
 \item title for plot

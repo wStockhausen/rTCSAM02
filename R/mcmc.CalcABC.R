@@ -10,7 +10,7 @@
 #' @param doPlot - flag (T/F) to create plot
 #' @param xlims - range for x-axis in plot
 #' @param title - title for plot
-#' @param verbose flag to rpint diagnostic info
+#' @param verbose flag to print diagnostic info
 #'
 #' @return list with elements
 #' \itemize{

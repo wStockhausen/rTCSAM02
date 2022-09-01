@@ -27,5 +27,6 @@ Function to get sd_report info on derived time series estimates as a dataframe.
 }
 \details{
 Derived variables are
-"sdrAvgRec","sdrBmsy","sdrFmsy","sdrMSY","sdrCurB","sdrPrjB","sdrOFL"
+"sdrAvgRec","sdrBmsy","sdrFmsy","sdrMSY","sdrCurB","sdrFofl","sdrOFL","sdrPrjB".
+The column names in the output dataframe have the "sdr" prefix dropped.
 }
