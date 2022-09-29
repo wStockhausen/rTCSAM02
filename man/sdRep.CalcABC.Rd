@@ -4,41 +4,22 @@
 \alias{sdRep.CalcABC}
 \title{Function to calculate ABCs from sd_report output}
 \usage{
-sdRep.CalcABC(
-  tcsams = NULL,
-  pstar = 0.49,
-  buffer = 0.2,
-  doPlot = TRUE,
-  xlims = NULL,
-  verbose = FALSE
-)
+sdRep.CalcABC(tcsams = NULL, buffer = 0.2, pstar = 0.49, verbose = FALSE)
 }
 \arguments{
 \item{tcsams}{\itemize{
 \item a named list of tcsam02.resLst objects
 }}
 
-\item{pstar}{\itemize{
-\item pstar value for ABC calculation
-}}
-
 \item{buffer}{\itemize{
 \item buffer for ABC as fraction (i.e., 0.20 = 20 \\% yields ABC = 0.8*OFL)
 }}
 
-\item{doPlot}{\itemize{
-\item flag (T/F) to create plot
-}}
-
-\item{xlims}{\itemize{
-\item range for x-axis in plot
+\item{pstar}{\itemize{
+\item pstar value for ABC calculation (default = 0.49)
 }}
 
 \item{verbose}{flag to print diagnostic info}
-
-\item{title}{\itemize{
-\item title for plot
-}}
 }
 \value{
 dfrABCs - dataframe with MLE management quantities, stdvOFL, ABC.pstar and ABC.buff for each case
