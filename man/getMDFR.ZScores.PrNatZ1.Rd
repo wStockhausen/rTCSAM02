@@ -45,6 +45,6 @@ Returned dataframe has columns:
 \item{y - year}
 \item{z - size bin}
 \item{val - value}
-\item{var - variable type}
+\item{type - variable type}
 }
 }
