@@ -2,7 +2,7 @@
 % Please edit documentation in R/getRep.R
 \name{getRep}
 \alias{getRep}
-\title{Get a TCSAM02 report object (by reading a TCSAM02 model report \link{.rep} file)}
+\title{Get a TCSAM02 report object (by reading a TCSAM02 model report [.rep] file)}
 \usage{
 getRep(repFile = NULL, verbose = FALSE)
 }
@@ -16,7 +16,7 @@ getRep(repFile = NULL, verbose = FALSE)
 }}
 }
 \value{
-TCSAM02 report object (a list). The returned object will be a list of class 'tcsam02.rep'.
+a TCSAM02 report object (a list), or NULL. The returned object will be a list of class 'tcsam02.rep'.
 }
 \description{
 Function to get a TCSAM02 report object

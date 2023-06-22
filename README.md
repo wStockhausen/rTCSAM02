@@ -1,11 +1,130 @@
+rTCSAM02: A R package for the TCSAM02 stock assessment model
+================
+William T. Stockhausen
+
+<!-- README.md is generated from README.Rmd. 
+     Knit this file to generate README.md.
+     Then run pkgdown::build_site_github_pages() to build site
+-->
+
 # rTCSAM02
-R package for extracting results from  TCSAM02 (formerly TCSAM2015) assessment model runs.
+
+R package with functions for making and extracting results from TCSAM02
+(formerly TCSAM2015) model runs for the Bering Sea and Aleutian Islands
+Tanner crab stock assessment.
+
+[TCSAM02](https://github.com/wStockhausen/tcsam02) is a modeling
+framework based on the AD Model Builder c++ automatic differentiation
+library for stage/size-specific fishery stock assessment models for the
+Tanner crab (*Chionoecetes bairdi*) stock in the eastern Bering Sea.
+This package provides a library of functions to run models and extract
+results. The R package
+[rCompTCMs](https://github.com/wStockhausen/rCompTCMs) provides a
+related library of functions to compare results (convergence
+information, model fits to data, predicted and projected quantities,
+management quantities) from multiple models using standardized plots,
+tables, and reports.
+
+## Installation
+
+The following software is required to install the package:
+
+- R version 4.0.0 or newer
+- the following R packages
+  - cowplot
+  - dplyr
+  - ggplot2
+  - graphics
+  - grDevices
+  - grid
+  - magrittr
+  - reshape2
+  - sqldf
+  - stats
+  - stringr
+  - tcltk
+  - tibble
+  - tidyr
+  - utils
+  - [wtsPlots](https://github.com/wStockhausen/wtsPlots)
+  - [wtsUtilities](https://github.com/wStockhausen/wtsUtilities)
+
+All packages except the last two are available on CRAN. The last two are
+available on GitHub.
 
 ## Configuring as an R project using RStudio
+
 To create a local version of this R project using RStudio:
-  1. copy the url of the repository from GitHub
-  2. start RStudio and:
-    a. go to "New Project"
-    b. select "Version Control/Git"
-    c. paste in the repository url, which will also fill in the default project name
-    d. click "Create Project"
+
+1.  copy the url of the repository from GitHub
+2.  start RStudio and:
+    1.  go to “New Project” b select “Version Control/Git”
+    2.  paste in the repository url, which will also fill in the default
+        project name
+    3.  click “Create Project”
+
+You can install the current version of rTCSAM02 from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("wStockhausen/rTCSAM02")
+```
+
+## Using the package
+
+The principal functions for running a TCSAM02 model are
+[runTCSAM02](reference/runTCSAM02.html) and
+[runJitter](reference/runJitter.html). The former runs a single model
+(but can be used in a loop to run multiple models) and the latter makes
+multiple runs of a single model with randomized (“jittered”) initial
+parameter values in order to determine convergence properties and
+provide support for the maximum likelihood solution.
+
+[getResLst](reference/getResLst.html) is used to convert the output text
+(input/output parameter csv, report, and/or sdrep) files from a TCSAM02
+model run to a more compact R object (of class “tcsam02.resLst”), which
+provides the principal object for functions that extract a dataframe in
+standardized format of a subset of the model results (the “getMDFR”
+functions). This function encapsulates the getPrs(), getRep(), and
+getStd() functions that read the input/output parameter csv, report, and
+sdreport files (respectively) created during a TCSAM02 model run. The
+function [getResLsts](reference/getResLsts.html) allows the user to
+convert multiple model runs to tcsam02.resLst objects. Other functions
+that extract model output include readCorFile() (the .cor file) and
+readParFile() (the .par file).
+
+------------------------------------------------------------------------
+
+## NOAA Disclaimer
+
+This repository is a scientific product and is not official
+communication of the National Oceanic and Atmospheric Administration, or
+the United States Department of Commerce. All NOAA GitHub project code
+is provided on an ‘as is’ basis and the user assumes responsibility for
+its use. Any claims against the Department of Commerce or Department of
+Commerce bureaus stemming from the use of this GitHub project will be
+governed by all applicable Federal law. Any reference to specific
+commercial products, processes, or services by service mark, trademark,
+manufacturer, or otherwise, does not constitute or imply their
+endorsement, recommendation or favoring by the Department of Commerce.
+The Department of Commerce seal and logo, or the seal and logo of a DOC
+bureau, shall not be used in any manner to imply endorsement of any
+commercial product or activity by DOC or the United States Government.
+
+Software code created by U.S. Government employees is not subject to
+copyright in the United States (17 U.S.C. §105). The United
+States/Department of Commerce reserve all rights to seek and obtain
+copyright protection in countries other than the United States for
+Software authored in its entirety by the Department of Commerce. To this
+end, the Department of Commerce hereby grants to Recipient a
+royalty-free, nonexclusive license to use, copy, and create derivative
+works of the Software outside of the United States.
+
+------------------------------------------------------------------------
+
+<img src="https://raw.githubusercontent.com/nmfs-general-modeling-tools/nmfspalette/main/man/figures/noaa-fisheries-rgb-2line-horizontal-small.png" height="75" alt="NOAA Fisheries">
+
+[U.S. Department of Commerce](https://www.commerce.gov/) \| [National
+Oceanographic and Atmospheric Administration](https://www.noaa.gov) \|
+[NOAA Fisheries](https://www.fisheries.noaa.gov/)

@@ -22,5 +22,5 @@ dataframe in canonical format.
 Function to get recruitment size distribution from model results from TCSAM02 model runs as a dataframe.
 }
 \details{
-Extracts mean growth increments.
+Extracts recruitment size distributions (values are \emph{not} scaled by bin size).
 }

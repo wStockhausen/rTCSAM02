@@ -8,7 +8,7 @@
 #'
 #'@return dataframe in canonical format.
 #'
-#'@details Extracts mean growth increments.
+#'@details Extracts recruitment size distributions (values are *not* scaled by bin size).
 #'
 #'@export
 #'

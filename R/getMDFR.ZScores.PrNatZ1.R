@@ -20,7 +20,7 @@
 #'  \item{y - year}
 #'  \item{z - size bin}
 #'  \item{val - value}
-#'  \item{var - variable type}
+#'  \item{type - variable type}
 #' }
 #'
 #' @export
@@ -38,46 +38,29 @@ getMDFR.ZScores.PrNatZ1<-function(fits,
     sxs<-gsub("_"," ",tolower(c(dims$x$nms,"ALL_SEX")),     fixed=TRUE);
     mss<-gsub("_"," ",tolower(c(dims$m$nms,"ALL_MATURITY")),fixed=TRUE);
     scs<-gsub("_"," ",tolower(c(dims$s$nms,"ALL_SHELL")),   fixed=TRUE);
-    zbs<-dims$z$vls;
+    zbsm<-dims$z$vls;#--model size bins
 
     n<-length(fits);
-    yrs<-min(as.numeric(names(fits)),na.rm=TRUE):max(as.numeric(names(fits)),na.rm=TRUE)
-
-    dms<-c(length(sxs),length(mss),length(scs),length(yrs),length(zbs));
-    dmnames<-list(x=sxs,m=mss,s=scs,y=yrs,z=zbs);
-    pAtZ<-array(0,dms,dmnames);#pearson's residuals
-    nAtZ<-array(0,dms,dmnames);#nll's residuals
-
     yrsp<-names(fits);
+    plst = list();
+    nlst = list();
     for (i in 1:(n-1)){
+        #--testing: i=1;
         fit<-fits[[i]];
+        #--define single-year arrays
+        zbs<-fit$zBs;
+        if (is.null(zbs)) zbs<-zbsm;
         x<-gsub("_"," ",tolower(fit$x),fixed=TRUE);
         m<-gsub("_"," ",tolower(fit$m),fixed=TRUE);
         s<-gsub("_"," ",tolower(fit$s),fixed=TRUE);
-        y<-yrsp[i];
-        pAtZ[x,m,s,y,]<-fit$fit$zscrs;
-        nAtZ[x,m,s,y,]<-fit$fit$nlls;
+        pdfr<-tibble::tibble(x=x,m=m,s=s,y=yrsp[i],z=zbs,val=fit$fit$zscrs);
+        ndfr<-tibble::tibble(x=x,m=m,s=s,y=yrsp[i],z=zbs,val=fit$fit$nlls);
+        plst[[i]] = pdfr;
+        nlst[[i]] = ndfr;
     }
+    pdfr = dplyr::bind_rows(plst); rm(plst);
+    ndfr = dplyr::bind_rows(nlst); rm(nlst);
 
-    pdfr<-reshape2::melt(pAtZ,value.name='val');
-    ndfr<-reshape2::melt(nAtZ,value.name='val');
-
-    #remove all-zero factor combinations
-    for (x in sxs){
-        for (m in mss){
-            for (s in scs){
-                pAtZp<-t(as.matrix(pAtZ[x,m,s,,]));
-                if (sum(abs(pAtZp),na.rm=TRUE)==0){
-                    idx<-(pdfr$x==x)&(pdfr$m==m)&(pdfr$s==s);
-                    pdfr<-pdfr[!(idx),];
-                    idx<-(ndfr$x==x)&(ndfr$m==m)&(ndfr$s==s);
-                    ndfr<-ndfr[!idx,];
-                } else {
-                    if (verbose) cat('----keeping factor combination',x,m,s,"\n")
-                }
-            }#s
-        }#m
-    }#x
 
     pdfr$type<-'pearsons';
     ndfr$type<-'nlls';
@@ -85,6 +68,6 @@ getMDFR.ZScores.PrNatZ1<-function(fits,
     if (type=='pearsons') mdfr<-pdfr;
     if (type=='nlls')     mdfr<-ndfr;
 
-    if (verbose) cat("---Finished rTCSAM02::getMDFR.ZScoresForSizeComps(...)\n");
+    if (verbose) cat("---Finished rTCSAM02::getMDFR.ZScores.PrNatZ1(...)\n");
     return(mdfr);
 }

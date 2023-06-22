@@ -1,12 +1,12 @@
 #'
-#'@title Get a TCSAM02 report object (by reading a TCSAM02 model report [.rep] file)
+#'@title Get a TCSAM02 report object (by reading a TCSAM02 model report \[.rep\] file)
 #'
 #'@description Function to get a TCSAM02 report object
 #'
 #'@param repFile - report file from a TCSAM02 model run to source. can be NULL.
 #'@param verbose - flag (T/F) to prnt diagnostic info
 #'
-#'@return TCSAM02 report object (a list). The returned object will be a list of class 'tcsam02.rep'.
+#'@return a TCSAM02 report object (a list), or NULL. The returned object will be a list of class 'tcsam02.rep'.
 #'
 #'@details If \code{repFile} is NULL, the user will be prompted to identify a
 #'TCSAM02 model report file from which to source the results object.
@@ -15,7 +15,7 @@
 #'@export
 #'
 getRep<-function(repFile=NULL,verbose=FALSE){
-    rep<-NULL;
+    res<-NULL;#--'res' is name of list object if repFile exists
     if(is.null(repFile)){
         Filters<-wtsUtilities::addFilter("rep","report files (*.rep)","*.rep",Filters=NULL);
         Filters<-wtsUtilities::addFilter("R","R files (*.R)","*.R",Filters=Filters);

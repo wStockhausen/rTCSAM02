@@ -21,6 +21,10 @@
 #'  \item{var - variable type}
 #' }
 #'
+#' @import dplyr
+#'
+#' @export
+#'
 getMDFR.FitsForSizeComps<-function(fits,
                                    mc,
                                    verbose=FALSE){
@@ -31,55 +35,27 @@ getMDFR.FitsForSizeComps<-function(fits,
     sxs<-gsub("_"," ",tolower(c(dims$x$nms,"ALL_SEX")),     fixed=TRUE);
     mss<-gsub("_"," ",tolower(c(dims$m$nms,"ALL_MATURITY")),fixed=TRUE);
     scs<-gsub("_"," ",tolower(c(dims$s$nms,"ALL_SHELL")),   fixed=TRUE);
-    zbs<-dims$z$vls;
+    zbsm<-dims$z$vls;#--model size bins
 
     n<-length(fits);
-    yrsp<-names(fits);
-    yrs<-min(as.numeric(names(fits)),na.rm=TRUE):max(as.numeric(names(fits)),na.rm=TRUE)
-    #yrs<-sort(as.numeric(yrsp));
+    yrsp<-names(fits);#--years with observed size comps
 
-    dms<-c(length(sxs),length(mss),length(scs),length(yrs),length(zbs));
-    dmnames<-list(x=sxs,m=mss,s=scs,y=yrs,z=zbs);
-    oAtZ<-array(0,dms,dmnames);#observed size comps
-    mAtZ<-array(0,dms,dmnames);#model size comps
-
-    dms<-c(length(sxs),length(mss),length(scs),length(yrs));
-    dmnames<-list(x=sxs,m=mss,s=scs,y=yrs);
-
+    lst = list();
     for (i in 1:(n-1)){
+        #--testing: i=1;
         fit<-fits[[i]];
+        #--define single-year arrays
+        zbs<-fit$zBs;#--NULL for model results pre-202303
+        if (is.null(zbs)) zbs<-zbsm;
         x<-gsub("_"," ",tolower(fit$x),fixed=TRUE);
         m<-gsub("_"," ",tolower(fit$m),fixed=TRUE);
         s<-gsub("_"," ",tolower(fit$s),fixed=TRUE);
-        y<-yrsp[i];
-        oAtZ[x,m,s,y,]<-fit$fit$obs;
-        mAtZ[x,m,s,y,]<-fit$fit$mod;
+        mdfr<-tibble::tibble(x=x,m=m,s=s,y=yrsp[i],z=zbs,var="predicted",val=fit$fit$mod);
+        odfr<-tibble::tibble(x=x,m=m,s=s,y=yrsp[i],z=zbs,var="observed",val=fit$fit$obs);
+        lst[[i]] = dplyr::bind_rows(odfr,mdfr);
+        rm(fit,zbs,x,m,s,odfr,mdfr);
     }
-
-    odfr<-reshape2::melt(oAtZ,value.name='val');
-    mdfr<-reshape2::melt(mAtZ,value.name='val');
-    odfr$var<-'observed';
-    mdfr$var<-'predicted';
-    pdfr<-rbind(odfr,mdfr);
-
-    pdfr<-pdfr[pdfr$y %in% yrsp,];#select only years with observed size comps
-
-    rm(odfr,mdfr);
-
-    mdfr<-NULL;
-    odx<-(pdfr$var=='observed');
-    for (x in sxs){
-        for (m in mss){
-            for (s in scs){
-                #set up extraction indices
-                idx<-(pdfr$x %in% x)&(pdfr$m %in% m)&(pdfr$s %in% s);
-                if (sum(pdfr$val[idx&odx],na.rm=TRUE)>0){
-                    if (verbose) cat('----keeping factor combination',x,m,s,"\n")
-                    mdfr<-rbind(mdfr,pdfr[idx,]);
-                }#sum(pdfr$val[idx&odx],na.rm=TRUE)>0
-            }#s
-        }#m
-    }#x
+    mdfr = dplyr::bind_rows(lst); rm(lst);
 
     if (verbose) cat("---Finished rTCSAM02::getMDFR.FitsForSizeComps(...)\n");
     return(mdfr)

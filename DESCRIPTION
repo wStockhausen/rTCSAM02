@@ -1,8 +1,8 @@
 Package: rTCSAM02
 Type: Package
 Title: A set of tools to set up input for, and interact with output from, TCSAM02 model runs
-Version: 2022.09.28
-Date: 2022-09-28
+Version: 2023.06.22
+Date: 2023-06-22
 Author: William T. Stockhausen
 Maintainer: William T. Stockhausen <ywilliam.stockhausen@noaa.gov>
 Description: This package provides a set of tools to set up input for,
@@ -31,4 +31,5 @@ Imports:
 Suggests:
     rTCSAM2013
 Roxygen: list(markdown=TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
+URL: https://wstockhausen.github.io/rTCSAM02/

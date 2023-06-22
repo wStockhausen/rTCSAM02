@@ -16,8 +16,8 @@ runMSE(
   numYrs = 10,
   iSeeds = NULL,
   runBaseModel = TRUE,
-  baseModelInfo = list(path = ".", configFile = "ModelConfig.inp", datasets = list(file
-    = "Datasets.inp", components = list(Bio = "Info", Fishery = c("TCF", "SCF", "GTF",
+  baseModelInfo = list(path = ".", configFile = "ModelConfig.inp", datasets = list(file =
+    "Datasets.inp", components = list(Bio = "Info", Fishery = c("TCF", "SCF", "GTF",
     "RKF"), Survey = "NMFS", Growth = "EBS", ChelaHeights = NULL)), pin = TRUE, pinFile =
     "tcsam02.pin", minPhase = 1, jitter = FALSE, iSeed = NULL, calcTAC = TRUE, HCR = 1),
   opModInfo = list(path = ".", configFile = "OpMod.Configuration.inp", optsFile =
