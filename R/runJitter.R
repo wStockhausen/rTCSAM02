@@ -140,7 +140,7 @@ runJitter<-function(os='osx',
         seed<-tbl$seed[idx[1]];
         if (onlyEvalJitter){parList<-NULL;}
 
-        #re-run case associated with mininum objective function value, save in "best"
+        #re-run case associated with miminum objective function value, save in "best"
         cat("\n\n---Re-running ADMB program for",idx[1],"out of",numRuns,"as best run---\n");
         ##fldr<-paste('best.run',wtsUtilities::formatZeros(best,width=max(2,ceiling(log10(numRuns)))),sep='');
         fldr<-"best";
