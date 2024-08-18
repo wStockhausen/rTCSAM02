@@ -132,7 +132,7 @@ saved for each model run in a csv file (the value of out.csv).
 When all the models requested have been run,
 the function determines the seed associated with the 1st model run that yielded
 the smallest value for the objective function and re-runs the model using this seed
-to re-create the model run resulting in the minimum objectve function to recreate
+to re-create the model run resulting in the minimum objective function to recreate
 the model output files. The final model run is done estimating the hessian, so
 standard deviations for estimated model parameters are available in the .std file.
 }

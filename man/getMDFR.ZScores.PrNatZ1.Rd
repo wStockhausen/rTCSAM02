@@ -25,7 +25,7 @@ getMDFR.ZScores.PrNatZ1(
 }}
 
 \item{verbose}{\itemize{
-\item flag (T/F) to print dagnostic info
+\item flag (T/F) to print diagnostic info
 }}
 }
 \value{

@@ -21,6 +21,8 @@ getRunCommands(
   mc.scale = 1000,
   jitter = FALSE,
   iSeed = NULL,
+  fitSimData = FALSE,
+  simDataSeed = NULL,
   calcOFL = FALSE,
   calcTAC = FALSE,
   HCR = 1,
@@ -93,6 +95,14 @@ getRunCommands(
 
 \item{iSeed}{\itemize{
 \item value for random number seed
+}}
+
+\item{fitSimData}{\itemize{
+\item flag (T/F) to fit simulated data
+}}
+
+\item{simDataSeed}{\itemize{
+\item random number seed value for simulated data
 }}
 
 \item{calcOFL}{\itemize{

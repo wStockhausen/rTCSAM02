@@ -26,6 +26,8 @@ runTCSAM02(
   mc.scale = 1000,
   jitter = FALSE,
   iSeed = NULL,
+  fitSimData = FALSE,
+  simDataSeed = NULL,
   saveResults = hess,
   test = FALSE,
   cleanup = TRUE,
@@ -117,6 +119,14 @@ runTCSAM02(
 \item seed for random number generator (or NULL)
 }}
 
+\item{fitSimData}{\itemize{
+\item flag (T/F) to fit simulated data
+}}
+
+\item{simDataSeed}{\itemize{
+\item random number seed value for simulated data
+}}
+
 \item{saveResults}{\itemize{
 \item T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}
 }}
@@ -150,8 +160,8 @@ to set the random number generator. The iSeed and final objective function value
 saved for each model run in a csv file (the value of out.csv).
 
 If the path associated with \code{configFile} is a relative one, it should
-be relative to the \code{path} variable. If saveResults=TRUE, getResLSt() is used to read in
-the report file, prs file, and std files are read in and the resulting tcsam02.resLst object is
+be relative to the \code{path} variable. If saveResults=TRUE, getResLst() is used to read in
+the report file, prs file, and std files and the resulting tcsam02.resLst object is
 saved to 'ModelResults.RData'. If jitter=TRUE, hess=FALSE, and cleanup=TRUE, then most output files
 (including the .rep files) are deleted after the model run to save disk space.
 }

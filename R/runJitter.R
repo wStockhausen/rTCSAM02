@@ -14,7 +14,7 @@
 #'When all the models requested have been run,
 #'the function determines the seed associated with the 1st model run that yielded
 #'the smallest value for the objective function and re-runs the model using this seed
-#'to re-create the model run resulting in the minimum objectve function to recreate
+#'to re-create the model run resulting in the minimum objective function to recreate
 #'the model output files. The final model run is done estimating the hessian, so
 #'standard deviations for estimated model parameters are available in the .std file.
 #'
@@ -140,7 +140,7 @@ runJitter<-function(os='osx',
         seed<-tbl$seed[idx[1]];
         if (onlyEvalJitter){parList<-NULL;}
 
-        #re-run case associated with miminum objective function value, save in "best"
+        #re-run case associated with minimum objective function value, save in "best"
         cat("\n\n---Re-running ADMB program for",idx[1],"out of",numRuns,"as best run---\n");
         ##fldr<-paste('best.run',wtsUtilities::formatZeros(best,width=max(2,ceiling(log10(numRuns)))),sep='');
         fldr<-"best";

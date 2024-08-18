@@ -7,7 +7,7 @@
 #' @param fits - list of fits
 #' @param mc - model configuration list
 #' @param type - type of residuals ('pearsons' or 'nlls')
-#' @param verbose - flag (T/F) to print dagnostic info
+#' @param verbose - flag (T/F) to print diagnostic info
 #'
 #' @return dataframe
 #'

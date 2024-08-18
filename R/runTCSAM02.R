@@ -31,6 +31,8 @@
 #'@param mc.scale - number of iterations to adjust scale for mcmc calculations
 #'@param jitter  - T/F to jitter parameters
 #'@param iSeed - seed for random number generator (or NULL)
+#'@param fitSimData - flag (T/F) to fit simulated data
+#'@param simDataSeed - random number seed value for simulated data
 #'@param saveResults - T/F to save results to ModelResults.RData as a tcsam02.resLst object using \code{getResLst(...)}
 #'@param test - flag (T/F) to run function in "test" mode
 #'@param cleanup - flag (T/F) to clean up some output files
@@ -40,8 +42,8 @@
 #'and par file info, or NULL if par file does not exist.
 #'
 #'@details If the path associated with \code{configFile} is a relative one, it should
-#'be relative to the \code{path} variable. If saveResults=TRUE, getResLSt() is used to read in
-#'the report file, prs file, and std files are read in and the resulting tcsam02.resLst object is
+#'be relative to the \code{path} variable. If saveResults=TRUE, getResLst() is used to read in
+#'the report file, prs file, and std files and the resulting tcsam02.resLst object is
 #' saved to 'ModelResults.RData'. If jitter=TRUE, hess=FALSE, and cleanup=TRUE, then most output files
 #' (including the .rep files) are deleted after the model run to save disk space.
 #'
@@ -68,6 +70,8 @@ runTCSAM02<-function(os='osx',
                      mc.scale=1000,
                      jitter=FALSE,
                      iSeed=NULL,
+                     fitSimData=FALSE,
+                     simDataSeed=NULL,
                      saveResults=hess,
                      test=FALSE,
                      cleanup=TRUE,
@@ -103,6 +107,8 @@ runTCSAM02<-function(os='osx',
                              mc.scale=mc.scale,
                              jitter=jitter,
                              iSeed=iSeed,
+                             fitSimData=fitSimData,
+                             simDataSeed=simDataSeed,
                              calcOFL=calcOFL,
                              calcTAC=calcTAC,
                              HCR=HCR,
@@ -134,27 +140,30 @@ runTCSAM02<-function(os='osx',
     dfr<-NULL;
     if (!test) dfr<-rTCSAM02::readParFile(par);
 
-    #get jitter info
+    #get jitter or simulation info
     if (!test){
-        if (jitter&(!is.null(dfr))) {
-            tbl<-utils::read.csv('jitterInfo.csv',header=TRUE);
-            if ("B0" %in% colnames(tbl)){
-                dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
-                           data.frame(name='MMB', value=tbl$MMB[1]),
-                           data.frame(name='B0',  value=tbl$B0[1]),
-                           data.frame(name='Bmsy',value=tbl$Bmsy[1]),
-                           data.frame(name='Fmsy',value=tbl$Fmsy[1]),
-                           data.frame(name='OFL', value=tbl$OFL[1]),
-                           data.frame(name='curB',value=tbl$curB[1]),
-                           dfr);
-            } else {
-                dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
-                           data.frame(name='MMB', value=tbl$MMB[1]),
-                           dfr);
-            }
-            dfr$value[dfr$name=='objective function']<-tbl$objfun[1];
-            dfr$value[dfr$name=='max gradient']<-tbl$maxGrad[1];
+      if ((jitter||fitSimData)&(!is.null(dfr))) {
+        if (jitter)
+          tbl<-utils::read.csv('jitterInfo.csv',header=TRUE);
+        if (fitSimData)
+          tbl<-utils::read.csv('simInfo.csv',header=TRUE);
+        if ("B0" %in% colnames(tbl)){
+          dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
+                     data.frame(name='MMB', value=tbl$MMB[1]),
+                     data.frame(name='B0',  value=tbl$B0[1]),
+                     data.frame(name='Bmsy',value=tbl$Bmsy[1]),
+                     data.frame(name='Fmsy',value=tbl$Fmsy[1]),
+                     data.frame(name='OFL', value=tbl$OFL[1]),
+                     data.frame(name='curB',value=tbl$curB[1]),
+                     dfr);
+        } else {
+          dfr<-rbind(data.frame(name='seed',value=tbl$seed[1]),
+                     data.frame(name='MMB', value=tbl$MMB[1]),
+                     dfr);
         }
+        dfr$value[dfr$name=='objective function']<-tbl$objfun[1];
+        dfr$value[dfr$name=='max gradient']<-tbl$maxGrad[1];
+      }
     }#!test
 
     if (!test & saveResults){
