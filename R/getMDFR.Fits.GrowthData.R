@@ -60,17 +60,29 @@ getMDFR.Fits.GrowthData<-function(objs,
                     gdnx<-gdn[[nx]];
                     dfrp1<-data.frame(x=x,m="immature",s="new shell",
                                       category=nms.gd[n],type="observed",
-                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$zPst);
+                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$zPst) |>
+                            dplyr::mutate(pc=dplyr::row_number());
                     dfrp2<-data.frame(x=x,m="immature",s="new shell",
                                       category=nms.gd[n],type="predicted",
-                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$mnZ);
+                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$mnZ) |>
+                            dplyr::mutate(pc=dplyr::row_number());
                     dfrp3<-data.frame(x=x,m="immature",s="new shell",
                                       category=nms.gd[n],type="nlls",
-                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$nlls);
+                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$nlls) |>
+                            dplyr::mutate(pc=dplyr::row_number());
                     dfrp4<-data.frame(x=x,m="immature",s="new shell",
                                       category=nms.gd[n],type="zscores",
-                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$zscrs);
-                    mdfrp<-rbind(dfrp1,dfrp2,dfrp3,dfrp4);
+                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$zscrs) |>
+                            dplyr::mutate(pc=dplyr::row_number());
+                    dfrp5<-data.frame(x=x,m="immature",s="new shell",
+                                      category=nms.gd[n],type="alpha",
+                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$alpha) |>
+                            dplyr::mutate(pc=dplyr::row_number());
+                    dfrp6<-data.frame(x=x,m="immature",s="new shell",
+                                      category=nms.gd[n],type="ibeta",
+                                      y=gdnx$years,z=gdnx$zPre,val=gdnx$ibeta) |>
+                            dplyr::mutate(pc=dplyr::row_number());
+                    mdfrp<-rbind(dfrp1,dfrp2,dfrp3,dfrp4,dfrp5,dfrp6);
                     idx<-order(mdfrp$type,mdfrp$y,mdfrp$z,mdfrp$val);
                     mdfr<-rbind(mdfr,mdfrp[idx,]);
                 }#nx
