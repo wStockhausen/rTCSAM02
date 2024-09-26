@@ -37,7 +37,8 @@ getRep<-function(repFile=NULL,verbose=FALSE){
         }
     }
     if (file.exists(repFile)){
-        if (verbose) cat("Reading model report from file:\n",repFile,"\n")
+        if (verbose) cat("Reading model report from file:\n",repFile,"\n");
+        nan = NaN;
         source(repFile,local=TRUE);
         if(!any(names(res)=='mc')){
                 cat("The file '",repFile,"'\n",
