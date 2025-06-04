@@ -6,7 +6,8 @@
 \usage{
 getMDFR.Fisheries.CatchBiomass(
   tcsams,
-  category = c("captured", "discarded", "retained", "discard mortality", "index"),
+  category = c("captured", "discarded", "retained", "discard mortality",
+    "total mortality", "index"),
   cast = "x",
   verbose = FALSE
 )
@@ -17,7 +18,7 @@ getMDFR.Fisheries.CatchBiomass(
 }}
 
 \item{category}{\itemize{
-\item 'captured','discarded','retained', 'discard mortality', or 'index'
+\item 'captured','discarded','retained', 'discard mortality','total mortality', or 'index'
 }}
 
 \item{cast}{\itemize{
